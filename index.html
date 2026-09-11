@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+  <title>Толя Музыка — уроки создания музыки в Ableton Live</title>
+  <meta name="description" content="Индивидуальные онлайн-занятия по созданию музыки и работе в Ableton Live. Курсы для новичков, продолжающих и опытных музыкантов." />
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #efe7d8; color: #1e1b16; font-family: "Bricolage Grotesque", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #1e1b16; text-decoration: none; }
+  a:hover { color: #a8632a; }
+  summary::-webkit-details-marker { display: none; }
+  summary { list-style: none; cursor: pointer; }
+</style>
+</helmet>
+
+<div style="max-width:100%; overflow-x:hidden">
+
+<header style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:13px clamp(16px,4vw,56px); background:rgba(239,231,216,0.88); backdrop-filter:blur(10px); border-bottom:1px solid #d6c9b0">
+  <a href="#top" style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.14em; text-transform:uppercase">Толя<span style="color:#a8632a">•</span>Music</a>
+  <nav style="display:flex; gap:clamp(12px,2vw,26px); flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.07em; text-transform:uppercase">
+    <a href="#about" style="color:#6b6255">О себе</a>
+    <a href="#courses" style="color:#6b6255">Курсы</a>
+    <a href="#programs" style="color:#6b6255">Программы</a>
+    <a href="#pricing" style="color:#6b6255">Стоимость</a>
+    <a href="#contact" style="color:#6b6255">Контакты</a>
+  </nav>
+  <a href="#pricing" style="padding:9px 20px; background:#1e1b16; color:#efe7d8; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.07em; text-transform:uppercase" style-hover="background:#a8632a; color:#fdf9f1">Записаться</a>
+</header>
+
+<section id="top" style="padding:clamp(56px,10vw,130px) clamp(16px,4vw,56px) clamp(48px,7vw,96px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:1200px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#a8632a; margin-bottom:clamp(20px,4vw,38px)">Музыка · индивидуально · онлайн</div>
+    <h1 style="margin:0; font-size:clamp(40px,11.5vw,160px); line-height:0.87; font-weight:800; letter-spacing:-0.035em">СОЗДАВАЙ<br /><span style="color:#a8632a">СВОЮ МУЗЫКУ</span></h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:clamp(24px,4vw,56px); align-items:end; margin-top:clamp(24px,4vw,40px)">
+      <div style="display:flex; flex-direction:column; align-items:flex-start; gap:clamp(22px,3vw,34px)">
+        <p style="margin:0; max-width:560px; font-size:clamp(17px,2.1vw,22px); line-height:1.5; color:#4a4339; text-wrap:pretty">Научись работать со звуком так - чтобы гордиться результатами!<br />С помощью простых и понятных шагов по моей авторской программе.</p>
+        <a href="#pricing" style="display:inline-block; padding:18px 42px; background:#a8632a; color:#fdf9f1; border-radius:100px; font-size:17px; font-weight:600" style-hover="background:#1e1b16">Записаться</a>
+      </div>
+      <img src="img/hero-studio.png" alt="Домашняя студия: электропиано, ноутбук с проектом и модульный синтезатор в закатном свете" style="display:block; width:100%; max-width:820px; height:auto; justify-self:end; border-radius:3px; position:relative; z-index:-1; margin-top:calc(-1 * clamp(50px,15vw,270px))" />
+  </div>
+</section>
+
+<section id="about" style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:clamp(24px,4vw,44px)">
+    <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding-bottom:clamp(16px,2vw,22px); border-bottom:1px solid #d6c9b0">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172">01 / Пару слов о себе</span>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:clamp(28px,4vw,52px); align-items:stretch">
+      <img src="img/anatoly.png" alt="Анатолий Грищенко за пианино на закате" style="display:block; flex:0 1 460px; width:100%; max-width:500px; aspect-ratio:4/5; object-fit:cover; object-position:62% 38%; border-radius:3px" />
+      <div style="flex:1 1 380px; min-width:0; display:flex; flex-direction:column; gap:20px; font-size:clamp(16px,1.9vw,19px); line-height:1.6; color:#4a4339">
+        <h2 style="margin:0; font-size:clamp(34px,5vw,58px); line-height:0.98; font-weight:800; letter-spacing:-0.03em; color:#1e1b16">Анатолий<br />Грищенко</h2>
+        <p style="margin:auto 0 0; color:#1e1b16; font-weight:600; font-size:clamp(19px,2.4vw,26px); line-height:1.35; text-wrap:pretty">Я музыкант, продюсер, аранжировщик и саунд-дизайнер. Преподаю создание музыки с 2017 года.</p>
+        <p style="margin:0; text-wrap:pretty">За это время я разработал собственную методику, которая помогает легко пройти весь путь от первой идеи до законченной композиции.</p>
+        <div style="height:1px; background:#d6c9b0"></div>
+        <p style="margin:0; font-size:clamp(19px,2.4vw,26px); line-height:1.35; font-weight:600; color:#1e1b16; text-wrap:pretty">Я учу не просто работать в Ableton Live. Я учу писать музыку!</p>
+        <p style="margin:0; text-wrap:pretty">Понимать свои творческие решения и создавать треки, которыми вы действительно будете гордиться.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:1200px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172; margin-bottom:18px">02 / Что это даёт</div>
+    <h2 style="margin:0 0 20px; font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em; max-width:840px; text-wrap:balance">Развивайте свой потенциал в музыкальном продюсировании</h2>
+    <p style="margin:0 0 clamp(32px,5vw,56px); max-width:700px; font-size:clamp(16px,1.9vw,19px); line-height:1.55; color:#4a4339; text-wrap:pretty">Co мной вы быстро освоите навыки продюсирования, увидите результат уже через три месяца. А также получите персональную поддержку и помощь на протяжении всего курса!</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:clamp(12px,1.6vw,20px)">
+      <div style="border:1px solid #cbbda2; border-radius:3px; padding:clamp(24px,3vw,34px)">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a8632a" strokeWidth="1.4" strokeLinecap="round"><path d="M12 21V7" /><path d="M6 13l6-6 6 6" /><path d="M4 3h16" /></svg>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#a8632a">01</span>
+        </div>
+        <h3 style="margin:0 0 10px; font-size:20px; font-weight:600; line-height:1.2">Быстрый старт в создании музыки</h3>
+        <p style="margin:0; font-size:15px; line-height:1.5; color:#4a4339">Научишься создавать музыку с нуля за <em>максимально</em> короткий срок.</p>
+      </div>
+      <div style="border:1px solid #cbbda2; border-radius:3px; padding:clamp(24px,3vw,34px)">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a8632a" strokeWidth="1.4" strokeLinecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l4 2.5" /></svg>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#a8632a">02</span>
+        </div>
+        <h3 style="margin:0 0 10px; font-size:20px; font-weight:600; line-height:1.2">Результат уже через 3 месяца</h3>
+        <p style="margin:0; font-size:15px; line-height:1.5; color:#4a4339">Сможешь увидеть прогресс и создать <em>свои</em> первые треки.</p>
+      </div>
+      <div style="border:1px solid #cbbda2; border-radius:3px; padding:clamp(24px,3vw,34px)">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a8632a" strokeWidth="1.4" strokeLinecap="round"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="0.6" fill="#a8632a" /></svg>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#a8632a">03</span>
+        </div>
+        <h3 style="margin:0 0 10px; font-size:20px; font-weight:600; line-height:1.2">Индивидуальный подход</h3>
+        <p style="margin:0; font-size:15px; line-height:1.5; color:#4a4339">Занятия адаптированы под <em>твои</em> цели и уровень.</p>
+      </div>
+      <div style="border:1px solid #cbbda2; border-radius:3px; padding:clamp(24px,3vw,34px)">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a8632a" strokeWidth="1.4" strokeLinecap="round"><path d="M20 14.5a2.5 2.5 0 0 1-2.5 2.5H9l-5 3.5V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5z" /><path d="M8.5 10.5h7M8.5 13.5h4" /></svg>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#a8632a">04</span>
+        </div>
+        <h3 style="margin:0 0 10px; font-size:20px; font-weight:600; line-height:1.2">Поддержка между занятиями</h3>
+        <p style="margin:0; font-size:15px; line-height:1.5; color:#4a4339">Иметь возможность получить помощь и ответы на вопросы в любое время.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="courses" style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); background:#1e1b16; color:#efe7d8; border-bottom:1px solid #1e1b16">
+  <div style="max-width:1200px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#c98d4b; margin-bottom:18px">03 / Уровни</div>
+    <h2 style="margin:0 0 18px; font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em">Чему можно у меня научиться?</h2>
+    <p style="margin:0 0 clamp(32px,5vw,56px); max-width:700px; font-size:clamp(16px,1.9vw,19px); line-height:1.55; color:#bcb2a1; text-wrap:pretty">Есть курсы для новичков, продолжающих обучение и опытных музыкантов. Каждый уровень имеет свою программу и цели.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:clamp(16px,2vw,28px)">
+      <div style="border:1px solid #3b352b; border-radius:3px; padding:clamp(24px,3vw,34px); display:flex; flex-direction:column; gap:16px">
+        <div style="background:#1c1c1b; border:1px solid #3b3b38; border-radius:3px; padding:14px; display:flex; flex-direction:column; gap:9px; margin:-6px 0 4px">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#b9b6b0">STEP SEQ · 120 BPM</span>
+            <button type="button" onClick="{{ toggleSeq }}" style="{{ seqBtn }}">{{ seqLabel }}</button>
+          </div>
+          <sc-for list="{{ seqRows }}" as="row" hint-placeholder-count="4">
+            <div style="display:flex; align-items:center; gap:6px">
+              <span style="width:38px; flex:none; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:#8a8781">{{ row.name }}</span>
+              <div style="display:flex; gap:4px; flex:1; min-width:0">
+                <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="8">
+                  <button type="button" onClick="{{ cell.toggle }}" style="{{ cell.style }}"></button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#6f6d68">нажми на клетки, потом PLAY</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#c98d4b">Новичкам</div>
+        <h3 style="margin:0; font-size:clamp(26px,3vw,34px); font-weight:800; letter-spacing:-0.02em">Курс «Старт»</h3>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#bcb2a1; text-wrap:pretty">Основы Ableton Live Этот курс - твой первый шаг в создании музыки. За 24 часовых занятия ты с нуля освоишь интерфейс программы, научишься работать с сэмплами, создавать биты, мелодии и аранжировки, которые звучат круто и выражают ТВОЙ стиль. Мы разберём, как собирать треки шаг за шагом, использовать встроенные эффекты и доводить идеи до готового результата.</p>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#bcb2a1; text-wrap:pretty">Курс идеально подойдёт новичкам, которые хотят уверенно начать творить и понять, как работает Ableton Live.</p>
+      </div>
+      <div style="border:1px solid #3b352b; border-radius:3px; padding:clamp(24px,3vw,34px); display:flex; flex-direction:column; gap:16px">
+        <div style="background:#1c1c1b; border:1px solid #3b3b38; border-radius:3px; padding:14px; display:flex; flex-direction:column; gap:12px; margin:-6px 0 4px">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#b9b6b0">FM OSC · 2 OPERATORS</span>
+          <div style="display:flex; gap:4px">
+            <sc-for list="{{ fmPads }}" as="pad" hint-placeholder-count="6">
+              <button type="button" onClick="{{ pad.press }}" style="{{ pad.style }}">{{ pad.name }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <div style="display:flex; flex-direction:column; gap:5px">
+              <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#8a8781">
+                <span>RATIO</span><span>{{ fmRatioLabel }}</span>
+              </div>
+              <input type="range" min="0.5" max="8" step="0.5" value="{{ fmRatio }}" onChange="{{ setRatio }}" style="width:100%; accent-color:#b5763a; height:14px" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:5px">
+              <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#8a8781">
+                <span>MOD INDEX</span><span>{{ fmIndexLabel }}</span>
+              </div>
+              <input type="range" min="0" max="800" step="10" value="{{ fmIndex }}" onChange="{{ setIndex }}" style="width:100%; accent-color:#4e7f78; height:14px" />
+            </div>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#6f6d68">жми нотные пэды и крути ручки</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#c98d4b">Продолжающим</div>
+        <h3 style="margin:0; font-size:clamp(26px,3vw,34px); font-weight:800; letter-spacing:-0.02em">Курс «Медиум»</h3>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#bcb2a1; text-wrap:pretty">Этот курс для тех, кто хочет вывести свои треки на профессиональный уровень. За 20 занятий по 90 минт мы разберём, как создавать мощные миксы в Ableton Live, которые звучат цельно и держат публику. Ты научишься работать со сторонними vst плагинами и эффектами. Освоишь сложные автоматизации и синтез звука.</p>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#bcb2a1; text-wrap:pretty">Курс подойдёт тем, кто уже знаком с Ableton и готов освоить секреты профессиональных техник сведения и аранжировки.</p>
+      </div>
+      <div style="border:1px solid #3b352b; border-radius:3px; padding:clamp(24px,3vw,34px); display:flex; flex-direction:column; gap:16px">
+        <div style="background:#1c1c1b; border:1px solid #3b3b38; border-radius:3px; padding:14px; display:flex; flex-direction:column; gap:11px; margin:-6px 0 4px">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#b9b6b0">LIVE LOOPS</span>
+            <button type="button" onClick="{{ toggleLive }}" style="{{ liveBtn }}">{{ liveLabel }}</button>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px">
+            <sc-for list="{{ liveLayers }}" as="lay" hint-placeholder-count="4">
+              <button type="button" onClick="{{ lay.toggle }}" style="{{ lay.style }}">{{ lay.name }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px">
+            <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#8a8781">
+              <span>FILTER</span><span>{{ cutoffLabel }}</span>
+            </div>
+            <input type="range" min="240" max="12000" step="60" value="{{ cutoff }}" onChange="{{ setCutoff }}" style="width:100%; accent-color:#c2a24a; height:14px" />
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#6f6d68">включай слои на ходу, фильтр — на весь микс</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#c98d4b">Опытным</div>
+        <h3 style="margin:0; font-size:clamp(26px,3vw,34px); font-weight:800; letter-spacing:-0.02em">Курс «Хард»</h3>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#bcb2a1; text-wrap:pretty">Этот курс для тех, кто хочет вывести свои треки на сцену. Здесь мы разберём, как создавать мощные лайв-миксы в Ableton Live, которые звучат цельно и держат публику. Ты научишься работать в реальном времени: от подготовки сета и структурирования треков до использования эффектов и переходов «на лету». Курс подойдёт тем, кто уже знаком с Ableton и готов освоить секреты лайв-режима для уверенных выступлений.</p>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#bcb2a1; text-wrap:pretty">В итоге ты научишься программировать свои live сеты, и сможешь выступать с ними как профессиональный артист.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs" style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:1000px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172; margin-bottom:18px">04 / Учебные планы</div>
+    <h2 style="margin:0 0 clamp(30px,5vw,52px); font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em">Программы курсов</h2>
+
+    <details style="border-top:1px solid #d6c9b0; padding:clamp(20px,2.6vw,30px) 0">
+      <summary style="display:flex; align-items:baseline; justify-content:space-between; gap:24px">
+        <span>
+          <span style="display:block; font-size:clamp(20px,2.6vw,28px); font-weight:600; line-height:1.2; letter-spacing:-0.02em">Курс «Ableton START — первая композиция»</span>
+          <span style="display:block; margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:#a8632a">24 занятия по 1 часу</span>
+        </span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8a8172; white-space:nowrap">программа +</span>
+      </summary>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(20px,3vw,36px); margin-top:28px; font-size:15px; line-height:1.65; color:#4a4339">
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 1. Ритм и основы (1–6)</h4>
+          <p style="margin:0">1. Первое знакомство через практику: пишем ритм-партию (kick, clap, hi-hat) и параллельно разбираем интерфейс Ableton.<br />2. Развитие ритма: добавляем перкуссии, ghost notes, работаем с Groove Pool.<br />3. Ресемплинг: превращаем готовые биты в новые, делаем уникальные звуки.<br />4. Разбор стилей: пишем ритм-партию в разных жанрах.<br />5. Собственный drum rack: собираем библиотеку ударных, настраиваем Drum Rack.<br />6. Финальная ритм-секция: структурируем и варьируем, готовим под бас.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 2. Бас и грув (7–10)</h4>
+          <p style="margin:0">7. Основы синтеза на Wavetable, создание первого баса.<br />8. Басовая партия: пишем грув под ритм.<br />9. Техники баса в различных жанрах.<br />10. Бас + ударные: добиваемся связки и правильного баланса.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 3. Гармония и аккорды (11–14)</h4>
+          <p style="margin:0">11. Простая гармония: основы аккордов.<br />12. Гармонизация: аккорды + бас, связь с ритмом.<br />13. Усложняем: септаккорды, обращения, нестандартные ходы.<br />14. Стиль: аккордовые последовательности в разных жанрах.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 4. Мелодия и текстуры (15–18)</h4>
+          <p style="margin:0">15. Мелодия: пишем простую тему, работа с MIDI.<br />16. Подложки: падовые звуки, атмосферы, саунд-дизайн.<br />17. Мотив и вариации: развитие мелодии в течение трека.<br />18. Текстурирование: добавляем шумы, эффекты, фоновые элементы.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 5. Эффекты и детализация (19–21)</h4>
+          <p style="margin:0">19. Простая обработка: эквалайзер, компрессор, фильтр.<br />20. Пространство: реверб, дилэй, сайдчейн.<br />21. Креатив: сатурация, дисторшн, автоматизация параметров.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 6. Аранжировка и сведение (22–24)</h4>
+          <p style="margin:0">22. Конструкция трека: интро, дроп, развитие, аутро.<br />23. Сведение: баланс, панорама, громкость, подготовка к финалу.<br />24. Финал: полный трек, экспорт, чек-лист по самостоятельному написанию.</p>
+        </div>
+      </div>
+    </details>
+
+    <details style="border-top:1px solid #d6c9b0; padding:clamp(20px,2.6vw,30px) 0">
+      <summary style="display:flex; align-items:baseline; justify-content:space-between; gap:24px">
+        <span>
+          <span style="display:block; font-size:clamp(20px,2.6vw,28px); font-weight:600; line-height:1.2; letter-spacing:-0.02em">Курс «Ableton MEDIUM — профессиональное звучание»</span>
+          <span style="display:block; margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:#a8632a">20 занятий по 90 минут</span>
+        </span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8a8172; white-space:nowrap">программа +</span>
+      </summary>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(20px,3vw,36px); margin-top:28px; font-size:15px; line-height:1.65; color:#4a4339">
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 1. Продвинутая обработка звука (1–5)</h4>
+          <p style="margin:0">1. Продвинутая эквализация: динамические фильтры, mid/side, работа с частотным балансом.<br />2. Компрессия в продакшене: разные режимы и их художественное применение.<br />3. Работа с пространством: реверберация и её креативные приёмы.<br />4. Сатурация, дисторшн и другие способы «окрашивания» звука.<br />5. Работа с динамикой: многополосная обработка, transient shaping.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 2. Синтез и саунд-дизайн (6–8)</h4>
+          <p style="margin:0">6. Продвинутая работа с fm синтезом. С Wavetable, Serum, Diva, Nexus и другими инструментами.<br />7. Создание нестандартных тембров: текстуры, evolving-звуки.<br />8. Layering: соединение нескольких источников в один мощный инструмент.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 3. Гармония и лады (9–11)</h4>
+          <p style="margin:0">9. Ладовая система: дорийский, фригийский, миксолидийский и их применение в современной музыке.<br />10. Построение аккордовых прогрессий в разных ладах.<br />11. Модуляции и заимствованные аккорды: необычные приёмы в гармонии.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 4. Аранжировка и драматургия (12–15)</h4>
+          <p style="margin:0">12. Структура профессионального трека: развитие энергии и формы.<br />13. «Секреты аранжировки»: приёмы из разных жанров, которые удерживают внимание слушателя.<br />14. Работа с переходами: филлы, сбивки, разгоны.<br />15. Управление вниманием: как в нужный момент «удивлять» слушателя.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 5. Детали и музыкальное оформление (16–17)</h4>
+          <p style="margin:0">16. Микродетали: шумы, фоновые элементы, микроарпеджио, «невидимые» звуки.<br />17. Вариативность: дублирование партий без повторов, чтобы трек не уставал.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Блок 6. Сведение и финал (18–20)</h4>
+          <p style="margin:0">18. Сведение профессионального уровня: глубина, ширина, ясность.<br />19. Сведение вокала.<br />20. Финальный трек: проверка по чек-листу, экспорт под стриминг и сравнение с референсами.</p>
+        </div>
+      </div>
+    </details>
+
+    <details style="border-top:1px solid #d6c9b0; border-bottom:1px solid #d6c9b0; padding:clamp(20px,2.6vw,30px) 0">
+      <summary style="display:flex; align-items:baseline; justify-content:space-between; gap:24px">
+        <span>
+          <span style="display:block; font-size:clamp(20px,2.6vw,28px); font-weight:600; line-height:1.2; letter-spacing:-0.02em">Курс «Ableton HARD — Live Performance»</span>
+          <span style="display:block; margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:#a8632a">количество занятий под задачу</span>
+        </span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8a8172; white-space:nowrap">программа +</span>
+      </summary>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(20px,3vw,36px); margin-top:28px; font-size:15px; line-height:1.65; color:#4a4339">
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Для кого</h4>
+          <p style="margin:0">– Электронные музыканты, диджеи, саунд-дизайнеры, вокалисты, исполнители любого жанра, которые хотят выйти на сцену с лайвом.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Темы, которые мы прорабатываем</h4>
+          <p style="margin:0">– Подготовка Live Set в Ableton (структура, клипы, сцены).<br />– Мэппинг контроллеров и настройка MIDI/аудио-устройств.<br />– Автоматизация эффектов и параметров в реальном времени.<br />– Создание эффект-треков для лайв-импровизаций.<br />– Использование Ableton как диджейского инструмента (битматчинг, переходы, варпинг).<br />– Работа с вокалом: минусовые дорожки, лайв-эффекты на голос, бэкинг-треки.<br />– Подготовка к выступлению с группой: синхронизация Ableton с другими музыкантами.<br />– Практика выступлений: репетиции, стресс-тесты, оптимизация CPU, резервные сценарии.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Формат</h4>
+          <p style="margin:0">– Индивидуальные занятия.<br />– Количество уроков подбирается под задачу:<br />• для вокалиста с минусовкой может хватить 6–8 занятий<br />• для диджея или электронного музыканта, готовящего клубный сет — от 12<br />• Полный лайв проект для полноценной группы музыкантов — 15–20+ занятий</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px; font-size:15px; font-weight:600; color:#1e1b16">Финал курса</h4>
+          <p style="margin:0">– Собранный и отрепетированный Live Set.<br />– Понимание, как управлять им на сцене.<br />– Уверенность в работе с Ableton Live в условиях реального выступления.</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="pricing" style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:1200px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172; margin-bottom:18px">05 / Стоимость обучения</div>
+    <h2 style="margin:0 0 16px; font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em">Пакеты занятий</h2>
+    <p style="margin:0 0 clamp(30px,5vw,52px); font-size:clamp(16px,1.9vw,19px); color:#4a4339">Занятия подразумевают онлайн формат по 60 или 90 минут.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:clamp(16px,2vw,26px); align-items:stretch">
+
+      <div style="border:1px solid #cbbda2; border-radius:3px; padding:clamp(24px,3vw,34px); display:flex; flex-direction:column; gap:18px">
+        <div>
+          <h3 style="margin:0 0 6px; font-size:24px; font-weight:600; letter-spacing:-0.02em">Разовая консультация онлайн</h3>
+          <p style="margin:0; font-size:15px; color:#6b6255">Консультация по работе со звуком</p>
+        </div>
+        <div style="font-size:clamp(34px,4.5vw,46px); font-weight:800; letter-spacing:-0.03em">5000 ₽</div>
+        <p style="margin:0; font-size:15px; line-height:1.6; color:#4a4339; flex:1">Классическая консультация онлайн на 90 минут.</p>
+        <a href="https://yookassa.ru/my/i/apVxpZevovUw/l" target="_blank" rel="noopener" style="display:block; text-align:center; padding:15px 24px; border:1px solid #1e1b16; border-radius:100px; font-size:16px; font-weight:600" style-hover="background:#1e1b16; color:#efe7d8">Оплатить</a>
+      </div>
+
+      <div style="border:1px solid #cbbda2; border-radius:3px; padding:clamp(24px,3vw,34px); display:flex; flex-direction:column; gap:18px">
+        <div>
+          <h3 style="margin:0 0 6px; font-size:24px; font-weight:600; letter-spacing:-0.02em">Пакет «Основа»</h3>
+          <p style="margin:0; font-size:15px; color:#6b6255">здесь начинается настоящее обучение</p>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:12px; flex-wrap:wrap">
+          <span style="font-size:clamp(34px,4.5vw,46px); font-weight:800; letter-spacing:-0.03em">15000 ₽</span>
+          <sc-if value="{{ showOldPrices }}" hint-placeholder-val="{{ true }}"><span style="font-size:19px; color:#8a8172; text-decoration:line-through">20000 ₽</span></sc-if>
+        </div>
+        <sc-if value="{{ showOldPrices }}" hint-placeholder-val="{{ true }}"><div style="align-self:flex-start; padding:5px 12px; background:#a8632a; color:#fdf9f1; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:12px">Экономия 25%</div></sc-if>
+        <div style="font-size:15px; line-height:1.6; color:#4a4339; flex:1; display:flex; flex-direction:column; gap:14px">
+          <div><strong style="color:#1e1b16">Для кого</strong><br />Если ты хочешь двигаться вперёд, а не «поговорить один раз». Готов работать системно.</div>
+          <div><strong style="color:#1e1b16">Что внутри</strong><br />– 6 часов индивидуальных занятий онлайн<br />– работа с твоими проектами<br />– <em>возможность получать обратную связь между занятиями</em></div>
+          <div><strong style="color:#1e1b16">Результат</strong><br />– собранный трек<br />– понимание решений<br />– уверенность в действиях</div>
+        </div>
+        <a href="https://yookassa.ru/my/i/apVyFnrAhm-X/l" target="_blank" rel="noopener" style="display:block; text-align:center; padding:15px 24px; border:1px solid #1e1b16; border-radius:100px; font-size:16px; font-weight:600" style-hover="background:#1e1b16; color:#efe7d8">Оплатить</a>
+      </div>
+
+      <div style="border:1px solid #a8632a; border-radius:3px; padding:clamp(24px,3vw,34px); display:flex; flex-direction:column; gap:18px; background:#e8dcc6">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#a8632a; margin-bottom:10px">Наставничество</div>
+          <h3 style="margin:0 0 6px; font-size:24px; font-weight:600; letter-spacing:-0.02em">Пакет «Максимум»</h3>
+          <p style="margin:0; font-size:15px; color:#6b6255">Если ты хочешь максимум результата и минимальные обходные пути</p>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:12px; flex-wrap:wrap">
+          <span style="font-size:clamp(34px,4.5vw,46px); font-weight:800; letter-spacing:-0.03em">27300 ₽</span>
+          <sc-if value="{{ showOldPrices }}" hint-placeholder-val="{{ true }}"><span style="font-size:19px; color:#8a8172; text-decoration:line-through">40000 ₽</span></sc-if>
+        </div>
+        <sc-if value="{{ showOldPrices }}" hint-placeholder-val="{{ true }}"><div style="align-self:flex-start; padding:5px 12px; background:#a8632a; color:#fdf9f1; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:12px">Экономия 32%</div></sc-if>
+        <div style="font-size:15px; line-height:1.6; color:#4a4339; flex:1; display:flex; flex-direction:column; gap:14px">
+          <div><strong style="color:#1e1b16">Что внутри</strong><br />– 12 часов индивидуальных занятий<br />– приоритетное внимание<br />– <em>возможность получать обратную связь между занятиям</em><br />– <em>мастериг готовых композиций</em></div>
+          <div>Это полноценное наставничество.</div>
+          <div><strong style="color:#1e1b16">Результат</strong><br />– системный рост<br />– создание готовых для стримминга работ<br />– чёткое понимание производственнго процесса</div>
+        </div>
+        <a href="https://yookassa.ru/my/i/aVj1J01SNkJA/l" target="_blank" rel="noopener" style="display:block; text-align:center; padding:15px 24px; background:#a8632a; color:#fdf9f1; border-radius:100px; font-size:16px; font-weight:600" style-hover="background:#1e1b16">Оплатить</a>
+      </div>
+    </div>
+
+    <a href="#contact" style="display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-top:clamp(20px,3vw,28px); padding:clamp(22px,3vw,30px); border:1px dashed #a8632a; border-radius:3px; font-size:clamp(16px,2vw,20px); line-height:1.45; color:#1e1b16" style-hover="background:#e8dcc6">
+      <span style="max-width:760px; text-wrap:pretty">Если вы готовы заниматься в группе, чтобы обучение было немного дешевле - нажмите на эту кнопку и напишите мне!</span>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#a8632a; white-space:nowrap">написать →</span>
+    </a>
+  </div>
+</section>
+
+<section style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:24px; align-items:flex-start">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172">06 / Отзывы о работе со мной</div>
+    <div style="display:flex; gap:6px">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#a8632a"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9z" /></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#a8632a"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9z" /></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#a8632a"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9z" /></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#a8632a"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9z" /></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#a8632a"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.5l6.6-.9z" /></svg>
+    </div>
+    <p style="margin:0; font-size:clamp(22px,3.4vw,38px); line-height:1.25; font-weight:600; letter-spacing:-0.02em; max-width:820px; text-wrap:pretty">Перейдя по кнопке ниже вы можете ознакомиться с <span style="color:#a8632a">реальными отзывами</span> на популярной в России образовательной площадке.</p>
+    <a href="https://profi.ru/profile/GrischenkoAP6" target="_blank" rel="noopener" style="padding:16px 34px; border:1px solid #1e1b16; border-radius:100px; font-size:16px; font-weight:600" style-hover="background:#1e1b16; color:#efe7d8">Перейти к отзывам</a>
+  </div>
+</section>
+
+<section id="contact" style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); background:#1e1b16; color:#efe7d8">
+  <div style="max-width:1000px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#c98d4b; margin-bottom:18px">07 / Связаться</div>
+    <h2 style="margin:0 0 18px; font-size:clamp(32px,5.4vw,64px); line-height:1; font-weight:800; letter-spacing:-0.03em">Получи бесплатную консультацию!</h2>
+    <p style="margin:0 0 clamp(30px,5vw,48px); max-width:720px; font-size:clamp(16px,1.9vw,19px); line-height:1.55; color:#bcb2a1; text-wrap:pretty">Расскажи, о себе. О том как ты хочешь начать свой путь в музыке и чему хочешь научиться. Напиши своё имя, укажи удобный способ связи и выбери уровень знаний. Я помогу тебе достичь цели!</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:clamp(12px,2vw,18px)">
+      <a href="https://t.me/TolyaMusic808" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; gap:4px; padding:18px 22px; flex-direction:column; align-items:flex-start; background:#efe7d8; color:#1e1b16; border-radius:3px; font-size:19px; font-weight:600" style-hover="background:#c98d4b"><span style="display:flex; align-items:center; gap:12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e1b16" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 4L2.5 11l6 2.2L21 4z" /><path d="M21 4l-3 15-9.5-5.8L21 4z" /></svg>Telegram</span><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:400; color:#6b6255; white-space:nowrap">@TolyaMusic808</span></a>
+      <a href="https://wa.me/79045150040" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; gap:4px; padding:18px 22px; flex-direction:column; align-items:flex-start; background:#efe7d8; color:#1e1b16; border-radius:3px; font-size:19px; font-weight:600" style-hover="background:#c98d4b"><span style="display:flex; align-items:center; gap:12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e1b16" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.4A8.5 8.5 0 1 1 20.5 11.7z" /><path d="M9 8.5c-.6.6-.6 1.9.5 3.4s2.4 2.2 3.2 2.4c.6.1 1.4-.6 1.6-1.1l-1.7-.9-.8.7c-.7-.4-1.4-1.1-1.8-1.9l.7-.7-.9-1.7c-.4 0-.6-.2-.8-.2z" /></svg>WhatsApp</span><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:400; color:#6b6255; white-space:nowrap; white-space:nowrap">+7 904 515-00-40</span></a>
+      <a href="https://vk.com/tolyamusic" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; gap:4px; padding:18px 22px; flex-direction:column; align-items:flex-start; background:#efe7d8; color:#1e1b16; border-radius:3px; font-size:19px; font-weight:600" style-hover="background:#c98d4b"><span style="display:flex; align-items:center; gap:12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e1b16" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5" /><path d="M7 9.2h1.8c.3 2.3 1.4 4 2.6 4.4V9.2h1.7v2.2c1-.3 1.7-1.2 2-2.2H17c-.3 1.4-1.1 2.5-2 3 1 .5 1.8 1.5 2.2 2.8h-1.9c-.3-1-1.1-1.8-2.2-2v2h-.4c-2.8 0-5-2.3-5.7-5.8z" /></svg>ВКонтакте</span><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:400; color:#6b6255; white-space:nowrap">/tolyamusic</span></a>
+    </div>
+    <p style="margin:26px 0 0; font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8a8172">Или почтой: <a href="mailto:punkalert145@gmail.com" style="color:#c98d4b">punkalert145@gmail.com</a></p>
+  </div>
+</section>
+
+<sc-if value="{{ showFaq }}" hint-placeholder-val="{{ true }}">
+<section style="padding:clamp(52px,8vw,110px) clamp(16px,4vw,56px); border-bottom:1px solid #d6c9b0">
+  <div style="max-width:900px; margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172; margin-bottom:18px">08 / FAQ</div>
+    <h2 style="margin:0 0 clamp(28px,4vw,44px); font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em">Ответы на частые вопросы</h2>
+    <details style="border-top:1px solid #d6c9b0; padding:22px 0">
+      <summary style="display:flex; justify-content:space-between; gap:20px; font-size:clamp(17px,2.1vw,21px); font-weight:600"><span>Что нужно для занятий?</span><span style="color:#a8632a">+</span></summary>
+      <p style="margin:16px 0 0; max-width:760px; font-size:16px; line-height:1.6; color:#4a4339; text-wrap:pretty">Подойдет обычный ноутбук или ПК. Не обязательно мощный. Так же очень рекомендую обзавестись наушниками. В целом этого набора для начала вполне хватит.</p>
+    </details>
+    <details style="border-top:1px solid #d6c9b0; padding:22px 0">
+      <summary style="display:flex; justify-content:space-between; gap:20px; font-size:clamp(17px,2.1vw,21px); font-weight:600"><span>Как проходят занятия?</span><span style="color:#a8632a">+</span></summary>
+      <p style="margin:16px 0 0; max-width:760px; font-size:16px; line-height:1.6; color:#4a4339; text-wrap:pretty">Занятия проходят онлайн в индивидуальном формате. Мы созваниваемся в удобном приложении. Я объясняю тему и даю домашнее задание. В начале следующего занятия я даю связь по домашке и мы приступаем к новой теме. Даже сложное объясняю простым языком, и поддерживаю между занятиями.</p>
+    </details>
+    <details style="border-top:1px solid #d6c9b0; padding:22px 0">
+      <summary style="display:flex; justify-content:space-between; gap:20px; font-size:clamp(17px,2.1vw,21px); font-weight:600"><span>Как записаться на занятия?</span><span style="color:#a8632a">+</span></summary>
+      <p style="margin:16px 0 0; max-width:760px; font-size:16px; line-height:1.6; color:#4a4339; text-wrap:pretty">Все очень просто. Вы оплачиваете удобное количество занятий. Мне приходит оповещение. Я скидываю вам ссылку на Google календарь, где мы оговариваем удобные даты и время. Я не против чтобы мы оговаривали разное время и разные дни для занятий, так что график может быть плавающим.</p>
+    </details>
+    <details style="border-top:1px solid #d6c9b0; border-bottom:1px solid #d6c9b0; padding:22px 0">
+      <summary style="display:flex; justify-content:space-between; gap:20px; font-size:clamp(17px,2.1vw,21px); font-weight:600"><span>Как отменять и переносить занятия, сгорит ли оплата?</span><span style="color:#a8632a">+</span></summary>
+      <p style="margin:16px 0 0; max-width:760px; font-size:16px; line-height:1.6; color:#4a4339; text-wrap:pretty">Вы без проблем можете перенести занятие, написав мне за 24 часа до оговоренной даты. Я всегда пойду на встречу, отлично понимаю - все живем на вулкане. При отмене менее чем за сутки занятие сгорает. Прошу понять, мое время это мои деньги. Однако если произошел форс мажор - мы можем обсудить причины и найти удобное для всех решение. Я всегда отношусь с уважением к вашему времени и прошу также относиться к моему.</p>
+    </details>
+  </div>
+</section>
+</sc-if>
+
+<footer style="padding:clamp(40px,6vw,72px) clamp(16px,4vw,56px)">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; align-items:start">
+    <div style="font-size:15px; line-height:1.7; color:#4a4339">
+      <div style="color:#1e1b16; font-weight:600">Грищенко Анатолий Павлович</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8a8172">ИНН: 784100790670</div>
+      <a href="mailto:punkalert145@gmail.com">punkalert145@gmail.com</a>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#8a8172">Поддержать автора</div>
+      <a href="https://yookassa.ru/my/i/aVj6K8f1AAC0/l" target="_blank" rel="noopener" style="padding:12px 28px; border:1px solid #1e1b16; border-radius:100px; font-size:15px; font-weight:600" style-hover="background:#1e1b16; color:#efe7d8">Оплатить</a>
+    </div>
+    <div style="display:flex; gap:18px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:13px; color:#8a8172">
+      <a href="https://t.me/TolyaMusic808" target="_blank" rel="noopener" style="color:#8a8172">Telegram</a>
+      <a href="https://wa.me/79045150040" target="_blank" rel="noopener" style="color:#8a8172">WhatsApp</a>
+      <a href="https://vk.com/tolyamusic" target="_blank" rel="noopener" style="color:#8a8172">VK</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showFaq&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Блоки&quot;},&quot;showOldPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Блоки&quot;}}">
+class Component extends DCLogic {
+  state = {
+    grid: [
+      [1, 0, 0, 0, 1, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0, 1, 0],
+      [0, 1, 0, 1, 0, 1, 1, 1],
+      [1, 0, 1, 0, 0, 1, 0, 1],
+    ],
+    seqPos: -1,
+    seqPlay: false,
+    layers: [true, false, false, false],
+    livePos: -1,
+    livePlay: false,
+    fmRatio: 2,
+    fmIndex: 260,
+    cutoff: 6000,
+  };
+
+  TRACKS = [
+    { name: 'KICK', color: '#b5763a' },
+    { name: 'CLAP', color: '#a44a2f' },
+    { name: 'HAT', color: '#c2a24a' },
+    { name: 'BASS', color: '#7f9a5c' },
+  ];
+  NOTES = [['C2', 130.81], ['D#', 155.56], ['F', 174.61], ['G', 196.0], ['A#', 233.08], ['C3', 261.63]];
+  LAYERS = [
+    { name: 'DRUMS', color: '#b5763a' },
+    { name: 'BASS', color: '#7f9a5c' },
+    { name: 'ARP', color: '#4e7f78' },
+    { name: 'PERC', color: '#c2a24a' },
+  ];
+
+  componentWillUnmount() {
+    clearInterval(this._seqI);
+    clearInterval(this._liveI);
+    if (this._ac) this._ac.close();
+  }
+
+  ac() {
+    if (!this._ac) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      this._ac = new AC();
+      // iOS: беззвучный режим глушит Web Audio, пока сессия не объявлена как playback
+      try {
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
+      } catch (e) {}
+      const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      let out = this._ac.destination;
+      if (iOS && !navigator.audioSession && this._ac.createMediaStreamDestination) {
+        // старые iOS: media-элемент играет и в беззвучном режиме
+        const dest = this._ac.createMediaStreamDestination();
+        const el = document.createElement('audio');
+        el.setAttribute('playsinline', '');
+        el.autoplay = true;
+        el.srcObject = dest.stream;
+        el.play().catch(() => {});
+        this._el = el;
+        out = dest;
+      }
+      this._dry = this._ac.createGain();
+      this._dry.gain.value = 0.5;
+      this._dry.connect(out);
+      this._flt = this._ac.createBiquadFilter();
+      this._flt.type = 'lowpass';
+      this._flt.Q.value = 1.2;
+      this._flt.frequency.value = this.state.cutoff;
+      this._wet = this._ac.createGain();
+      this._wet.gain.value = 0.5;
+      this._wet.connect(this._flt);
+      this._flt.connect(out);
+    }
+    if (this._ac.state === 'suspended') this._ac.resume();
+    return this._ac;
+  }
+
+  noiseBuf() {
+    const a = this.ac();
+    if (!this._nb) {
+      this._nb = a.createBuffer(1, a.sampleRate, a.sampleRate);
+      const d = this._nb.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    }
+    return this._nb;
+  }
+  noise(t, out, type, freq, q, dur, vol) {
+    const a = this.ac();
+    const src = a.createBufferSource();
+    src.buffer = this.noiseBuf();
+    const f = a.createBiquadFilter();
+    f.type = type;
+    f.frequency.value = freq;
+    f.Q.value = q;
+    const g = a.createGain();
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+    src.connect(f);
+    f.connect(g);
+    g.connect(out);
+    src.start(t);
+    src.stop(t + dur + 0.02);
+  }
+  kick(t, out) {
+    const a = this.ac();
+    const o = a.createOscillator();
+    const g = a.createGain();
+    o.frequency.setValueAtTime(150, t);
+    o.frequency.exponentialRampToValueAtTime(46, t + 0.16);
+    g.gain.setValueAtTime(0.95, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+    o.connect(g);
+    g.connect(out);
+    o.start(t);
+    o.stop(t + 0.32);
+  }
+  clap(t, out) {
+    for (let i = 0; i < 3; i++) this.noise(t + i * 0.012, out, 'bandpass', 1500, 2.4, 0.11, 0.5);
+  }
+  hat(t, out, vol) {
+    this.noise(t, out, 'highpass', 8200, 0.9, 0.05, vol || 0.28);
+  }
+  bass(t, out, f) {
+    const a = this.ac();
+    const o = a.createOscillator();
+    o.type = 'sawtooth';
+    o.frequency.value = f;
+    const fl = a.createBiquadFilter();
+    fl.type = 'lowpass';
+    fl.Q.value = 4;
+    fl.frequency.setValueAtTime(900, t);
+    fl.frequency.exponentialRampToValueAtTime(140, t + 0.2);
+    const g = a.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.5, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.24);
+    o.connect(fl);
+    fl.connect(g);
+    g.connect(out);
+    o.start(t);
+    o.stop(t + 0.3);
+  }
+  fm(t, out, f, ratio, index, dur) {
+    const a = this.ac();
+    const car = a.createOscillator();
+    car.frequency.value = f;
+    const mod = a.createOscillator();
+    mod.frequency.value = f * ratio;
+    const mg = a.createGain();
+    mg.gain.setValueAtTime(index, t);
+    mg.gain.exponentialRampToValueAtTime(Math.max(1, index * 0.12), t + dur * 0.8);
+    const g = a.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.34, t + 0.014);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    mod.connect(mg);
+    mg.connect(car.frequency);
+    car.connect(g);
+    g.connect(out);
+    mod.start(t);
+    car.start(t);
+    mod.stop(t + dur + 0.05);
+    car.stop(t + dur + 0.05);
+  }
+
+  playTrack(r, t, out) {
+    const o = out || this._dry;
+    if (r === 0) this.kick(t, o);
+    else if (r === 1) this.clap(t, o);
+    else if (r === 2) this.hat(t, o);
+    else this.bass(t, o, [65.41, 65.41, 87.31, 98.0, 65.41, 73.42, 87.31, 61.74][Math.floor(Math.random() * 8)]);
+  }
+
+  _start(key, steps, stepDur, fire) {
+    const a = this.ac();
+    this['_' + key + 'T'] = a.currentTime + 0.1;
+    this['_' + key + 'S'] = 0;
+    this['_' + key + 'I'] = setInterval(() => {
+      const now = a.currentTime;
+      while (this['_' + key + 'T'] < now + 0.15) {
+        const s = this['_' + key + 'S'] % steps;
+        const t = this['_' + key + 'T'];
+        fire(s, t);
+        setTimeout(() => this.setState({ [key + 'Pos']: s }), Math.max(0, (t - a.currentTime) * 1000));
+        this['_' + key + 'T'] += stepDur;
+        this['_' + key + 'S']++;
+      }
+    }, 25);
+  }
+  _stop(key) {
+    clearInterval(this['_' + key + 'I']);
+    this.setState({ [key + 'Pos']: -1 });
+  }
+
+  toggleSeq = () => {
+    if (this.state.seqPlay) {
+      this._stop('seq');
+      this.setState({ seqPlay: false });
+      return;
+    }
+    this.setState({ seqPlay: true });
+    const bassNotes = [65.41, 65.41, 87.31, 98.0, 65.41, 73.42, 87.31, 61.74];
+    this._start('seq', 8, 0.25, (s, t) => {
+      const g = this.state.grid;
+      if (g[0][s]) this.kick(t, this._dry);
+      if (g[1][s]) this.clap(t, this._dry);
+      if (g[2][s]) this.hat(t, this._dry);
+      if (g[3][s]) this.bass(t, this._dry, bassNotes[s]);
+    });
+  };
+
+  toggleLive = () => {
+    if (this.state.livePlay) {
+      this._stop('live');
+      this.setState({ livePlay: false });
+      return;
+    }
+    this.setState({ livePlay: true });
+    const bp = [65.41, 0, 0, 73.42, 0, 87.31, 0, 0, 65.41, 0, 98.0, 0, 73.42, 0, 0, 58.27];
+    const arp = [261.63, 311.13, 392.0, 466.16];
+    this._start('live', 16, 0.125, (s, t) => {
+      const [dr, bs, ar, pr] = this.state.layers;
+      const out = this._wet;
+      if (dr) {
+        if (s % 4 === 0) this.kick(t, out);
+        if (s % 2 === 1) this.hat(t, out, 0.2);
+      }
+      if (bs && bp[s]) this.bass(t, out, bp[s]);
+      if (ar && s % 2 === 0) this.fm(t, out, arp[(s / 2) % 4], this.state.fmRatio, this.state.fmIndex * 0.6, 0.22);
+      if (pr) {
+        if (s === 4 || s === 12) this.clap(t, out);
+        if (s % 4 === 2) this.hat(t, out, 0.16);
+      }
+    });
+  };
+
+  heat(v) {
+    const st = [[0, 27, 24, 19], [0.35, 120, 45, 25], [0.6, 168, 99, 42], [0.82, 201, 141, 75], [1, 247, 238, 222]];
+    for (let i = 1; i < st.length; i++) {
+      if (v <= st[i][0]) {
+        const a = st[i - 1], b = st[i], k = (v - a[0]) / (b[0] - a[0]);
+        return `rgb(${(a[1] + (b[1] - a[1]) * k) | 0},${(a[2] + (b[2] - a[2]) * k) | 0},${(a[3] + (b[3] - a[3]) * k) | 0})`;
+      }
+    }
+    return '#efe7d8';
+  }
+
+  drawWave() {
+    const c = this.cvWave.current, x = c.getContext('2d'), w = c.width, h = c.height;
+    const N = 150;
+    if (!this.wf) { this.wf = []; this.beat = 0; }
+    this.beat += 0.12;
+    const b = this.beat;
+    const kick = Math.exp(-((b % 4) % 1) * 5) * (((b % 4) | 0) % 2 === 0 ? 1 : 0.5);
+    const snare = ((b % 4) | 0) === 2 ? Math.exp(-((b % 4) % 1) * 8) * 0.7 : 0;
+    const pad = 0.3 + 0.16 * Math.sin(b * 0.17) + 0.09 * Math.sin(b * 0.61);
+    const bar = 0.72 + 0.28 * Math.sin(b * 0.045);
+    const a = Math.min(1, (kick * 0.8 + snare + pad) * bar) * (0.96 + 0.04 * Math.random());
+    this.wf.push({ a: a * 0.88, rms: a * (0.36 + 0.1 * Math.sin(b * 0.9)) });
+    while (this.wf.length > N) this.wf.shift();
+
+    x.fillStyle = '#1c1c1b';
+    x.fillRect(0, 0, w, h);
+    x.fillStyle = '#333331';
+    x.fillRect(0, 0, w, 34);
+    const mid = h / 2, p = 36, iw = w - p * 2, cw = iw / (N - 1), A = h / 2 - 58;
+    x.lineWidth = 1;
+    x.strokeStyle = 'rgba(255,255,255,0.06)';
+    for (let i = 1; i < 10; i++) {
+      const py = (i * h) / 10;
+      x.beginPath(); x.moveTo(p, py); x.lineTo(w - p, py); x.stroke();
+    }
+    for (let i = 0; i <= 8; i++) {
+      const px = p + (i * iw) / 8;
+      x.strokeStyle = i % 2 ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.13)';
+      x.beginPath(); x.moveTo(px, 34); x.lineTo(px, h - p - 8); x.stroke();
+      if (i % 2 === 0) { x.fillStyle = 'rgba(185,182,176,0.5)'; x.font = '12px monospace'; x.fillText(String(1 + i * 4), px + 4, 50); }
+    }
+    const env = (key, fill, stroke) => {
+      x.beginPath();
+      this.wf.forEach((s, i) => {
+        const px = p + i * cw, py = mid - s[key] * A;
+        i ? x.lineTo(px, py) : x.moveTo(px, py);
+      });
+      for (let i = this.wf.length - 1; i >= 0; i--) x.lineTo(p + i * cw, mid + this.wf[i][key] * A);
+      x.closePath();
+      x.fillStyle = fill;
+      x.fill();
+      if (stroke) { x.strokeStyle = stroke; x.lineWidth = 1.4; x.stroke(); }
+    };
+    env('a', 'rgba(181,118,58,0.42)', 'rgba(232,229,223,0.55)');
+    env('rms', 'rgba(207,154,86,0.8)', null);
+    x.strokeStyle = 'rgba(0,0,0,0.45)';
+    x.lineWidth = 1;
+    x.beginPath(); x.moveTo(p, mid); x.lineTo(w - p, mid); x.stroke();
+    const cx = p + (this.wf.length - 1) * cw;
+    x.strokeStyle = '#e8e5df';
+    x.lineWidth = 1.5;
+    x.beginPath(); x.moveTo(cx, 34); x.lineTo(cx, h - p); x.stroke();
+    x.fillStyle = '#b5763a';
+    x.fillRect(0, 0, 6, 34);
+    x.fillStyle = '#dcd9d3';
+    x.font = '14px monospace';
+    x.fillText('1 Audio  ·  loop 4', 18, 23);
+    x.fillStyle = '#a44a2f';
+    x.beginPath(); x.arc(w - 26, 17, 5 + 1.5 * Math.abs(Math.sin(this.t * 2)), 0, 7); x.fill();
+    x.fillStyle = 'rgba(185,182,176,0.4)';
+    x.font = '12px monospace';
+    x.fillText('128.00  ·  4 / 4', p, h - 16);
+  }
+
+  drawMix() {
+    const c = this.cvMix.current, x = c.getContext('2d'), w = c.width, h = c.height, n = 4, sw = w / n;
+    const CL = ['#b5763a', '#7f9a5c', '#4e7f78', '#c2a24a'];
+    x.fillStyle = '#1c1c1b';
+    x.fillRect(0, 0, w, h);
+    for (let i = 0; i < n; i++) {
+      const ox = i * sw, st = this.mixState[i];
+      x.fillStyle = i % 2 ? '#262625' : '#212120';
+      x.fillRect(ox, 0, sw, h);
+      x.fillStyle = '#333331';
+      x.fillRect(ox, 0, sw - 2, 26);
+      x.fillStyle = CL[i];
+      x.fillRect(ox, 0, sw - 2, 3);
+      x.fillStyle = '#dcd9d3';
+      x.font = '13px monospace';
+      x.fillText((i + 1) + ' ' + ['Drums', 'Bass', 'Keys', 'Lead'][i], ox + 8, 18);
+      x.strokeStyle = 'rgba(0,0,0,0.5)';
+      x.lineWidth = 2;
+      x.beginPath(); x.moveTo(ox, 0); x.lineTo(ox, h); x.stroke();
+      for (let k = 0; k < 3; k++) {
+        const cx = ox + sw / 2, cy = 74 + k * 74, R = 24;
+        x.fillStyle = '#141413'; x.beginPath(); x.arc(cx, cy, R, 0, 7); x.fill();
+        x.fillStyle = '#3a3a38'; x.beginPath(); x.arc(cx, cy, R - 4, 0, 7); x.fill();
+        x.strokeStyle = 'rgba(255,255,255,0.14)'; x.lineWidth = 1.5;
+        for (let s = 0; s <= 8; s++) {
+          const a = Math.PI * 0.75 + (s * Math.PI * 1.5) / 8;
+          x.beginPath();
+          x.moveTo(cx + Math.cos(a) * (R + 4), cy + Math.sin(a) * (R + 4));
+          x.lineTo(cx + Math.cos(a) * (R + 9), cy + Math.sin(a) * (R + 9));
+          x.stroke();
+        }
+        const base = [0.35, 0.68, 0.5, 0.8, 0.42, 0.6, 0.75, 0.3, 0.55, 0.62, 0.48, 0.7][i * 3 + k];
+        const v = Math.min(1, Math.max(0, base + 0.07 * Math.sin(this.t * 0.5 + i + k * 2)));
+        const a = Math.PI * 0.75 + v * Math.PI * 1.5;
+        x.strokeStyle = CL[i]; x.lineWidth = 4;
+        x.beginPath(); x.arc(cx, cy, R + 7, Math.PI * 0.75, a); x.stroke();
+        x.strokeStyle = '#e8e5df'; x.lineWidth = 2.5;
+        x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.cos(a) * (R - 7), cy + Math.sin(a) * (R - 7)); x.stroke();
+      }
+      const target = 0.45 + 0.5 * Math.abs(Math.sin(this.t * 1.6 + st.ph)) * (0.6 + 0.4 * Math.abs(Math.sin(this.t * 0.4 + i)));
+      st.lvl += (target - st.lvl) * (target > st.lvl ? 0.6 : 0.12);
+      st.peak = Math.max(st.peak - 0.008, st.lvl);
+      const mx = ox + 14, my = 300, mh = h - 356;
+      x.fillStyle = '#141413';
+      x.fillRect(mx, my, 18, mh);
+      const seg = 24;
+      for (let s = 0; s < seg; s++) {
+        const on = s / seg < st.lvl, yy = my + mh - ((s + 1) * mh) / seg;
+        x.fillStyle = on ? (s > 20 ? '#a44a2f' : s > 17 ? '#c2a24a' : '#7f9a5c') : 'rgba(255,255,255,0.06)';
+        x.fillRect(mx + 2, yy + 1.5, 14, mh / seg - 3);
+      }
+      const pk = my + mh - st.peak * mh;
+      x.fillStyle = '#e8e5df';
+      x.fillRect(mx + 2, pk, 14, 2);
+      const fx = ox + sw - 42;
+      x.fillStyle = '#141413';
+      x.fillRect(fx - 3, my, 22, mh);
+      x.strokeStyle = 'rgba(255,255,255,0.16)'; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(fx + 8, my + 8); x.lineTo(fx + 8, my + mh - 8); x.stroke();
+      const fv = [0.62, 0.8, 0.45, 0.7][i] + 0.05 * Math.sin(this.t * 0.35 + i * 2);
+      const ky = my + mh - 14 - (mh - 28) * fv;
+      x.fillStyle = '#0e0e0d'; x.fillRect(fx - 10, ky - 11, 38, 24);
+      x.fillStyle = '#4a4a47'; x.fillRect(fx - 8, ky - 9, 34, 20);
+      x.fillStyle = CL[i]; x.fillRect(fx - 8, ky - 1, 34, 2.5);
+      x.fillStyle = 'rgba(185,182,176,0.55)';
+      x.font = '12px monospace';
+      x.fillText(['-4.2', '-2.0', '-7.5', '-3.1'][i] + ' dB', ox + 12, h - 16);
+    }
+  }
+
+  drawEq() {
+    const c = this.cvEq.current, x = c.getContext('2d'), w = c.width, h = c.height;
+    const L = 62, R = w - 24, T = 52, B = h - 74, gw = R - L, gh = B - T;
+    x.fillStyle = '#1c1c1b'; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#333331'; x.fillRect(0, 0, w, 34);
+    x.fillStyle = '#4e7f78'; x.fillRect(0, 0, 7, 34);
+    x.fillStyle = '#dcd9d3'; x.font = '15px monospace';
+    x.fillText('EQ EIGHT', 20, 23);
+    x.fillStyle = '#141413'; x.fillRect(L, T, gw, gh);
+    x.font = '11px monospace';
+    x.strokeStyle = 'rgba(255,255,255,0.08)'; x.lineWidth = 1;
+    for (const [t, lb] of [[0.05, '50'], [0.16, '100'], [0.3, '500'], [0.45, '1k'], [0.6, '3k'], [0.75, '8k'], [0.9, '16k']]) {
+      const px = L + t * gw;
+      x.beginPath(); x.moveTo(px, T); x.lineTo(px, B); x.stroke();
+      x.fillStyle = 'rgba(185,182,176,0.5)'; x.fillText(lb, px - 8, B + 18);
+    }
+    for (let i = 0; i <= 8; i++) {
+      const py = T + (i * gh) / 8;
+      x.strokeStyle = i === 4 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.07)';
+      x.beginPath(); x.moveTo(L, py); x.lineTo(R, py); x.stroke();
+      x.fillStyle = 'rgba(185,182,176,0.45)';
+      x.fillText((12 - i * 3 > 0 ? '+' : '') + (12 - i * 3), L - 32, py + 4);
+    }
+    if (!this.spec) this.spec = new Array(120).fill(0);
+    if (!this.pk) this.pk = new Array(120).fill(0);
+    const t = this.t;
+    const bass = 0.55 + 0.45 * Math.abs(Math.sin(t * 1.9));
+    for (let i = 0; i < 120; i++) {
+      const f = i / 119;
+      let v = 0.62 * Math.exp(-f * 2.1) * bass
+        + 0.3 * Math.exp(-Math.pow((f - 0.42) * 5, 2)) * (0.5 + 0.5 * Math.sin(t * 1.3))
+        + 0.2 * Math.exp(-Math.pow((f - 0.7) * 7, 2)) * (0.4 + 0.6 * Math.abs(Math.sin(t * 2.7)));
+      for (let k = 1; k < 8; k++) v += Math.exp(-Math.pow((f - k * 0.09) * 30, 2)) * 0.18 * (0.4 + 0.6 * Math.sin(t * 0.8 + k));
+      v = Math.min(1, v + 0.04 * Math.random());
+      this.spec[i] += (v - this.spec[i]) * (v > this.spec[i] ? 0.7 : 0.18);
+      this.pk[i] = Math.max(this.pk[i] - 0.006, this.spec[i]);
+      const px = L + (i * gw) / 120, bw = gw / 120 - 1.2, sv = this.spec[i];
+      const g = x.createLinearGradient(0, B, 0, B - sv * gh);
+      g.addColorStop(0, 'rgba(181,118,58,0.2)');
+      g.addColorStop(1, 'rgba(207,154,86,0.8)');
+      x.fillStyle = g;
+      x.fillRect(px, B - sv * gh, bw, sv * gh);
+      x.fillStyle = 'rgba(232,229,223,0.75)';
+      x.fillRect(px, B - this.pk[i] * gh, bw, 2);
+    }
+    const band = [[0.1, -7, 0.09], [0.3, 4, 0.1], [0.47, -4, 0.06], [0.63, 6.5, 0.08], [0.84, 3, 0.13]];
+    x.beginPath();
+    for (let px = L; px <= R; px += 3) {
+      const f = (px - L) / gw;
+      let db = 0;
+      band.forEach(([bt, gn, q], i) => { db += (gn + 1.2 * Math.sin(t * 0.6 + i * 1.5)) * Math.exp(-Math.pow((f - bt) / q, 2)); });
+      const py = T + gh / 2 - db * (gh / 24);
+      px === L ? x.moveTo(px, py) : x.lineTo(px, py);
+    }
+    x.strokeStyle = '#e8e5df'; x.lineWidth = 2.5; x.stroke();
+    x.lineTo(R, T + gh / 2); x.lineTo(L, T + gh / 2); x.closePath();
+    x.fillStyle = 'rgba(255,255,255,0.07)'; x.fill();
+    band.forEach(([bt, gn], i) => {
+      const px = L + bt * gw;
+      const db = gn + 1.2 * Math.sin(t * 0.6 + i * 1.5);
+      const py = T + gh / 2 - db * (gh / 24);
+      x.strokeStyle = 'rgba(255,255,255,0.16)'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(px, T); x.lineTo(px, B); x.stroke();
+      x.fillStyle = ['#b5763a', '#7f9a5c', '#4e7f78', '#a44a2f', '#c2a24a'][i];
+      x.beginPath(); x.arc(px, py, 8, 0, 7); x.fill();
+      x.strokeStyle = '#e8e5df'; x.lineWidth = 1.8;
+      x.beginPath(); x.arc(px, py, 8, 0, 7); x.stroke();
+      x.fillStyle = '#1c1c1b'; x.font = '10px monospace';
+      x.fillText(String(i + 1), px - 3, py + 3.5);
+    });
+    ['LOW CUT', 'LOW SHELF', 'BELL', 'BELL', 'HIGH SHELF'].forEach((s, i) => {
+      const bx = L + 8 + i * ((gw - 16) / 5);
+      x.strokeStyle = 'rgba(255,255,255,0.14)'; x.lineWidth = 1;
+      x.strokeRect(bx, B + 30, (gw - 16) / 5 - 10, 28);
+      x.fillStyle = 'rgba(185,182,176,0.7)'; x.font = '12px monospace';
+      x.fillText(s, bx + 10, B + 48);
+    });
+  }
+
+  renderVals() {
+    const st = this.state;
+    const btn = (on) => ({
+      padding: '5px 12px',
+      borderRadius: '2px',
+      border: '1px solid ' + (on ? '#e8e5df' : 'rgba(255,255,255,0.22)'),
+      background: on ? '#e8e5df' : 'transparent',
+      color: on ? '#1c1c1b' : '#dcd9d3',
+      font: '11px/1 "IBM Plex Mono", monospace',
+      letterSpacing: '0.08em',
+      cursor: 'pointer',
+    });
+    const seqRows = this.TRACKS.map((tr, r) => ({
+      name: tr.name,
+      cells: st.grid[r].map((on, ci) => ({
+        toggle: () => {
+          const g = st.grid.map((row) => row.slice());
+          g[r][ci] = g[r][ci] ? 0 : 1;
+          this.setState({ grid: g });
+          if (g[r][ci]) this.playTrack(r, this.ac().currentTime + 0.01);
+        },
+        style: {
+          flex: '1 1 0',
+          minWidth: 0,
+          height: '28px',
+          padding: 0,
+          cursor: 'pointer',
+          borderRadius: '2px',
+          border: '1px solid ' + (on ? tr.color : 'rgba(255,255,255,0.16)'),
+          background: on ? tr.color : st.seqPos === ci ? 'rgba(255,255,255,0.14)' : 'transparent',
+          boxShadow: st.seqPos === ci ? 'inset 0 0 0 1px rgba(232,229,223,0.55)' : 'none',
+        },
+      })),
+    }));
+    const fmPads = this.NOTES.map(([n, f]) => ({
+      name: n,
+      press: () => this.fm(this.ac().currentTime + 0.01, this._dry, f, st.fmRatio, st.fmIndex, 0.8),
+      style: {
+        flex: '1 1 0',
+        minWidth: 0,
+        height: '46px',
+        borderRadius: '2px',
+        border: '1px solid rgba(255,255,255,0.18)',
+        background: '#262625',
+        color: '#dcd9d3',
+        font: '11px/1 "IBM Plex Mono", monospace',
+        cursor: 'pointer',
+      },
+    }));
+    const liveLayers = this.LAYERS.map((l, i) => ({
+      name: l.name,
+      toggle: () => {
+        const ls = st.layers.slice();
+        ls[i] = !ls[i];
+        this.setState({ layers: ls });
+      },
+      style: {
+        height: '40px',
+        borderRadius: '2px',
+        border: '1px solid ' + (st.layers[i] ? l.color : 'rgba(255,255,255,0.18)'),
+        background: st.layers[i] ? l.color : '#262625',
+        color: st.layers[i] ? '#1c1c1b' : '#dcd9d3',
+        font: '11px/1 "IBM Plex Mono", monospace',
+        letterSpacing: '0.08em',
+        cursor: 'pointer',
+      },
+    }));
+    return {
+      showFaq: this.props.showFaq ?? true,
+      showOldPrices: this.props.showOldPrices ?? true,
+      seqRows,
+      fmPads,
+      liveLayers,
+      toggleSeq: this.toggleSeq,
+      toggleLive: this.toggleLive,
+      seqLabel: st.seqPlay ? 'STOP' : 'PLAY',
+      liveLabel: st.livePlay ? 'STOP' : 'PLAY',
+      seqBtn: btn(st.seqPlay),
+      liveBtn: btn(st.livePlay),
+      fmRatio: st.fmRatio,
+      fmIndex: st.fmIndex,
+      cutoff: st.cutoff,
+      fmRatioLabel: st.fmRatio.toFixed(1) + ' : 1',
+      fmIndexLabel: String(st.fmIndex),
+      cutoffLabel: st.cutoff >= 1000 ? (st.cutoff / 1000).toFixed(1) + ' kHz' : st.cutoff + ' Hz',
+      setRatio: (e) => this.setState({ fmRatio: parseFloat(e.target.value) }),
+      setIndex: (e) => this.setState({ fmIndex: parseFloat(e.target.value) }),
+      setCutoff: (e) => {
+        const v = parseFloat(e.target.value);
+        this.setState({ cutoff: v });
+        if (this._flt) this._flt.frequency.setTargetAtTime(v, this._ac.currentTime, 0.02);
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
