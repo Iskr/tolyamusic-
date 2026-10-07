@@ -68,7 +68,7 @@
         <button type="button" onClick="{{ tabRank }}" style="{{ tabRankStyle }}">Рейтинг</button>
       </div>
     </div>
-    <div style="display:grid">
+    <div style="display:grid; grid-template-columns:minmax(0,1fr)">
     <div style="{{ rankPaneStyle }}">
         <div style="display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px; margin-bottom:clamp(12px,1.6vw,18px)">
           <sc-for list="{{ rankChips }}" as="c" hint-placeholder-count="6">
@@ -1096,8 +1096,8 @@ class Component extends DCLogic {
     return {
       go,
       showRank: s.tab === 'rank', showList: s.tab !== 'rank', rankCards,
-      rankPaneStyle: { gridArea: '1 / 1', alignSelf: 'start', visibility: s.tab === 'rank' ? 'visible' : 'hidden', opacity: s.tab === 'rank' ? 1 : 0, transition: 'opacity .2s' },
-      listPaneStyle: { gridArea: '1 / 1', visibility: s.tab === 'rank' ? 'hidden' : 'visible', opacity: s.tab === 'rank' ? 0 : 1, transition: 'opacity .2s' },
+      rankPaneStyle: { gridArea: '1 / 1', minWidth: 0, alignSelf: 'start', visibility: s.tab === 'rank' ? 'visible' : 'hidden', opacity: s.tab === 'rank' ? 1 : 0, transition: 'opacity .2s' },
+      listPaneStyle: { gridArea: '1 / 1', minWidth: 0, visibility: s.tab === 'rank' ? 'hidden' : 'visible', opacity: s.tab === 'rank' ? 0 : 1, transition: 'opacity .2s' },
       listTitle: 'Шесть аркад. Каждая что-то тренирует.',
       tabGames: () => this.setState({ tab: 'games' }), tabRank: this.loadRanking,
       rankChips, rankRule, rankGameTitle: this.META[rg].title, rankPlay: () => this.selectGame(rg),
