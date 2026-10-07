@@ -477,6 +477,18 @@ class Component extends DCLogic {
     { name: 'PERC', color: '#c2a24a' },
   ];
 
+  componentDidMount() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    let n = 0;
+    const go = () => {
+      const el = document.getElementById(h);
+      if (el) { const top = el.getBoundingClientRect().top + window.scrollY - 64; window.scrollTo({ top, behavior: 'auto' }); if (n++ < 3) setTimeout(go, 350); }
+      else if (n++ < 20) setTimeout(go, 100);
+    };
+    setTimeout(go, 60);
+  }
+
   componentWillUnmount() {
     clearInterval(this._seqI);
     clearInterval(this._liveI);

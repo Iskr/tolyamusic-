@@ -14,7 +14,7 @@
   };
   const POSE_OF = { idle: 'f1', listen: 'f1', wink: 'f2' };
   const LOOP_POSE = { idle: 'f1', wink: 'f2', correct: 'f3', cheer: 'f4' };
-  const LOOP = [['idle', 2600], ['wink', 260], ['idle', 1100], ['correct', 1500], ['cheer', 1300], ['idle', 2200], ['wink', 260], ['idle', 700]];
+  const LOOP = [['idle', 4200], ['wink', 380], ['idle', 2600], ['correct', 2800], ['cheer', 2600], ['idle', 3600], ['wink', 380], ['idle', 1800]];
   const CSS = `
 :host{display:block;width:100%;height:100%;position:relative}
 .wrap{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
@@ -28,6 +28,14 @@
 .pose[data-p=f4] img{transform:scale(.88) translateY(-1%)}
 .pose.on{opacity:1}
 .pose.on.in{animation:squash .34s cubic-bezier(.3,1.4,.5,1)}
+.wrap.lp .pose{transition:opacity .32s ease}
+.wrap.lp .pose.on.in{animation:soft .7s cubic-bezier(.25,.8,.35,1)}
+.wrap.lp.s-idle .cam{animation:breathe 4.8s ease-in-out infinite}
+.wrap.lp.s-correct .cam{animation:leanSoft 1.1s cubic-bezier(.3,.9,.4,1)}
+.wrap.lp.s-cheer .cam{animation:jumpSoft 1.1s cubic-bezier(.3,.8,.4,1)}
+@keyframes soft{0%{transform:scale(1.015,.985)}100%{transform:none}}
+@keyframes leanSoft{0%{transform:none}40%{transform:rotate(-1.2deg) translateX(-2px)}100%{transform:none}}
+@keyframes jumpSoft{0%{transform:scale(1.02,.98)}40%{transform:translateY(-3.5%)}75%{transform:translateY(0) scale(1.01,.99)}100%{transform:none}}
 .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 .flash.go{animation:flash .26s ease-out}
 .vig{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 55%,rgba(224,121,79,0) 52%,rgba(224,121,79,.55) 100%)}
@@ -158,7 +166,7 @@ svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-ev
       const p = forcePose || (this._looping ? LOOP_POSE[state] || 'f1' : POSE_OF[state] || 'f1');
       if (!poseOnly) {
         if (restart || this._state !== state) { this._wrap.className = 'wrap'; void this._wrap.offsetWidth; }
-        this._wrap.className = 'wrap' + (this._looping ? '' : ' old') + ' s-' + (state === 'wink' ? 'idle' : state);
+        this._wrap.className = 'wrap' + (this._looping ? ' lp' : ' old') + ' s-' + (state === 'wink' ? 'idle' : state);
       }
       const changed = this._pose !== p;
       this._poses.forEach((el) => {

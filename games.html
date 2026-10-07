@@ -54,7 +54,6 @@
     </div>
     <div style="flex:0 1 360px; min-width:0; width:100%; max-width:380px; margin:0 auto; position:relative">
       <div style="width:100%; aspect-ratio:444/700"><x-import component-from-global-scope="tolya-cat" from="./mascot.js" mood="idle" loop="1" hint-size="100%,100%" style="display:block; width:100%; height:100%"></x-import></div>
-      <div style="position:absolute; left:-12px; bottom:22px; pointer-events:none; padding:10px 16px; background:#1e1b16; color:#fcf7f1; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em">COMBO ×3 при 15 подряд</div>
     </div>
   </div>
 </section>
@@ -62,44 +61,90 @@
 <section id="games" style="padding:clamp(52px,8vw,100px) clamp(16px,4vw,56px); border-bottom:1px solid #ead9c6">
   <div style="max-width:1200px; margin:0 auto">
     <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8a8172; margin-bottom:18px">01 / Выбери игру</div>
-    <h2 style="margin:0 0 clamp(28px,4vw,48px); font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em; max-width:760px; text-wrap:balance">Шесть аркад. Каждая что-то тренирует.</h2>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:clamp(28px,4vw,48px)">
+      <h2 style="margin:0; font-size:clamp(30px,4.6vw,54px); line-height:1.04; font-weight:800; letter-spacing:-0.03em; max-width:760px; text-wrap:balance">{{ listTitle }}</h2>
+      <div style="display:flex; gap:4px; padding:4px; background:#f3e7da; border-radius:100px">
+        <button type="button" onClick="{{ tabGames }}" style="{{ tabGamesStyle }}">Игры</button>
+        <button type="button" onClick="{{ tabRank }}" style="{{ tabRankStyle }}">Рейтинг</button>
+      </div>
+    </div>
+    <div style="display:grid">
+    <div style="{{ rankPaneStyle }}">
+        <div style="display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px; margin-bottom:clamp(12px,1.6vw,18px)">
+          <sc-for list="{{ rankChips }}" as="c" hint-placeholder-count="6">
+            <button type="button" onClick="{{ c.press }}" style="{{ c.style }}">{{ c.title }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(12px,1.6vw,18px)">
+          <sc-for list="{{ rankCards }}" as="rc" hint-placeholder-count="2">
+            <div style="{{ rc.style }}">
+              <sc-if value="{{ rc.isMonth }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><path d="M30 132 V92 H80 V132 M80 132 V64 H130 V132 M130 132 V104 H180 V132 M20 132 H190" stroke="#e0845e" stroke-opacity="0.35" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><text x="99" y="92" font-family="IBM Plex Mono, monospace" font-size="20" fill="#e0845e" fill-opacity="0.45">1</text><text x="49" y="120" font-family="IBM Plex Mono, monospace" font-size="18" fill="#e0845e" fill-opacity="0.35">2</text><text x="149" y="126" font-family="IBM Plex Mono, monospace" font-size="16" fill="#e0845e" fill-opacity="0.35">3</text><path d="M105 26 l4 9 l10 1 l-7 7 l2 10 l-9 -5 l-9 5 l2 -10 l-7 -7 l10 -1 z" fill="#e0845e" fill-opacity="0.2" stroke="#e0845e" stroke-opacity="0.4" stroke-width="2" stroke-linejoin="round"></path></svg></sc-if>
+              <sc-if value="{{ rc.isAll }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><path d="M76 30 H134 V58 C134 78 120 90 105 90 C90 90 76 78 76 58 Z" fill="#f4a582" fill-opacity="0.12" stroke="#f4a582" stroke-opacity="0.45" stroke-width="2" stroke-linejoin="round"></path><path d="M76 40 H60 C58 58 66 68 80 70 M134 40 H150 C152 58 144 68 130 70 M105 90 V108 M84 124 H126 V112 H84 Z M98 50 l7 -6 V72 M40 30 l3 -6 M30 44 l-6 -2 M170 28 l-3 -6 M180 44 l6 -2" stroke="#f4a582" stroke-opacity="0.45" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if>
+              <div style="display:flex; justify-content:space-between; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase"><span style="{{ rc.tagStyle }}">{{ rc.title }}</span><span style="{{ rc.subStyle }}">{{ rc.sub }}</span></div>
+              <sc-if value="{{ rc.note }}" hint-placeholder-val="{{ false }}"><div style="{{ rc.noteStyle }}">{{ rc.note }}</div></sc-if>
+              <div style="display:flex; flex-direction:column; gap:6px">
+                <sc-for list="{{ rc.rows }}" as="r" hint-placeholder-count="3">
+                  <div style="{{ r.style }}"><span style="font-family:'IBM Plex Mono',monospace; width:30px; flex:none">{{ r.place }}</span><span style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">{{ r.name }}</span><span style="font-weight:800">{{ r.score }}</span></div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ rc.me }}" hint-placeholder-val="{{ false }}"><div style="{{ rc.meStyle }}">{{ rc.me }}</div></sc-if>
+            </div>
+          </sc-for>
+          <div style="position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#f4a582; border:1px solid #f4a582; border-radius:8px; color:#1e1b16">
+            <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><path d="M40 96 h22 v30 h-22 Z M66 78 h22 v48 h-22 Z M92 60 h22 v66 h-22 Z M118 42 h22 v84 h-22 Z" fill="#1e1b16" fill-opacity="0.08" stroke="#1e1b16" stroke-opacity="0.25" stroke-width="2" stroke-linejoin="round"></path><path d="M152 50 h24 M164 38 v24 M30 136 H186" stroke="#1e1b16" stroke-opacity="0.3" stroke-width="2" fill="none" stroke-linecap="round"></path></svg>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase">Как считается</span>
+            <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">{{ rankGameTitle }}</span>
+            <span style="font-size:15px; line-height:1.5; text-wrap:pretty">{{ rankRule }}</span>
+            <button type="button" onClick="{{ rankPlay }}" style="margin-top:auto; align-self:flex-start; padding:14px 28px; background:#1e1b16; color:#fcf7f1; border:none; border-radius:100px; font-size:16px; font-weight:600; cursor:pointer" style-hover="background:#fcf7f1; color:#1e1b16">Играть</button>
+          </div>
+        </div>
+    </div>
+    <div style="{{ listPaneStyle }}">
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(12px,1.6vw,18px)">
-      <button type="button" onClick="{{ go.fake }}" style="text-align:left; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+      <button type="button" onClick="{{ go.fake }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><path d="M10 40 H195" stroke="#e0845e" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 52 H195" stroke="#e0845e" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 64 H195" stroke="#e0845e" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 76 H195" stroke="#e0845e" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 88 H195" stroke="#e0845e" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="40" cy="82" rx="7" ry="5" transform="rotate(-20 40 82)" fill="#e0845e" fill-opacity="0.32" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 80 V48" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="72" cy="70" rx="7" ry="5" transform="rotate(-20 72 70)" fill="#e0845e" fill-opacity="0.32" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M78 68 V36" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="104" cy="64" rx="7" ry="5" transform="rotate(-20 104 64)" fill="#e0845e" fill-opacity="0.32" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M110 62 V30" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="170" cy="52" rx="7" ry="5" transform="rotate(-20 170 52)" fill="#e0845e" fill-opacity="0.32" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M176 50 V18" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g><ellipse cx="138" cy="76" rx="7" ry="5" transform="rotate(-20 138 76)" fill="#b9542c" fill-opacity="0.55" stroke="#b9542c" stroke-opacity="0.55" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M144 74 V42" stroke="#b9542c" stroke-opacity="0.55" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M124 52 L154 92 M154 52 L124 92" stroke="#b9542c" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/></g></svg>
         <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#b9542c"><span>01</span><span>≈ 60 сек</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">ЛИШНЯЯ НОТА</span>
         <span style="font-size:15px; line-height:1.5; color:#4a4339">Найди ноту, которой нет в гамме или аккорде.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#8a8172">гаммы · аккорды</span>
       </button>
-      <button type="button" onClick="{{ go.rhythm }}" style="text-align:left; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+      <button type="button" onClick="{{ go.rhythm }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><rect x="18" y="46" width="17" height="20" rx="3" fill="#e0845e" fill-opacity="0.28" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="40" y="46" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="62" y="46" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="84" y="46" width="17" height="20" rx="3" fill="#e0845e" fill-opacity="0.28" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="112" y="46" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="134" y="46" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="156" y="46" width="17" height="20" rx="3" fill="#e0845e" fill-opacity="0.28" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="178" y="46" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="72" width="17" height="20" rx="3" fill="#e0845e" fill-opacity="0.28" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="40" y="72" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="62" y="72" width="17" height="20" rx="3" fill="#e0845e" fill-opacity="0.28" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="84" y="72" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="112" y="72" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="134" y="72" width="17" height="20" rx="3" fill="#e0845e" fill-opacity="0.28" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="156" y="72" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="178" y="72" width="17" height="20" rx="3" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="112" r="14" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M176 100 q8 -10 16 -6" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M192 90 l3 -4 M194 96 l5 0 M189 88 l-1 -5" stroke="#b9542c" stroke-opacity="0.5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#b9542c"><span>02</span><span>≈ 90 сек</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">РИТМ-БОМБА</span>
         <span style="font-size:15px; line-height:1.5; color:#4a4339">Услышь ритм и собери его на 16 шагах, пока не вышло время.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#8a8172">ритм · слух</span>
       </button>
-      <button type="button" onClick="{{ go.kill }}" style="text-align:left; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#1e1b16; border:1px solid #1e1b16; border-radius:8px; color:#fcf7f1; cursor:pointer" style-hover="background:#2f2a23">
+      <button type="button" onClick="{{ go.kill }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#1e1b16; border:1px solid #1e1b16; border-radius:8px; color:#fcf7f1; cursor:pointer" style-hover="background:#2f2a23">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><ellipse cx="112" cy="92" rx="7" ry="5" transform="rotate(-20 112 92)" fill="#f4a582" fill-opacity="0.35" stroke="#f4a582" stroke-opacity="0.35" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 90 V58" stroke="#f4a582" stroke-opacity="0.35" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="118" cy="80" r="34" stroke="#f4a582" stroke-opacity="0.4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="118" cy="80" r="18" stroke="#f4a582" stroke-opacity="0.28" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 34 V58 M118 102 V126 M72 80 H96 M140 80 H164" stroke="#f4a582" stroke-opacity="0.45" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="44" cy="60" rx="7" ry="5" transform="rotate(-20 44 60)" fill="none" fill-opacity="0.18" stroke="#f4a582" stroke-opacity="0.18" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 58 V26" stroke="#f4a582" stroke-opacity="0.18" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="176" cy="50" rx="7" ry="5" transform="rotate(-20 176 50)" fill="none" fill-opacity="0.18" stroke="#f4a582" stroke-opacity="0.18" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M182 48 V16" stroke="#f4a582" stroke-opacity="0.18" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#f4a582"><span>03</span><span>60 сек</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">НОТНЫЙ ТИР</span>
         <span style="font-size:15px; line-height:1.5; color:#d8cdbd">Скоростная версия «Лишней ноты». Чем быстрее ответ, тем больше очков.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#a99d8b">гармония · реакция</span>
       </button>
-      <button type="button" onClick="{{ go.chord }}" style="text-align:left; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+      <button type="button" onClick="{{ go.chord }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><rect x="22" y="40" width="24" height="88" rx="2" fill="#e0845e" fill-opacity="0.22" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="46" y="40" width="24" height="88" rx="2" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="70" y="40" width="24" height="88" rx="2" fill="#e0845e" fill-opacity="0.22" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="94" y="40" width="24" height="88" rx="2" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="118" y="40" width="24" height="88" rx="2" fill="#e0845e" fill-opacity="0.22" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="142" y="40" width="24" height="88" rx="2" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="166" y="40" width="24" height="88" rx="2" fill="none" fill-opacity="0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="38" y="40" width="15" height="52" rx="2" fill="#e0845e" fill-opacity=".2" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="62" y="40" width="15" height="52" rx="2" fill="#e0845e" fill-opacity=".2" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="110" y="40" width="15" height="52" rx="2" fill="#e0845e" fill-opacity=".2" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="134" y="40" width="15" height="52" rx="2" fill="#e0845e" fill-opacity=".2" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="158" y="40" width="15" height="52" rx="2" fill="#e0845e" fill-opacity=".2" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 30 V18 M82 30 V18 M130 30 V18 M34 18 H130" stroke="#b9542c" stroke-opacity="0.45" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#b9542c"><span>04</span><span>60 сек / без времени</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">АККОРДНЫЙ ЗАБЕГ</span>
         <span style="font-size:15px; line-height:1.5; color:#4a4339">Собирай аккорды из 12 звуков и узнавай их по нотам.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#8a8172">аккорды · интервалы</span>
       </button>
-      <button type="button" onClick="{{ go.ab }}" style="text-align:left; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+      <button type="button" onClick="{{ go.ab }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><path d="M10 52 L16 58 L26 39 L36 59 L46 38 L56 60 L66 37 L76 61 L86 36 L96 62 L106 35 L116 63 L126 34 L136 64 L146 46 L156 65 L166 45 L176 66 L186 44" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 104 Q15 118 20 104 Q25 90 30 104 Q35 118 40 104 Q45 90 50 104 Q55 118 60 104 Q65 90 70 104 Q75 118 80 104 Q85 90 90 104 Q95 118 100 104 Q105 90 110 104 Q115 118 120 104 Q125 90 130 104 Q135 118 140 104 Q145 90 150 104 Q155 118 160 104 Q165 90 170 104 Q175 118 180 104 Q185 90 190 104" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="182" y="40" font-family="IBM Plex Mono, monospace" font-size="18" fill="#b9542c" fill-opacity=".5">А</text><text x="182" y="94" font-family="IBM Plex Mono, monospace" font-size="18" fill="#b9542c" fill-opacity=".5">Б</text></svg>
         <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#b9542c"><span>05</span><span>≈ 90 сек</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">А ИЛИ Б</span>
         <span style="font-size:15px; line-height:1.5; color:#4a4339">Послушай два варианта и выбери тот, что подходит под условие.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#8a8172">восприятие · слух</span>
       </button>
-      <button type="button" onClick="{{ go.daily }}" style="text-align:left; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#f4a582; border:1px solid #f4a582; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="border-color:#1e1b16">
+      <button type="button" onClick="{{ go.daily }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#f4a582; border:1px solid #f4a582; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="border-color:#1e1b16">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><rect x="70" y="30" width="110" height="98" rx="8" stroke="#1e1b16" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M70 54 H180 M94 22 V38 M156 22 V38" stroke="#1e1b16" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="88" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="113" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="138" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="163" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="88" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="113" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="138" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="163" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="88" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="113" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="138" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="163" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><path d="M163 100 l4 9 l10 1 l-7 7 l2 10 l-9 -5 l-9 5 l2 -10 l-7 -7 l10 -1 z" fill="#1e1b16" fill-opacity=".14" stroke="#1e1b16" stroke-opacity="0.3" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1e1b16"><span>06</span><span>{{ todayLabel }}</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">ЗАДАНИЕ ДНЯ</span>
         <span style="font-size:15px; line-height:1.5; color:#1e1b16">Один набор на всех на сегодня: 10 нот, 3 ритма, 3 гармонии. ТОП-3 дня.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#1e1b16">всё сразу</span>
       </button>
+    </div>
+    </div>
     </div>
   </div>
 </section>
@@ -159,6 +204,13 @@
               <div style="display:flex; gap:4px; padding:4px; background:#1e1b16; border-radius:100px">
                 <button type="button" onClick="{{ setChallenge }}" style="{{ modeChallengeStyle }}">На время · 60 сек</button>
                 <button type="button" onClick="{{ setPractice }}" style="{{ modePracticeStyle }}">Тренировка</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isRhythmGame }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; gap:4px; padding:4px; background:#1e1b16; border-radius:100px">
+                <button type="button" onClick="{{ bpmDown }}" style="width:40px; height:40px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer" style-hover="background:#3a342b">−</button>
+                <span style="min-width:96px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:15px; color:#fcf7f1">{{ bpm }} BPM</span>
+                <button type="button" onClick="{{ bpmUp }}" style="width:40px; height:40px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer" style-hover="background:#3a342b">+</button>
               </div>
             </sc-if>
             <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap">
@@ -262,7 +314,12 @@
                 <sc-if value="{{ rhCanAct }}" hint-placeholder-val="{{ false }}">
                   <div style="display:flex; gap:10px; flex-wrap:wrap">
                     <button type="button" onClick="{{ rhCheck }}" style="padding:13px 28px; background:#f4a582; color:#1e1b16; border:none; border-radius:100px; font-size:16px; font-weight:600; cursor:pointer" style-hover="background:#fcf7f1">Готово</button>
-                    <button type="button" onClick="{{ rhReplay }}" style="padding:13px 24px; background:transparent; color:#fcf7f1; border:1px solid #4a4238; border-radius:100px; font-size:16px; cursor:pointer" style-hover="border-color:#fcf7f1">Послушать ещё раз</button>
+                    <button type="button" onClick="{{ rhReplay }}" style="{{ rhReplayStyle }}">{{ rhReplayLabel }}</button>
+                    <div style="display:flex; align-items:center; gap:2px; padding:3px; border:1px solid #4a4238; border-radius:100px">
+                      <button type="button" onClick="{{ bpmDown }}" style="width:38px; height:38px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:18px; cursor:pointer" style-hover="background:#3a342b">−</button>
+                      <span style="min-width:84px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:14px; color:#fcf7f1">{{ bpm }} BPM</span>
+                      <button type="button" onClick="{{ bpmUp }}" style="width:38px; height:38px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:18px; cursor:pointer" style-hover="background:#3a342b">+</button>
+                    </div>
                   </div>
                 </sc-if>
               </div>
@@ -368,7 +425,7 @@ class Component extends DCLogic {
 
   META = {
     fake: { title: 'ЛИШНЯЯ НОТА', meta: '12 заданий · ≈ 60 сек', rules: ['На экране гамма или аккорд и набор нот. Одна нота лишняя.', 'Найди её. Сложность растёт: гаммы → трезвучия → септаккорды → нонаккорды.', 'Ошибка сбрасывает combo и понижает уровень.', '10 подряд — Босс.'] },
-    rhythm: { title: 'РИТМ-БОМБА', meta: '6 раундов · ≈ 90 сек', rules: ['Сначала отсчёт, потом ритм. Он прозвучит дважды.', 'Дальше 8 секунд, чтобы отметить удары на 16 шагах.', 'Четверти → восьмые → шестнадцатые → паузы и синкопы.', '3 точных подряд — ритм-босс.'] },
+    rhythm: { title: 'РИТМ-БОМБА', meta: '6 раундов · ≈ 90 сек', rules: ['Сначала отсчёт, потом ритм. Он прозвучит дважды.', 'Дальше 12 секунд, чтобы отметить удары на 16 шагах. Пока ритм играет повторно, таймер стоит.', 'Темп можно поменять кнопками BPM. Четверти → восьмые → шестнадцатые → паузы и синкопы.', '3 точных подряд — ритм-босс.'] },
     kill: { title: 'НОТНЫЙ ТИР', meta: '60 сек · на скорость', rules: ['Наборы нот идут один за другим без пауз.', 'Бей ноту, которая не подходит к аккорду или гамме.', 'Быстрый ответ — больше очков. Ошибка: −100 и сброс combo.', '10 подряд — Босс, таймер ждёт.'] },
     chord: { title: 'АККОРДНЫЙ ЗАБЕГ', meta: 'На время 60 сек · Тренировка без времени', rules: ['«Собери Dm» — отметь нужные звуки на клавиатуре.', 'Иногда наоборот: по нотам назови аккорд.', 'Тренировка: ошибки подсвечиваются, можно исправить. На время: 60 секунд на очки.', 'Трезвучия → dim и aug → септаккорды → нонаккорды. Ошибки возвращают к простому.'] },
     ab: { title: 'А ИЛИ Б', meta: '6 вопросов · ≈ 90 сек', rules: ['Два коротких фрагмента, А и Б. Слушай сколько угодно.', 'Выбери тот, что подходит под условие.', 'После ответа — короткое объяснение.', 'Нужны наушники или нормальные колонки.'] },
@@ -397,12 +454,12 @@ class Component extends DCLogic {
     ['fake', 'rhythm', 'kill', 'chord', 'ab', 'daily'].forEach((g) => { const v = +localStorage.getItem('tm_best_' + g); if (v) best[g] = v; });
     let dailyRec = null;
     try { dailyRec = JSON.parse(localStorage.getItem('tm_daily_' + this.dateKey()) || 'null'); } catch (e) {}
-    this.setState({ best, dailyRec, nick: localStorage.getItem('tm_nick') || '', saved: !!localStorage.getItem('tm_nick') });
+    this.setState({ best, dailyRec, bpm: +localStorage.getItem('tm_bpm') || 100, nick: localStorage.getItem('tm_nick') || '', saved: !!localStorage.getItem('tm_nick') });
   }
   componentWillUnmount() { this.stopAll(); if (this._ac) this._ac.close(); }
 
   dateKey() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
-  stopAll() { (this._to || []).forEach(clearTimeout); this._to = []; clearInterval(this._ti); clearInterval(this._ri); this._replaying = false; }
+  stopAll() { (this._to || []).forEach(clearTimeout); this._to = []; clearInterval(this._ti); clearInterval(this._ri); this._replaying = false; if (this.state && this.state.replaying) this.setState({ replaying: false }); }
   later(fn, ms) { this._to.push(setTimeout(fn, ms)); }
   mult(c) { return c >= 15 ? 3 : c >= 10 ? 2 : c >= 5 ? 1.5 : c >= 3 ? 1.2 : 1; }
   timed() { const s = this.state; return s.game === 'kill' || (s.game === 'chord' && s.chordMode === 'challenge'); }
@@ -629,17 +686,17 @@ class Component extends DCLogic {
   }
 
   // RHYTHM
-  freshRh(target, boss) { return { target, input: Array(16).fill(false), sub: 'listen', pos: -1, count: 0, t: boss ? 10 : 8, max: boss ? 10 : 8, boss, res: null, ok: false }; }
+  freshRh(target, boss) { return { target, input: Array(16).fill(false), sub: 'listen', pos: -1, count: 0, t: boss ? 14 : 12, max: boss ? 14 : 12, boss, res: null, ok: false }; }
   patchRh(o) { this.setState((s) => (s.rh ? { rh: { ...s.rh, ...o } } : null)); }
   rhRound(boss) {
     const s = this.state;
     const target = TM.rhythmTask(boss ? 6 : s.level, this.r, s.rh && s.rh.target);
     this.setState({ rh: this.freshRh(target, boss) });
-    if (boss) { this.say('boss', ['Ритм-босс. 10 секунд.']); this.riser(); } else this.say('listen');
+    if (boss) { this.say('boss', ['Ритм-босс. 14 секунд.']); this.riser(); } else this.say('listen');
     this.later(() => this.playPattern(target, true, () => this.rhInput()), boss ? 1000 : 350);
   }
   playPattern(p, countIn, done) {
-    const a = this.ac(), step = 60 / 110 / 4, t0 = a.currentTime + 0.08;
+    const a = this.ac(), step = 60 / (this.state.bpm || 100) / 4, t0 = a.currentTime + 0.08;
     const ui = (fn, t) => this.later(fn, Math.max(0, (t - a.currentTime) * 1000));
     let off = 0;
     if (countIn) {
@@ -662,6 +719,7 @@ class Component extends DCLogic {
     this._ri = setInterval(() => {
       const rh = this.state.rh;
       if (!rh || rh.sub !== 'input') return clearInterval(this._ri);
+      if (this._replaying) return;
       const t = Math.max(0, +(rh.t - 0.1).toFixed(1));
       this.patchRh({ t });
       if (t <= 0) this.rhCheck();
@@ -678,8 +736,14 @@ class Component extends DCLogic {
     const rh = this.state.rh;
     if (!rh || rh.sub !== 'input' || this._replaying) return;
     this._replaying = true;
-    this.playPattern(rh.target, false, null);
+    this.setState({ replaying: true });
+    this.playPattern(rh.target, false, () => this.setState({ replaying: false }));
   };
+  setBpm(d) {
+    const bpm = Math.max(60, Math.min(140, (this.state.bpm || 100) + d));
+    this.setState({ bpm });
+    try { localStorage.setItem('tm_bpm', String(bpm)); } catch (e) {}
+  }
   rhCheck = () => {
     clearInterval(this._ri);
     const s = this.state, rh = s.rh;
@@ -739,6 +803,22 @@ class Component extends DCLogic {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.status === 204 ? null : r.json();
   }
+  loadRanking = async (game) => {
+    game = typeof game === 'string' ? game : this.state.rankGame || 'daily';
+    const req = (this._rq = (this._rq || 0) + 1);
+    this.setState({ tab: 'rank', rankGame: game, rank: { status: 'loading' } });
+    const d = new Date();
+    const month = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-01';
+    try {
+      const [m, a] = await Promise.all([
+        this.rpc('get_ranking', { p_game: game, p_from: month, p_client: this.cid() }),
+        this.rpc('get_ranking', { p_game: game, p_from: null, p_client: this.cid() }),
+      ]);
+      if (req === this._rq) this.setState({ rank: { status: 'ok', month: m || [], all: a || [] } });
+    } catch (e) {
+      if (req === this._rq) this.setState({ rank: { status: 'off' } });
+    }
+  };
   async syncBoard(score) {
     const ctx = this._lb;
     if (!ctx) return;
@@ -843,6 +923,7 @@ class Component extends DCLogic {
     this._lb = g === 'daily' ? { game: 'daily', day: this.dateKey() } : g === 'chord' && s.chordMode === 'challenge' ? { game: 'chord', day: this.weekKey() } : null;
     this.setState({ phase: 'over', best, isBest, boss: null, playing: null, lb: null, ...extra });
     if (this._lb) this.syncBoard(s.score);
+    else if (s.score > 0 && !(g === 'chord' && s.chordMode === 'practice')) this.rpc('submit_score', { p_day: this.dateKey(), p_game: g, p_client: this.cid(), p_nick: localStorage.getItem('tm_nick') || null, p_score: s.score }).catch(() => {});
     const acc = s.total ? s.right / s.total : 0;
     this.say('over', [acc >= 0.85 ? 'Это было мощно.' : acc >= 0.6 ? 'Неплохо. Ещё заход?' : 'Разминка засчитана. Давай ещё.']);
   }
@@ -982,9 +1063,30 @@ class Component extends DCLogic {
         board = top.map((x) => ({ place: x.place + '.', name: x.is_me && !s.saved ? 'Ты' : x.nick, score: fmt(x.score), style: { display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 4, fontSize: 17, background: x.is_me ? '#f4a582' : 'transparent', color: x.is_me ? '#1e1b16' : '#fcf7f1' } }));
         const inTop = !!me && me.place <= 3;
         toTopLabel = inTop ? 'Ты в ТОП-3' : me && top[2] ? 'Место ' + me.place + ' · до ТОП-3: ' + fmt(top[2].score - me.score + 1) : '';
-        showNick = inTop && !s.saved;
+        showNick = !!me && !s.saved;
       }
     }
+    const rankChips = ['daily', 'fake', 'rhythm', 'kill', 'chord', 'ab'].map((id) => ({ title: { chord: 'АККОРДЫ', daily: 'ЗАДАНИЕ ДНЯ' }[id] || this.META[id].title, press: () => this.loadRanking(id), style: { flex: 'none', whiteSpace: 'nowrap', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 11, letterSpacing: '0.08em', border: '1px solid ' + ((s.rankGame || 'daily') === id ? '#1e1b16' : '#ead9c6'), background: (s.rankGame || 'daily') === id ? '#1e1b16' : 'transparent', color: (s.rankGame || 'daily') === id ? '#fcf7f1' : '#4a4339' } }));
+    const rg = s.rankGame || 'daily';
+    const rankRule = rg === 'daily' ? 'Складываются лучшие результаты за каждый день. Чем чаще играешь, тем выше поднимаешься.' : rg === 'chord' ? 'В зачёт идёт лучший результат одной игры в режиме «На время».' : 'В зачёт идёт лучший результат за одну игру.';
+    const tabStyle = (on) => ({ padding: '10px 20px', borderRadius: 100, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 600, background: on ? '#1e1b16' : 'transparent', color: on ? '#fcf7f1' : '#4a4339' });
+    const rk = s.rank || {};
+    const MONTHS = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ'];
+    const mkCard = (title, sub, list, dark) => {
+      const rows = (list || []).filter((x) => x.place <= 3);
+      const me = (list || []).find((x) => x.is_me);
+      const note = rk.status === 'loading' || !rk.status ? 'Загружаю…' : rk.status === 'off' ? 'Рейтинг сейчас недоступен.' : !rows.length ? 'Пока пусто. Стань первым.' : '';
+      const ink = dark ? '#fcf7f1' : '#1e1b16';
+      return {
+        title, sub, note, isMonth: !dark, isAll: dark,
+        style: { position: 'relative', overflow: 'hidden', isolation: 'isolate', display: 'flex', flexDirection: 'column', gap: 14, padding: 'clamp(22px,2.6vw,30px)', borderRadius: 8, background: dark ? '#1e1b16' : '#fffdfa', border: '1px solid ' + (dark ? '#1e1b16' : '#ead9c6'), color: ink },
+        tagStyle: { color: dark ? '#f4a582' : '#b9542c' }, subStyle: { color: dark ? '#a99d8b' : '#8a8172' }, noteStyle: { color: dark ? '#a99d8b' : '#8a8172', fontSize: 15 },
+        rows: rows.map((x) => ({ place: x.place + '.', name: x.nick, score: fmt(Number(x.score)), style: { display: 'flex', alignItems: 'center', gap: 10, padding: '12px 14px', borderRadius: 6, fontSize: 'clamp(17px,1.9vw,20px)', background: x.is_me ? '#f4a582' : dark ? '#26221c' : '#f7eee4', color: x.is_me ? '#1e1b16' : ink } })),
+        me: me && me.place > 3 ? 'Ты: ' + me.place + ' место · ' + fmt(Number(me.score)) : '',
+        meStyle: { fontFamily: '"IBM Plex Mono", monospace', fontSize: 14, color: dark ? '#f4a582' : '#b9542c' },
+      };
+    };
+    const rankCards = [mkCard('ТОП-3 · ' + MONTHS[new Date().getMonth()], 'этот месяц', rk.month, false), mkCard('ТОП-3 · ВСЕГО', 'за всё время', rk.all, true)];
     const chipStyle = (on) => ({ flex: 'none', whiteSpace: 'nowrap', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 11, letterSpacing: '0.08em', border: '1px solid ' + (on ? '#f4a582' : '#4a4238'), background: on ? '#f4a582' : 'transparent', color: on ? '#1e1b16' : '#d8cdbd' });
     const modeStyle = (on) => ({ padding: '10px 18px', borderRadius: 100, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 600, background: on ? '#fcf7f1' : 'transparent', color: on ? '#1e1b16' : '#d8cdbd' });
     const ids = ['fake', 'rhythm', 'kill', 'chord', 'ab', 'daily'];
@@ -993,6 +1095,13 @@ class Component extends DCLogic {
 
     return {
       go,
+      showRank: s.tab === 'rank', showList: s.tab !== 'rank', rankCards,
+      rankPaneStyle: { gridArea: '1 / 1', alignSelf: 'start', visibility: s.tab === 'rank' ? 'visible' : 'hidden', opacity: s.tab === 'rank' ? 1 : 0, transition: 'opacity .2s' },
+      listPaneStyle: { gridArea: '1 / 1', visibility: s.tab === 'rank' ? 'hidden' : 'visible', opacity: s.tab === 'rank' ? 0 : 1, transition: 'opacity .2s' },
+      listTitle: 'Шесть аркад. Каждая что-то тренирует.',
+      tabGames: () => this.setState({ tab: 'games' }), tabRank: this.loadRanking,
+      rankChips, rankRule, rankGameTitle: this.META[rg].title, rankPlay: () => this.selectGame(rg),
+      tabGamesStyle: tabStyle(s.tab !== 'rank'), tabRankStyle: tabStyle(s.tab === 'rank'),
       todayLabel: s.dailyRec ? 'сегодня: ' + fmt(s.dailyRec.score) : 'сегодня ещё нет',
       chips: ids.map((id) => ({ title: { chord: 'АККОРДЫ', daily: 'ЗАДАНИЕ ДНЯ' }[id] || this.META[id].title, press: () => this.selectGame(id), style: chipStyle(g === id) })),
       gameTitle: this.META[g].title, gameMeta: this.META[g].meta,
@@ -1017,6 +1126,9 @@ class Component extends DCLogic {
       showRhythm: isRh, rhBoss: isRh && rh.boss, rhStatus, rhTime: isRh && rh.sub === 'input' ? rh.t.toFixed(1) + ' с' : '',
       rhTimerStyle: { height: '100%', width: rhPct + '%', background: rhPct < 30 && rh && rh.sub === 'input' ? '#e8806a' : '#f4a582', borderRadius: 4, transition: 'width .1s linear' },
       rhBeats, rhCanAct: isRh && rh.sub === 'input', rhCheck: this.rhCheck, rhReplay: this.rhReplay,
+      rhReplayLabel: s.replaying ? '♪ Играет… таймер на паузе' : 'Послушать ещё раз',
+      rhReplayStyle: { padding: '13px 24px', background: s.replaying ? '#fcf7f1' : 'transparent', color: s.replaying ? '#1e1b16' : '#fcf7f1', border: '1px solid ' + (s.replaying ? '#fcf7f1' : '#4a4238'), borderRadius: 100, fontSize: 16, cursor: s.replaying ? 'default' : 'pointer' },
+      bpm: s.bpm || 100, bpmUp: () => this.setBpm(5), bpmDown: () => this.setBpm(-5), isRhythmGame: g === 'rhythm' || g === 'daily',
       showAB, abQ: showAB ? s.ab.list[s.ab.i].q : '', abTiles, showAbNext: showAB && !!s.abPicked, abNext: this.abNext,
       explain,
       overTag: s.isBest ? 'НОВЫЙ РЕКОРД' : 'ИТОГ · ' + this.META[g].title,
