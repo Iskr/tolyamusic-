@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="./music.js"></script>
+<script src="./i18n-games.js"></script>
+<script src="./i18n.js"></script>
 <style>
   html { scroll-behavior: smooth; }
   body { margin: 0; background: #fcf7f1; color: #1e1b16; font-family: "Bricolage Grotesque", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -19,6 +21,8 @@
   a { color: #1e1b16; text-decoration: none; }
   a:hover { color: #c8613a; }
   button { font-family: inherit; -webkit-tap-highlight-color: transparent; }
+  button:focus { outline: none; }
+  button:focus-visible { outline: 2px solid #f4a582; outline-offset: 2px; }
   @keyframes mIdle { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
   @keyframes mHop { 0% { transform: translateY(0) scale(1) } 30% { transform: translateY(-16px) scale(1.03) } 60% { transform: translateY(0) scale(.98) } 100% { transform: none } }
   @keyframes mShake { 0%,100% { transform: translateX(0) rotate(0) } 20% { transform: translateX(-7px) rotate(-2deg) } 40% { transform: translateX(6px) rotate(2deg) } 60% { transform: translateX(-3px) } 80% { transform: translateX(2px) } }
@@ -53,7 +57,7 @@
       </div>
     </div>
     <div style="flex:0 1 360px; min-width:0; width:100%; max-width:380px; margin:0 auto; position:relative">
-      <div style="width:100%; aspect-ratio:444/700"><x-import component-from-global-scope="tolya-cat" from="./mascot.js" mood="idle" loop="1" hint-size="100%,100%" style="display:block; width:100%; height:100%"></x-import></div>
+      <div style="position:relative; width:100%; aspect-ratio:444/700"><img src="img/cat-f1.png" alt="Кот-маскот в наушниках" hidden="{{ heroReady }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:50% 100%" /><x-import component-from-global-scope="tolya-cat" from="./mascot.js" mood="idle" loop="1" hint-size="100%,100%" style="position:absolute; inset:0; display:block; width:100%; height:100%"></x-import></div>
     </div>
   </div>
 </section>
@@ -268,13 +272,13 @@
             </sc-if>
 
             <sc-if value="{{ showPiano }}" hint-placeholder-val="{{ false }}">
-              <div style="position:relative; width:100%; max-width:600px; height:clamp(150px,22vw,200px); user-select:none">
+              <div style="position:relative; width:100%; max-width:760px; height:clamp(140px,22vw,200px); user-select:none">
                 <div style="display:flex; gap:4px; height:100%">
-                  <sc-for list="{{ whiteKeys }}" as="k" hint-placeholder-count="7">
+                  <sc-for list="{{ whiteKeys }}" as="k" hint-placeholder-count="14">
                     <button type="button" onClick="{{ k.press }}" style="{{ k.style }}">{{ k.a }}</button>
                   </sc-for>
                 </div>
-                <sc-for list="{{ blackKeys }}" as="k" hint-placeholder-count="5">
+                <sc-for list="{{ blackKeys }}" as="k" hint-placeholder-count="10">
                   <button type="button" onClick="{{ k.press }}" style="{{ k.style }}"><span>{{ k.a }}</span><span>{{ k.b }}</span></button>
                 </sc-for>
               </div>
@@ -302,15 +306,32 @@
                 <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(6px,1.2vw,12px)">
                   <sc-for list="{{ rhBeats }}" as="b" hint-placeholder-count="4">
                     <div style="display:flex; flex-direction:column; gap:6px">
-                      <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#a99d8b">{{ b.n }}</span>
                       <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:3px">
                         <sc-for list="{{ b.cells }}" as="c" hint-placeholder-count="4">
-                          <button type="button" onClick="{{ c.press }}" style="{{ c.style }}"></button>
+                          <div style="display:flex; flex-direction:column; gap:5px; min-width:0">
+                            <button type="button" onClick="{{ c.press }}" style="{{ c.style }}"></button>
+                            <span style="{{ c.lblStyle }}">{{ c.lbl }}</span>
+                          </div>
                         </sc-for>
                       </div>
                     </div>
                   </sc-for>
                 </div>
+                <sc-if value="{{ rhFixNote }}" hint-placeholder-val="{{ false }}"><div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#a99d8b">{{ rhFixNote }}</div></sc-if>
+                <details open="open" style="border:1px solid #3a342b; border-radius:6px; padding:12px 16px; color:#d8cdbd">
+                  <summary style="cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#f4a582">Памятка · сильные и слабые доли</summary>
+                  <div style="display:flex; flex-direction:column; gap:12px; margin-top:12px; font-size:15px; line-height:1.5">
+                    <p style="margin:0; text-wrap:pretty">Сетка — один такт из четырёх четвертей. Каждая четверть делится на четыре части. Подпись клетки «четверть.часть»: 2.3 — третья часть второй четверти.</p>
+                    <p style="margin:0; text-wrap:pretty">Внутри каждой четверти доли устроены одинаково, в любом размере такта:</p>
+                    <div style="display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 16px; align-items:baseline">
+                      <span style="font-family:'IBM Plex Mono',monospace; font-weight:700; color:#fcf7f1; white-space:nowrap">x.1</span><span><strong style="color:#fcf7f1">Сильная доля.</strong> Начало четверти, счёт «раз», «два», «три», «четыре».</span>
+                      <span style="font-family:'IBM Plex Mono',monospace; color:#8a7f70; white-space:nowrap">x.2</span><span><strong style="color:#fcf7f1">Слабая доля.</strong></span>
+                      <span style="font-family:'IBM Plex Mono',monospace; color:#f4a582; white-space:nowrap">x.3</span><span><strong style="color:#fcf7f1">Полусильная доля.</strong> Середина четверти, счёт «и».</span>
+                      <span style="font-family:'IBM Plex Mono',monospace; color:#8a7f70; white-space:nowrap">x.4</span><span><strong style="color:#fcf7f1">Слабая доля.</strong></span>
+                    </div>
+                    <p style="margin:0; text-wrap:pretty">Например, в первой четверти: 1.1 — сильная, 1.2 — слабая, 1.3 — полусильная, 1.4 — слабая. Дальше то же самое для 2.x, 3.x и 4.x. Счёт вслух: «раз-и, два-и, три-и, четыре-и».</p>
+                  </div>
+                </details>
                 <sc-if value="{{ rhCanAct }}" hint-placeholder-val="{{ false }}">
                   <div style="display:flex; gap:10px; flex-wrap:wrap">
                     <button type="button" onClick="{{ rhCheck }}" style="padding:13px 28px; background:#f4a582; color:#1e1b16; border:none; border-radius:100px; font-size:16px; font-weight:600; cursor:pointer" style-hover="background:#fcf7f1">Готово</button>
@@ -424,10 +445,10 @@ class Component extends DCLogic {
   };
 
   META = {
-    fake: { title: 'ЛИШНЯЯ НОТА', meta: '12 заданий · ≈ 60 сек', rules: ['На экране гамма или аккорд и набор нот. Одна нота лишняя.', 'Найди её. Сложность растёт: гаммы → трезвучия → септаккорды → нонаккорды.', 'Ошибка сбрасывает combo и понижает уровень.', '10 подряд — Босс.'] },
-    rhythm: { title: 'РИТМ-БОМБА', meta: '6 раундов · ≈ 90 сек', rules: ['Сначала отсчёт, потом ритм. Он прозвучит дважды.', 'Дальше 12 секунд, чтобы отметить удары на 16 шагах. Пока ритм играет повторно, таймер стоит.', 'Темп можно поменять кнопками BPM. Четверти → восьмые → шестнадцатые → паузы и синкопы.', '3 точных подряд — ритм-босс.'] },
-    kill: { title: 'НОТНЫЙ ТИР', meta: '60 сек · на скорость', rules: ['Наборы нот идут один за другим без пауз.', 'Бей ноту, которая не подходит к аккорду или гамме.', 'Быстрый ответ — больше очков. Ошибка: −100 и сброс combo.', '10 подряд — Босс, таймер ждёт.'] },
-    chord: { title: 'АККОРДНЫЙ ЗАБЕГ', meta: 'На время 60 сек · Тренировка без времени', rules: ['«Собери Dm» — отметь нужные звуки на клавиатуре.', 'Иногда наоборот: по нотам назови аккорд.', 'Тренировка: ошибки подсвечиваются, можно исправить. На время: 60 секунд на очки.', 'Трезвучия → dim и aug → септаккорды → нонаккорды. Ошибки возвращают к простому.'] },
+    fake: { title: 'ЛИШНЯЯ НОТА', meta: '12 заданий · ≈ 60 сек', rules: ['На экране гамма или аккорд и набор нот. Одна нота лишняя.', 'Найди её. Сложность растёт: гаммы → трезвучия → септаккорды → нонаккорды.', 'Ошиблись — есть вторая попытка за половину очков, combo сбрасывается. После неё прозвучит твой вариант и правильный.', '10 подряд — Босс.'] },
+    rhythm: { title: 'РИТМ-БОМБА', meta: '6 раундов · ≈ 90 сек', rules: ['Сначала отсчёт, потом ритм. Он прозвучит дважды.', 'Сетка — один такт из четырёх четвертей, каждая делится на четыре части. Клетки подписаны «четверть.часть»: от 1.1 до 4.4.', 'В каждой четверти: x.1 — сильная доля, x.2 — слабая, x.3 — полусильная, x.4 — слабая. Подробнее — в памятке под сеткой.', 'После ритма есть 12 секунд, чтобы отметить удары. Пока ритм играет повторно, таймер стоит. Темп меняется кнопками BPM.', '3 точных подряд — ритм-босс.'] },
+    kill: { title: 'НОТНЫЙ ТИР', meta: '60 сек · на скорость', rules: ['Наборы нот идут один за другим без пауз.', 'Бей ноту, которая не подходит к аккорду или гамме.', 'Быстрый ответ — больше очков. Ошибка: −100, сброс combo и вторая попытка.', '10 подряд — Босс, таймер ждёт.'] },
+    chord: { title: 'АККОРДНЫЙ ЗАБЕГ', meta: 'На время 60 сек · Тренировка без времени', rules: ['«Собери Dm» — отметь нужные звуки на клавиатуре.', 'Иногда наоборот: по нотам назови аккорд.', 'Тренировка: исправляй сколько угодно. На время: 60 секунд, на ошибку даётся одно исправление, потом звучит твой аккорд и правильный.', 'Трезвучия → dim и aug → септаккорды → нонаккорды. Ошибки возвращают к простому.'] },
     ab: { title: 'А ИЛИ Б', meta: '6 вопросов · ≈ 90 сек', rules: ['Два коротких фрагмента, А и Б. Слушай сколько угодно.', 'Выбери тот, что подходит под условие.', 'После ответа — короткое объяснение.', 'Нужны наушники или нормальные колонки.'] },
     daily: { title: 'ЗАДАНИЕ ДНЯ', meta: '16 заданий · одинаковые для всех сегодня', rules: ['10 заданий на ноты, 3 ритма, 3 гармонии.', 'Скорость ответа и combo умножают очки.', 'В зачёт идёт лучший результат за день.', 'Попал в ТОП-3 — оставь никнейм.'] },
   };
@@ -449,6 +470,13 @@ class Component extends DCLogic {
   };
 
   componentDidMount() {
+    if (window.__tmGame && window.__tmGame !== this) { try { window.__tmGame.hardStop(); } catch (e) {} }
+    window.__tmGame = this;
+    this._onVis = () => { if (document.hidden) this.hardStop(true); };
+    document.addEventListener('visibilitychange', this._onVis);
+    window.addEventListener('pagehide', this._onVis);
+    this._onCat = () => { if (!this.state.heroReady) this.setState({ heroReady: true }); };
+    document.addEventListener('catready', this._onCat);
     this._to = [];
     const best = {};
     ['fake', 'rhythm', 'kill', 'chord', 'ab', 'daily'].forEach((g) => { const v = +localStorage.getItem('tm_best_' + g); if (v) best[g] = v; });
@@ -456,10 +484,18 @@ class Component extends DCLogic {
     try { dailyRec = JSON.parse(localStorage.getItem('tm_daily_' + this.dateKey()) || 'null'); } catch (e) {}
     this.setState({ best, dailyRec, bpm: +localStorage.getItem('tm_bpm') || 100, nick: localStorage.getItem('tm_nick') || '', saved: !!localStorage.getItem('tm_nick') });
   }
-  componentWillUnmount() { this.stopAll(); if (this._ac) this._ac.close(); }
+  componentWillUnmount() { document.removeEventListener('catready', this._onCat); document.removeEventListener('visibilitychange', this._onVis); window.removeEventListener('pagehide', this._onVis); this.hardStop(); if (window.__tmGame === this) window.__tmGame = null; }
+  hardStop(keepPhase) {
+    this.stopAll();
+    clearInterval(this._ri);
+    if (this._ac) { try { this._ac.close(); } catch (e) {} this._ac = null; this._out = null; this._nb = null; }
+    if (!keepPhase) return;
+    const s = this.state;
+    if (s.phase === 'play' && s.rh && (s.rh.sub === 'listen' || s.rh.sub === 'input')) this.setState({ phase: 'intro', rh: null, boss: null, playing: null });
+  }
 
   dateKey() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
-  stopAll() { (this._to || []).forEach(clearTimeout); this._to = []; clearInterval(this._ti); clearInterval(this._ri); this._replaying = false; if (this.state && this.state.replaying) this.setState({ replaying: false }); }
+  stopAll() { (this._to || []).forEach(clearTimeout); this._to = []; (this._pt || []).forEach(clearTimeout); this._pt = []; if (this._bus) { try { this._bus.disconnect(); } catch (e) {} this._bus = null; } clearInterval(this._ti); clearInterval(this._ri); this._replaying = false; if (this.state && this.state.replaying) this.setState({ replaying: false }); }
   later(fn, ms) { this._to.push(setTimeout(fn, ms)); }
   mult(c) { return c >= 15 ? 3 : c >= 10 ? 2 : c >= 5 ? 1.5 : c >= 3 ? 1.2 : 1; }
   timed() { const s = this.state; return s.game === 'kill' || (s.game === 'chord' && s.chordMode === 'challenge'); }
@@ -491,13 +527,13 @@ class Component extends DCLogic {
     return this._ac;
   }
   now() { return this.ac().currentTime + 0.02; }
-  noise(t, type, freq, q, dur, vol) {
+  noise(t, type, freq, q, dur, vol, out) {
     const a = this.ac();
     if (!this._nb) { this._nb = a.createBuffer(1, a.sampleRate, a.sampleRate); const d = this._nb.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
     const src = a.createBufferSource(); src.buffer = this._nb;
     const f = a.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
     const g = a.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
-    src.connect(f); f.connect(g); g.connect(this._out); src.start(t); src.stop(t + dur + 0.02);
+    src.connect(f); f.connect(g); g.connect(out || this._out); src.start(t); src.stop(t + dur + 0.02);
   }
   kick(t) {
     const a = this.ac(), o = a.createOscillator(), g = a.createGain();
@@ -506,18 +542,18 @@ class Component extends DCLogic {
     o.connect(g); g.connect(this._out); o.start(t); o.stop(t + 0.32);
   }
   hat(t, vol) { this.noise(t, 'highpass', 8000, 0.9, 0.04, vol || 0.16); }
-  tick(t, acc, vol) {
+  tick(t, acc, vol, out) {
     const a = this.ac(), o = a.createOscillator(), g = a.createGain();
     o.frequency.value = acc ? 1760 : 1320;
     g.gain.setValueAtTime(vol || 0.22, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
-    o.connect(g); g.connect(this._out); o.start(t); o.stop(t + 0.06);
+    o.connect(g); g.connect(out || this._out); o.start(t); o.stop(t + 0.06);
   }
-  perc(t) {
+  perc(t, out) {
     const a = this.ac(), o = a.createOscillator(), g = a.createGain();
     o.frequency.setValueAtTime(260, t); o.frequency.exponentialRampToValueAtTime(120, t + 0.09);
     g.gain.setValueAtTime(0.75, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
-    o.connect(g); g.connect(this._out); o.start(t); o.stop(t + 0.18);
-    this.noise(t, 'bandpass', 1800, 1.4, 0.06, 0.45);
+    o.connect(g); g.connect(out || this._out); o.start(t); o.stop(t + 0.18);
+    this.noise(t, 'bandpass', 1800, 1.4, 0.06, 0.45, out);
   }
   keys(m, t, dur, vol) {
     dur = dur || 0.6; vol = vol || 0.2;
@@ -563,6 +599,7 @@ class Component extends DCLogic {
     const g = this.state.game;
     this.r = g === 'daily' ? TM.rng(TM.hash('tm-daily-' + this.dateKey())) : Math.random;
     const base = { phase: 'play', score: 0, combo: 0, maxCombo: 0, level: 1, streak: 0, right: 0, total: 0, task: null, fb: null, sel: [], marks: null, round: 0, boss: null, bossFb: null, rh: null, ab: null, abPicked: null, playing: null, di: 0, isBest: false, bursts: [], time: 60 };
+    this._seen = new Set();
     if (g === 'daily') base.dq = this.buildDaily();
     if (g === 'ab') base.ab = this.buildAB();
     this.setState(base, () => {
@@ -584,19 +621,26 @@ class Component extends DCLogic {
     clearInterval(this._ti);
     this._ti = setInterval(() => {
       const s = this.state;
-      if (s.phase !== 'play' || s.boss) return;
+      if (s.phase !== 'play' || s.boss || (s.buildRetry && !s.fb)) return;
       const t = Math.max(0, +(s.time - 0.1).toFixed(1));
       this.setState({ time: t });
       if (t <= 0) this.finish();
     }, 100);
   }
+  taskKey(t) { return Array.isArray(t) ? 'r:' + t.map((x) => (x ? 1 : 0)).join('') : t.type + ':' + t.label + ':' + (t.type === 'pick' ? t.options.find((o) => o.correct).name : ''); }
+  seenTask(t) { return !!this._seen && this._seen.has(this.taskKey(t)); }
+  markTask(t) { if (!this._seen) this._seen = new Set(); this._seen.add(this.taskKey(t)); }
   nextTask() {
     const s = this.state, g = s.game;
     let task;
-    if (g === 'fake') task = TM.wrongNoteTask(s.level, this.r);
-    else if (g === 'kill') task = TM.wrongNoteTask(s.level, this.r, { shuffle: true, verb: 'Какая нота не подходит к' });
-    else if (g === 'chord') task = Math.random() < 0.3 ? TM.chordNameTask(s.level, this.r) : TM.chordBuildTask(s.level, this.r, s.task && s.task.label);
-    this.setState({ task, fb: null, sel: [], marks: null });
+    const gen = () => {
+      if (g === 'fake') return TM.wrongNoteTask(s.level, this.r);
+      if (g === 'kill') return TM.wrongNoteTask(s.level, this.r, { shuffle: true, verb: 'Какая нота не подходит к' });
+      if (g === 'chord') return Math.random() < 0.3 ? TM.chordNameTask(s.level, this.r) : TM.chordBuildTask(s.level, this.r, s.task && s.task.label);
+    };
+    for (let i = 0; i < 25; i++) { task = gen(); if (!task || !this.seenTask(task)) break; }
+    if (task) this.markTask(task);
+    this.setState({ task, fb: null, sel: [], marks: null, wrongPicks: [], buildRetry: false, listenLbl: '' });
     this._t0 = performance.now();
   }
   advance() {
@@ -620,13 +664,13 @@ class Component extends DCLogic {
       this.setState({ score: st.score + pts, combo, maxCombo: Math.max(st.maxCombo, combo), level, streak, right: st.right + 1, total: st.total + 1 });
       this.burst('+' + pts);
       this.say(combo >= 5 ? 'combo' : 'correct');
-      this.blip(true);
+      if (!opt.silent) this.blip(true);
       return combo;
     }
     this.setState({ score: Math.max(0, st.score - (opt.penalty || 0)), combo: 0, streak: 0, level: opt.fixed ? st.level : Math.max(1, st.level - 1), total: st.total + 1 });
     if (opt.penalty) this.burst('−' + opt.penalty);
     this.say('wrong');
-    this.blip(false);
+    if (!opt.silent) this.blip(false);
     return 0;
   }
   bossDue(combo) { return ['fake', 'kill', 'chord'].includes(this.state.game) && combo > 0 && combo % 10 === 0; }
@@ -634,86 +678,165 @@ class Component extends DCLogic {
   pick(i) {
     const s = this.state;
     if (s.fb || s.phase !== 'play' || !s.task || s.boss) return;
-    const o = s.task.options[i], fast = s.game === 'kill', daily = s.game === 'daily';
-    const combo = this.award(o.correct, { speed: fast || daily || this.timed(), fixed: daily, penalty: fast ? 100 : 0 });
-    this.setState({ fb: { i, ok: o.correct } });
-    if (o.correct && this.bossDue(combo)) return this.later(() => this.startBoss(), 500);
-    this.later(() => this.advance(), o.correct ? (fast ? 200 : 480) : (fast ? 800 : 1900));
+    const wp = s.wrongPicks || [];
+    if (wp.includes(i)) return;
+    const t = s.task, o = t.options[i], fast = s.game === 'kill', daily = s.game === 'daily';
+    if (!wp.length) {
+      if (!o.correct) {
+        this.setState({ wrongPicks: [i], combo: 0, streak: 0, score: Math.max(0, s.score - (fast ? 100 : 0)) });
+        if (fast) this.burst('−100');
+        this.say('wrong', ['Не та. Ещё одна попытка.', 'Мимо. Попробуй ещё.']);
+        this.blip(false);
+        return;
+      }
+      const combo = this.award(true, { speed: fast || daily || this.timed(), fixed: daily });
+      this.setState({ fb: { i, ok: true } });
+      if (this.bossDue(combo)) return this.later(() => this.startBoss(), 500);
+      return this.later(() => this.advance(), fast ? 200 : 480);
+    }
+    const ok = o.correct;
+    this.award(ok, { base: Math.round((100 + 50 * (s.level - 1)) / 2), fixed: true });
+    this.setState({ fb: { i, ok } });
+    const pcsOf = (opt) => opt.pcs || [opt.pc];
+    const rest = t.options.filter((_, j) => j !== i && !(t.wide)).map((x) => x.pc);
+    const yours = t.wide ? pcsOf(o) : rest;
+    const scale = t.kind === 'Гамма';
+    const at = this.now() + 0.25;
+    if (ok || fast) {
+      this.setState({ listenLbl: '♩ Так звучит ' + (t.wide ? t.options.find((x) => x.correct).name : t.label) });
+      const d = this.playSet(t.play, at, scale, fast);
+      return this.later(() => { this.setState({ listenLbl: '' }); this.advance(); }, (d + (fast ? 0.2 : 0.6)) * 1000);
+    }
+    this.setState({ listenLbl: '♩ Твой вариант' });
+    const d1 = this.playSet(yours, at, scale);
+    this.later(() => this.setState({ listenLbl: '♩ Как правильно' }), (d1 + 0.45) * 1000);
+    const d2 = this.playSet(t.play, at + d1 + 0.5, scale);
+    this.later(() => { this.setState({ listenLbl: '' }); this.advance(); }, (d1 + 0.5 + d2 + 0.7) * 1000);
+  }
+  voice(pcs) {
+    const out = [];
+    pcs.forEach((p, j) => {
+      if (!j) out.push(60 + p - (p > 6 ? 12 : 0));
+      else { const prev = out[j - 1]; out.push(prev + (((p - (prev % 12)) + 12) % 12 || 12)); }
+    });
+    return out;
+  }
+  playSet(pcs, t, scale, quick) {
+    const ms = this.voice(pcs), st = quick ? 0.09 : scale ? 0.2 : 0.14;
+    ms.forEach((m, j) => this.keys(m, t + j * st, scale ? 0.5 : 1.4, 0.13));
+    let d = ms.length * st;
+    if (!scale && !quick) { ms.forEach((m) => this.keys(m, t + d + 0.1, 1.1, 0.09)); d += 1.1; }
+    return d + 0.3;
   }
 
   // CHORD RUSH build
-  toggleKey(pc) {
+  toggleKey(k) {
     const s = this.state;
     if (s.phase !== 'play' || s.fb || !s.task || s.task.type !== 'build') return;
-    this.keys(60 + pc, this.now(), 0.5, 0.16);
-    const sel = s.sel.includes(pc) ? s.sel.filter((x) => x !== pc) : [...s.sel, pc];
-    this.setState({ sel, marks: null });
-    if (s.chordMode === 'challenge' && sel.length === s.task.target.length) this.later(() => this.checkBuild(sel), 140);
+    this.keys(48 + k, this.now(), 0.5, 0.16);
+    const sel = s.sel.includes(k) ? s.sel.filter((x) => x !== k) : [...s.sel, k];
+    const marks = (s.buildRetry || s.chordMode === 'practice') && s.marks ? { wrong: s.marks.wrong.filter((x) => x !== k), missing: s.marks.missing.filter((x) => x !== k) } : null;
+    this.setState({ sel, marks });
+    if (s.chordMode === 'challenge' && !s.buildRetry && sel.length === s.task.target.length) this.later(() => this.checkBuild(sel), 140);
   }
   checkBuild = (sel) => {
     const s = this.state, t = s.task;
     if (!t || t.type !== 'build' || s.fb) return;
     sel = Array.isArray(sel) ? sel : s.sel;
-    const wrong = sel.filter((p) => !t.target.includes(p)), missing = t.target.filter((p) => !sel.includes(p));
-    const ok = !wrong.length && !missing.length;
+    const pcs = sel.map((k) => k % 12);
+    const wrong = sel.filter((k) => !t.target.includes(k % 12));
+    const missPcs = t.target.filter((p) => !pcs.includes(p));
+    const rootKeys = sel.filter((k) => k % 12 === t.target[0]);
+    const base = rootKeys.length ? Math.min(...rootKeys) : t.target[0];
+    const missing = missPcs.map((p) => { let k = base + ((p - (base % 12) + 12) % 12); if (k > 23) k -= 12; return k; });
+    const ok = !wrong.length && !missPcs.length;
     const practice = s.chordMode === 'practice';
     if (ok) {
-      const combo = this.award(true, { speed: !practice });
+      const combo = s.buildRetry ? this.award(true, { base: Math.round((100 + 50 * (s.level - 1)) / 2), fixed: true }) : this.award(true, { speed: !practice });
       this.setState({ fb: { ok: true }, marks: null });
-      this.playPcs(t.target, this.now() + 0.15);
+      const t0 = this.now() + 0.15;
+      sel.slice().sort((a, b) => a - b).forEach((k, i) => this.keys(48 + k, t0 + i * 0.03, 1.1, 0.11));
+      if (s.buildRetry) { this.setState({ listenLbl: '♩ Твой аккорд' }); return this.later(() => { this.setState({ listenLbl: '' }); this.advance(); }, 1800); }
       if (this.bossDue(combo)) return this.later(() => this.startBoss(), 900);
       return this.later(() => this.advance(), practice ? 1700 : 700);
     }
     if (practice) { this.setState({ marks: { wrong, missing }, combo: 0, streak: 0 }); this.say('wrong'); this.blip(false); return; }
+    if (!s.buildRetry) {
+      this.setState({ marks: { wrong, missing }, buildRetry: true, combo: 0, streak: 0 });
+      this.say('wrong', ['Есть ошибки. Исправь.', 'Почти. Подправь отмеченное.']);
+      this.blip(false);
+      return;
+    }
     this.award(false, {});
-    this.setState({ fb: { ok: false }, marks: { wrong, missing } });
-    this.later(() => this.advance(), 1700);
+    this.setState({ fb: { ok: false }, marks: { wrong, missing }, listenLbl: '♩ Твой аккорд' });
+    const at = this.now() + 0.3;
+    const mine = sel.slice().sort((a, b) => a - b);
+    mine.forEach((k, i) => this.keys(48 + k, at + i * 0.03, 1.2, 0.11));
+    this.later(() => this.setState({ listenLbl: '♩ Как правильно: ' + t.label }), 1500);
+    const right = this.voice(t.target);
+    right.forEach((m, i) => this.keys(m, at + 1.6 + i * 0.03, 1.2, 0.11));
+    this.later(() => { this.setState({ listenLbl: '' }); this.advance(); }, 3500);
   };
 
   // BOSS
   startBoss() {
-    this.setState({ boss: TM.intervalChainTask(), bossFb: null, fb: null });
+    this.setState({ boss: TM.intervalChainTask(), bossFb: null, bossWrong: null, fb: null });
     this.say('boss'); this.riser();
   }
-  bossPick(pc) {
+  bossPick(k) {
     const s = this.state;
-    if (!s.boss || s.bossFb) return;
-    const ok = pc === s.boss.answerPc;
-    this.keys(60 + pc, this.now(), 0.6, 0.16);
-    if (ok) { this.setState({ score: s.score + 2000, bossFb: { pc, ok } }); this.burst('+2000'); this.say('bosswin'); this.blip(true); }
-    else { this.setState({ bossFb: { pc, ok } }); this.say('wrong', ['Босс устоял. Ответ: ' + s.boss.answerName + '.']); this.blip(false); }
+    if (!s.boss || s.bossFb || s.bossWrong === k) return;
+    const ok = k % 12 === s.boss.answerPc;
+    this.keys(48 + k, this.now(), 0.6, 0.16);
+    if (!ok && s.bossWrong == null) { this.setState({ bossWrong: k }); this.say('wrong', ['Мимо. Ещё одна попытка — за неё +1000.']); this.blip(false); return; }
+    const bonus = s.bossWrong == null ? 2000 : 1000;
+    if (ok) { this.setState({ score: s.score + bonus, bossFb: { k, ok } }); this.burst('+' + bonus); this.say('bosswin'); this.blip(true); }
+    else { this.setState({ bossFb: { k, ok } }); this.say('wrong', ['Босс устоял. Ответ: ' + s.boss.answerName + '.']); this.blip(false); this.keys(48 + s.boss.answerPc, this.now() + 0.6, 0.9, 0.16); }
     this.later(() => { this.setState({ boss: null, bossFb: null }); this.say('combo'); this.advance(); }, 2400);
   }
 
   // RHYTHM
-  freshRh(target, boss) { return { target, input: Array(16).fill(false), sub: 'listen', pos: -1, count: 0, t: boss ? 14 : 12, max: boss ? 14 : 12, boss, res: null, ok: false }; }
+  freshRh(target, boss) { return { target, input: Array(16).fill(false), sub: 'listen', pos: -1, count: 0, t: boss ? 14 : 12, max: boss ? 14 : 12, boss, res: null, ok: false, fix: false, hint: null }; }
   patchRh(o) { this.setState((s) => (s.rh ? { rh: { ...s.rh, ...o } } : null)); }
   rhRound(boss) {
     const s = this.state;
-    const target = TM.rhythmTask(boss ? 6 : s.level, this.r, s.rh && s.rh.target);
+    let target;
+    for (let i = 0; i < 25; i++) { target = TM.rhythmTask(boss ? 6 : s.level, this.r, s.rh && s.rh.target); if (!this.seenTask(target)) break; }
+    this.markTask(target);
     this.setState({ rh: this.freshRh(target, boss) });
     if (boss) { this.say('boss', ['Ритм-босс. 14 секунд.']); this.riser(); } else this.say('listen');
     this.later(() => this.playPattern(target, true, () => this.rhInput()), boss ? 1000 : 350);
   }
-  playPattern(p, countIn, done) {
+  stopPattern() {
+    if (this._bus) { try { this._bus.gain.setValueAtTime(0, this._ac.currentTime); this._bus.disconnect(); } catch (e) {} this._bus = null; }
+    (this._pt || []).forEach(clearTimeout); this._pt = [];
+    this._replaying = false;
+    if (this.state.replaying) this.setState({ replaying: false });
+    this.patchRh({ pos: -1, count: 0 });
+  }
+  playPattern(p, countIn, done, reps) {
+    reps = reps || 2;
+    this.stopPattern();
     const a = this.ac(), step = 60 / (this.state.bpm || 100) / 4, t0 = a.currentTime + 0.08;
-    const ui = (fn, t) => this.later(fn, Math.max(0, (t - a.currentTime) * 1000));
+    const bus = (this._bus = a.createGain()); bus.connect(this._out);
+    this._pt = [];
+    const ui = (fn, t) => this._pt.push(setTimeout(fn, Math.max(0, (t - a.currentTime) * 1000)));
     let off = 0;
     if (countIn) {
-      for (let i = 0; i < 4; i++) { const t = t0 + i * 4 * step; this.tick(t, i === 0); ui(() => this.patchRh({ count: i + 1 }), t); }
+      for (let i = 0; i < 4; i++) { const t = t0 + i * 4 * step; this.tick(t, i === 0, 0, bus); ui(() => this.patchRh({ count: i + 1 }), t); }
       off = 16 * step;
     }
-    for (let rep = 0; rep < 2; rep++) for (let s = 0; s < 16; s++) {
+    for (let rep = 0; rep < reps; rep++) for (let s = 0; s < 16; s++) {
       const t = t0 + off + (rep * 16 + s) * step;
-      if (s % 4 === 0) this.tick(t, s === 0, 0.05);
-      if (p[s]) this.perc(t);
+      if (s % 4 === 0) this.tick(t, s === 0, 0.05, bus);
+      if (p[s]) this.perc(t, bus);
       ui(() => this.patchRh({ pos: s, count: 0 }), t);
     }
-    ui(() => { this.patchRh({ pos: -1 }); this._replaying = false; if (done) done(); }, t0 + off + 32 * step);
+    ui(() => { this.patchRh({ pos: -1 }); this._replaying = false; this._pt = []; if (done) done(); }, t0 + off + reps * 16 * step);
   }
-  rhInput() {
+  rhInput(keepMood) {
     this.patchRh({ sub: 'input' });
-    this.say('idle', ['Твой ход. Отметь удары.']);
+    if (!keepMood) this.say('idle', ['Твой ход. Отметь удары.']);
     this._t0 = performance.now();
     clearInterval(this._ri);
     this._ri = setInterval(() => {
@@ -728,9 +851,14 @@ class Component extends DCLogic {
   rhTap(i) {
     const rh = this.state.rh;
     if (!rh || rh.sub !== 'input') return;
+    const now = performance.now();
+    if (this._lastTap && this._lastTap.i === i && now - this._lastTap.t < 180) return;
+    this._lastTap = { i, t: now };
     if (!rh.input[i]) this.perc(this.now());
     const input = rh.input.slice(); input[i] = !input[i];
-    this.patchRh({ input });
+    const hint = rh.hint ? rh.hint.slice() : null;
+    if (hint) hint[i] = '';
+    this.patchRh({ input, hint });
   }
   rhReplay = () => {
     const rh = this.state.rh;
@@ -746,33 +874,53 @@ class Component extends DCLogic {
   }
   rhCheck = () => {
     clearInterval(this._ri);
+    this.stopPattern();
     const s = this.state, rh = s.rh;
     if (!rh || rh.sub !== 'input') return;
     const ok = rh.target.every((v, i) => v === rh.input[i]);
     const res = rh.target.map((v, i) => (v && rh.input[i] ? 'hit' : v ? 'miss' : rh.input[i] ? 'extra' : ''));
     const daily = s.game === 'daily';
+    if (!ok && !rh.fix) {
+      this.patchRh({ fix: true, hint: res, t: 8, max: 8, pos: -1 });
+      this.setState({ combo: 0, streak: 0 });
+      this.say('wrong', ['Есть ошибки. Исправь.', 'Почти. Подправь отмеченное.']);
+      return this.rhInput(true);
+    }
     let combo;
-    if (rh.boss && ok) {
+    if (rh.boss && ok && !rh.fix) {
       combo = s.combo + 1;
       this.setState({ score: s.score + 2000, combo, maxCombo: Math.max(s.maxCombo, combo), right: s.right + 1, total: s.total + 1 });
       this.burst('+2000'); this.say('bosswin'); this.blip(true);
-    } else combo = this.award(ok, { base: 150 + 60 * (s.level - 1), fixed: daily, max: 5, step: 1, speed: daily });
-    this.patchRh({ sub: 'result', res, ok, pos: -1 });
-    this.later(() => {
+    } else combo = this.award(ok, { base: Math.round((150 + 60 * (s.level - 1)) * (rh.fix ? 0.5 : 1)), fixed: daily || rh.fix, max: 5, step: 1, speed: daily && !rh.fix });
+    this.patchRh({ sub: 'result', res, ok, pos: -1, playLbl: '' });
+    const next = () => {
       if (daily) return this.advance();
       const round = this.state.round + 1;
       if (round >= 6) return this.finish();
       this.setState({ round });
       this.rhRound(!rh.boss && combo > 0 && combo % 3 === 0);
-    }, 2100);
+    };
+    if (!rh.fix) return this.later(next, 2100);
+    const mine = rh.input.slice(), target = rh.target.slice();
+    this.later(() => {
+      this.patchRh({ playLbl: 'Твой вариант' });
+      this.playPattern(mine, false, () => {
+        if (ok) return this.later(next, 900);
+        this.later(() => {
+          this.patchRh({ playLbl: 'Как было нужно' });
+          this.playPattern(target, false, () => this.later(next, 1000), 1);
+        }, 500);
+      }, 1);
+    }, 700);
   };
 
   // DAILY
   buildDaily() {
     const r = this.r;
-    const N = (l) => ({ kind: 'pick', task: TM.wrongNoteTask(l, r) });
-    const H = (l) => ({ kind: 'pick', task: TM.chordNameTask(l, r) });
-    const R = (l) => ({ kind: 'rhythm', target: TM.rhythmTask(l, r) });
+    const uniq = (fn) => { let t; for (let i = 0; i < 25; i++) { t = fn(); if (!this.seenTask(t)) break; } this.markTask(t); return t; };
+    const N = (l) => ({ kind: 'pick', task: uniq(() => TM.wrongNoteTask(l, r)) });
+    const H = (l) => ({ kind: 'pick', task: uniq(() => TM.chordNameTask(l, r)) });
+    const R = (l) => ({ kind: 'rhythm', target: uniq(() => TM.rhythmTask(l, r)) });
     return [N(1), N(1), N(1), N(2), R(2), N(2), H(2), N(2), N(3), R(3), N(3), H(3), N(3), N(4), R(4), H(4)];
   }
   runDaily() {
@@ -782,7 +930,7 @@ class Component extends DCLogic {
       this.say('listen');
       this.later(() => this.playPattern(it.target, true, () => this.rhInput()), 350);
     } else {
-      this.setState({ rh: null, task: it.task, fb: null });
+      this.setState({ rh: null, task: it.task, fb: null, wrongPicks: [], listenLbl: '' });
       this._t0 = performance.now();
     }
   }
@@ -984,55 +1132,67 @@ class Component extends DCLogic {
       opacity: st === 'dim' ? 0.4 : 1, transition: 'background .12s, opacity .12s',
     });
     const fb = s.fb;
+    const wpk = s.wrongPicks || [];
     const opts = showPick ? task.options.map((o, i) => {
-      const st = fb ? (fb.i === i ? (fb.ok ? 'good' : 'bad') : !fb.ok && o.correct ? 'answer' : 'dim') : 'idle';
+      const st = fb ? (fb.i === i ? (fb.ok ? 'good' : 'bad') : wpk.includes(i) ? 'bad' : !fb.ok && o.correct ? 'answer' : 'dim') : wpk.includes(i) ? 'bad' : 'idle';
       return { name: o.name, press: () => this.pick(i), style: optStyle(st) };
     }) : [];
 
     // piano
     const showPiano = !!s.boss || showBuild;
-    const keyState = (pc) => {
-      if (s.boss) { const b = s.bossFb; if (!b) return 'idle'; if (b.pc === pc) return b.ok ? 'good' : 'bad'; return pc === s.boss.answerPc ? 'answer' : 'idle'; }
-      if (s.marks) { if (s.marks.wrong.includes(pc)) return 'bad'; if (s.marks.missing.includes(pc)) return 'answer'; }
-      if (s.sel.includes(pc)) return fb && fb.ok ? 'good' : 'sel';
+    const keyState = (k) => {
+      if (s.boss) { const b = s.bossFb; if (s.bossWrong === k) return 'bad'; if (!b) return 'idle'; if (b.k === k) return b.ok ? 'good' : 'bad'; return k < 12 && k === s.boss.answerPc ? 'answer' : 'idle'; }
+      if (s.marks) { if (s.marks.wrong.includes(k)) return 'bad'; if (s.marks.missing.includes(k)) return 'answer'; }
+      if (s.sel.includes(k)) return fb && fb.ok ? 'good' : 'sel';
       return 'idle';
     };
-    const press = (pc) => () => (s.boss ? this.bossPick(pc) : this.toggleKey(pc));
+    const press = (k) => () => (s.boss ? this.bossPick(k) : this.toggleKey(k));
     const W = [[0, 'C'], [2, 'D'], [4, 'E'], [5, 'F'], [7, 'G'], [9, 'A'], [11, 'B']];
     const B = [[1, 'C♯', 'D♭', 0], [3, 'D♯', 'E♭', 1], [6, 'F♯', 'G♭', 3], [8, 'G♯', 'A♭', 4], [10, 'A♯', 'B♭', 5]];
-    const whiteKeys = W.map(([pc, a]) => {
-      const st = keyState(pc);
-      return { a, press: press(pc), style: { flex: 1, height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 12, borderRadius: '0 0 6px 6px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 15, fontWeight: 500,
-        border: 'none', background: st === 'sel' || st === 'good' ? '#f4a582' : st === 'bad' ? '#c84b31' : '#fcf7f1', color: st === 'bad' ? '#fcf7f1' : '#1e1b16',
+    const KW = '((100% - 52px) / 14)';
+    const whiteKeys = [0, 1].flatMap((o) => W.map(([pc, a]) => {
+      const k = o * 12 + pc, st = keyState(k);
+      return { a: pc === 0 ? a + (o + 3) : a, press: press(k), style: { flex: '1 1 0', minWidth: 0, height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 10, borderRadius: '0 0 5px 5px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(10px,1.4vw,13px)', fontWeight: 500, overflow: 'hidden', outline: 'none',
+        border: 'none', background: st === 'sel' || st === 'good' ? '#f4a582' : st === 'bad' ? '#c84b31' : '#fcf7f1', color: st === 'bad' ? '#fcf7f1' : pc === 0 ? '#b9542c' : '#1e1b16',
         boxShadow: st === 'answer' ? 'inset 0 0 0 4px #e0794f' : 'inset 0 -6px 0 rgba(0,0,0,0.08)' } };
-    });
-    const blackKeys = B.map(([pc, a, b, wi]) => {
-      const st = keyState(pc);
-      return { a, b, press: press(pc), style: { position: 'absolute', top: 0, height: '60%', width: 'calc((100% - 24px) / 7 * 0.64)', left: 'calc(' + (wi + 1) + ' * (100% - 24px) / 7 + ' + (wi * 4 + 2) + 'px - (100% - 24px) / 7 * 0.32)', zIndex: 2,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 1, paddingBottom: 8, borderRadius: '0 0 5px 5px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 10, lineHeight: 1.1,
+    }));
+    const blackKeys = [0, 1].flatMap((o) => B.map(([pc, a, b, w]) => {
+      const k = o * 12 + pc, wi = o * 7 + w, st = keyState(k);
+      return { a, b, press: press(k), style: { position: 'absolute', top: 0, height: '60%', width: 'calc(' + KW + ' * 0.64)', left: 'calc(' + (wi + 1) + ' * ' + KW + ' + ' + (wi * 4 + 2) + 'px - ' + KW + ' * 0.32)', zIndex: 2,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 1, paddingBottom: 6, padding: '0 0 6px', borderRadius: '0 0 4px 4px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(7px,1vw,9px)', lineHeight: 1.1, overflow: 'hidden', outline: 'none',
         border: '1px solid #4a4238', background: st === 'sel' || st === 'good' ? '#f4a582' : st === 'bad' ? '#c84b31' : '#141210', color: st === 'sel' || st === 'good' ? '#1e1b16' : '#d8cdbd',
         boxShadow: st === 'answer' ? 'inset 0 0 0 3px #f4a582' : 'none' } };
-    });
+    }));
     const practice = s.chordMode === 'practice';
-    const buildHint = showBuild ? (s.marks ? 'Красным — лишние, обводкой — недостающие.' : practice ? 'Отметь звуки и нажми «Проверить».' : 'Отметь ' + task.target.length + ' звука(ов). Проверка автоматически.') : '';
+    const buildHint = showBuild ? (s.buildRetry && !fb ? 'Красным — лишние, обводкой — недостающие. Таймер на паузе: убери красные, нажми обведённые и «Проверить». За исправление половина очков.' : s.marks && practice && !fb ? 'Красным — лишние, обводкой — недостающие. Убери красные, нажми обведённые и снова «Проверить».' : s.marks ? 'Красным — лишние, обводкой — недостающие.' : practice ? 'Отметь звуки и нажми «Проверить».' : 'Отметь ' + task.target.length + ' звука(ов). Проверка автоматически.') : '';
 
     // explain
     let explain = '';
+    if (showPick && !fb && wpk.length) explain = 'Не та. Ещё одна попытка — за неё половина очков. После ответа прозвучит результат.';
     if (showPick && fb && !fb.ok) explain = task.explain;
     if (showBuild && fb) explain = task.explain;
+    if (showBuild && !fb && s.marks && (s.buildRetry || practice)) explain = 'Нужно собрать ' + task.label + ' (' + task.sub + '). ' + task.explain.replace(/^[^=]*= /, 'Звуки: ');
+    if (s.listenLbl) explain = s.listenLbl + (explain ? ' · ' + explain : '');
     if (showAB && s.abPicked) { const it = s.ab.list[s.ab.i]; explain = (s.abPicked === it.correct ? 'Верно. ' : 'Правильный ответ: ' + (it.correct === 'A' ? 'А' : 'Б') + '. ') + it.explain; }
 
     // rhythm
     const rh = s.rh;
     const cellStyle = (i) => {
-      const base = { height: 'clamp(40px,6vw,58px)', padding: 0, borderRadius: 4, cursor: rh.sub === 'input' ? 'pointer' : 'default', border: '1px solid ' + (i % 4 === 0 ? '#6a5f50' : '#4a4238'), background: '#2f2a23', transition: 'background .06s' };
+      const base = { height: 'clamp(40px,6vw,58px)', padding: 0, borderRadius: 4, outline: 'none', cursor: rh.sub === 'input' ? 'pointer' : 'default', borderWidth: 1, borderStyle: 'solid', borderColor: i % 4 === 0 ? '#6a5f50' : '#4a4238', background: '#2f2a23', boxShadow: 'none', opacity: 1, transition: 'background .06s' };
+      const miss = () => { base.background = 'transparent'; base.borderWidth = 2; base.borderStyle = 'dashed'; base.borderColor = '#f4a582'; };
       if (rh.sub === 'listen') { if (rh.pos === i) base.background = '#fcf7f1'; }
-      else if (rh.sub === 'input') { if (rh.input[i]) { base.background = '#f4a582'; base.borderColor = '#f4a582'; } if (rh.pos === i) base.boxShadow = 'inset 0 0 0 2px #fcf7f1'; }
-      else { const r = rh.res[i]; if (r === 'hit') { base.background = '#f4a582'; base.borderColor = '#f4a582'; } else if (r === 'miss') { base.background = 'transparent'; base.border = '2px dashed #f4a582'; } else if (r === 'extra') { base.background = '#c84b31'; base.borderColor = '#c84b31'; } else base.opacity = 0.5; }
+      else if (rh.sub === 'input') {
+        if (rh.input[i]) { base.background = '#f4a582'; base.borderColor = '#f4a582'; }
+        const hn = rh.hint && rh.hint[i];
+        if (hn === 'miss' && !rh.input[i]) miss();
+        if (hn === 'extra' && rh.input[i]) { base.background = '#c84b31'; base.borderColor = '#c84b31'; }
+        if (rh.pos === i) base.boxShadow = 'inset 0 0 0 2px #fcf7f1';
+      }
+      else { const r = rh.res[i]; if (r === 'hit') { base.background = '#f4a582'; base.borderColor = '#f4a582'; } else if (r === 'miss') miss(); else if (r === 'extra') { base.background = '#c84b31'; base.borderColor = '#c84b31'; } else base.opacity = 0.5; if (rh.pos === i) { base.boxShadow = 'inset 0 0 0 2px #fcf7f1'; base.opacity = 1; } }
       return base;
     };
-    const rhBeats = isRh ? [0, 1, 2, 3].map((b) => ({ n: String(b + 1), cells: [0, 1, 2, 3].map((k) => { const i = b * 4 + k; return { press: () => this.rhTap(i), style: cellStyle(i) }; }) })) : [];
-    const rhStatus = isRh ? (rh.sub === 'listen' ? (rh.count ? 'Отсчёт ' + rh.count : 'Слушай') : rh.sub === 'input' ? 'Твой ход' : rh.ok ? 'Точно в ритм' : 'Не совпало') : '';
+    const rhBeats = isRh ? [0, 1, 2, 3].map((b) => ({ n: String(b + 1), cells: [0, 1, 2, 3].map((k) => { const i = b * 4 + k; return { press: () => this.rhTap(i), style: cellStyle(i), lbl: (b + 1) + '.' + (k + 1), lblStyle: { textAlign: 'center', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(9px,1.2vw,12px)', lineHeight: 1, whiteSpace: 'nowrap', color: k === 0 ? '#fcf7f1' : k === 2 ? '#f4a582' : '#8a7f70', fontWeight: k === 0 ? 700 : k === 2 ? 500 : 400 } }; }) })) : [];
+    const rhStatus = isRh ? (rh.sub === 'listen' ? (rh.count ? 'Отсчёт ' + rh.count : 'Слушай') : rh.sub === 'input' ? (rh.fix ? 'Исправь ошибки' : 'Твой ход') : rh.playLbl ? '♪ ' + rh.playLbl : rh.ok ? 'Точно в ритм' : 'Не совпало') : '';
     const rhPct = isRh ? (rh.sub === 'input' ? (rh.t / rh.max) * 100 : rh.sub === 'listen' ? 100 : 0) : 0;
 
     // A/B tiles
@@ -1121,10 +1281,11 @@ class Component extends DCLogic {
       showBoss: play && !!s.boss, bossSteps: s.boss ? s.boss.steps.map((t) => ({ t })) : [],
       showPick, task: task || {}, opts,
       showBuild, buildHint, showPiano, whiteKeys, blackKeys,
-      showBuildActions: showBuild && practice && !fb,
-      checkBuild: () => this.checkBuild(), clearBuild: () => this.setState({ sel: [], marks: null }),
+      showBuildActions: showBuild && (practice || s.buildRetry) && !fb,
+      checkBuild: () => this.checkBuild(), clearBuild: () => this.setState({ sel: [] }),
       showRhythm: isRh, rhBoss: isRh && rh.boss, rhStatus, rhTime: isRh && rh.sub === 'input' ? rh.t.toFixed(1) + ' с' : '',
       rhTimerStyle: { height: '100%', width: rhPct + '%', background: rhPct < 30 && rh && rh.sub === 'input' ? '#e8806a' : '#f4a582', borderRadius: 4, transition: 'width .1s linear' },
+      rhFixNote: isRh && rh.fix && rh.sub === 'input' ? 'Пунктир — сюда нужен удар, красным — лишний удар. За исправление половина очков.' : '',
       rhBeats, rhCanAct: isRh && rh.sub === 'input', rhCheck: this.rhCheck, rhReplay: this.rhReplay,
       rhReplayLabel: s.replaying ? '♪ Играет… таймер на паузе' : 'Послушать ещё раз',
       rhReplayStyle: { padding: '13px 24px', background: s.replaying ? '#fcf7f1' : 'transparent', color: s.replaying ? '#1e1b16' : '#fcf7f1', border: '1px solid ' + (s.replaying ? '#fcf7f1' : '#4a4238'), borderRadius: 100, fontSize: 16, cursor: s.replaying ? 'default' : 'pointer' },

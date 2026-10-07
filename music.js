@@ -144,6 +144,7 @@
         question: (opts.verb || (kind === 'Гамма' ? 'Какая нота лишняя в' : 'Какая нота не относится к')) + ' ' + label + '?',
         options: shown.map((n) => ({ name: name(n), pc: pc(n), correct: !pcs.has(pc(n)) })), // проверка по высоте звука, не по тексту
         explain: name(wrong) + ' не входит в ' + label + ': ' + set.map(name).join(' '),
+        play: set.map(pc),
         level,
       };
     }
@@ -170,7 +171,8 @@
       if (opts.length < 4) continue;
       return {
         type: 'pick', kind: 'Аккорд', label: notes.map(name).join(' – '), question: 'Какой это аккорд?', wide: true,
-        options: shuffle(r, opts).map((o) => ({ name: chordSym(o.root, o.q), correct: setEq(pcSet(chordNotes(o.root, o.q)), target) })),
+        options: shuffle(r, opts).map((o) => ({ name: chordSym(o.root, o.q), pcs: chordNotes(o.root, o.q).map(pc), correct: setEq(pcSet(chordNotes(o.root, o.q)), target) })),
+        play: notes.map(pc),
         explain: chordSym(root, q) + ' — ' + CHORDS[q].ru + ': ' + CHORDS[q].ivs.map((iv) => IV[iv][1]).join('–') + ' полутонов',
         level,
       };

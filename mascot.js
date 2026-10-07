@@ -29,6 +29,7 @@
 .pose.on{opacity:1}
 .pose.on.in{animation:squash .34s cubic-bezier(.3,1.4,.5,1)}
 .wrap.lp .pose{transition:opacity .32s ease}
+.wrap.lp.rd{background:#fcf7f1}
 .wrap.lp .pose.on.in{animation:soft .7s cubic-bezier(.25,.8,.35,1)}
 .wrap.lp.s-idle .cam{animation:breathe 4.8s ease-in-out infinite}
 .wrap.lp.s-correct .cam{animation:leanSoft 1.1s cubic-bezier(.3,.9,.4,1)}
@@ -112,14 +113,22 @@ svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-ev
     constructor() {
       super();
       this._root = this.attachShadow({ mode: 'open' });
-      const poses = Object.keys(POSES).map((k) => `<div class="pose${k.length > 2 ? ' op' : ''}" data-p="${k}"><img src="${POSES[k]}" alt="" loading="lazy" draggable="false"/></div>`).join('');
+      const poses = Object.keys(POSES).map((k) => `<div class="pose${k.length > 2 ? ' op' : ''}" data-p="${k}"><img src="${POSES[k]}" alt=""${k === 'f1' ? '' : ' loading="lazy"'} draggable="false"/></div>`).join('');
       this._root.innerHTML = `<style>${CSS}</style><div class="wrap s-idle"><div class="cam">${poses}</div><div class="vig"></div><div class="flash"></div>${FX}</div>`;
       this._wrap = this._root.querySelector('.wrap');
       this._flash = this._root.querySelector('.flash');
       this._poses = [...this._root.querySelectorAll('.pose')];
       this._pose = null; this._state = null;
+      this._f1 = this._root.querySelector('[data-p=f1] img');
+      this._f1.addEventListener('load', () => this._ready());
     }
-    connectedCallback() { this._apply(); }
+    _ready() {
+      if (this._isReady || !this.isConnected || !this._f1.complete || !this._f1.naturalWidth) return;
+      this._isReady = true;
+      this._wrap.classList.add('rd');
+      requestAnimationFrame(() => this.dispatchEvent(new CustomEvent('catready', { bubbles: true, composed: true })));
+    }
+    connectedCallback() { this._apply(); this._ready(); }
     disconnectedCallback() { clearTimeout(this._lt); clearTimeout(this._wt); }
     get mood() { return this.getAttribute('mood') || 'idle'; }
     set mood(v) { this.setAttribute('mood', String(v)); }
@@ -165,8 +174,9 @@ svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-ev
     _show(state, restart, poseOnly, forcePose) {
       const p = forcePose || (this._looping ? LOOP_POSE[state] || 'f1' : POSE_OF[state] || 'f1');
       if (!poseOnly) {
-        if (restart || this._state !== state) { this._wrap.className = 'wrap'; void this._wrap.offsetWidth; }
-        this._wrap.className = 'wrap' + (this._looping ? ' lp' : ' old') + ' s-' + (state === 'wink' ? 'idle' : state);
+        const baseCls = 'wrap' + (this._looping ? ' lp' : ' old') + (this._isReady ? ' rd' : '');
+        if (restart || this._state !== state) { this._wrap.className = baseCls; void this._wrap.offsetWidth; }
+        this._wrap.className = baseCls + ' s-' + (state === 'wink' ? 'idle' : state);
       }
       const changed = this._pose !== p;
       this._poses.forEach((el) => {
