@@ -390,6 +390,9 @@
                 </sc-for>
                 <div style="height:1px; background:#3a342b; margin:4px 0"></div>
                 <div style="display:flex; justify-content:space-between; gap:12px; font-size:17px"><span>Ты: {{ myBestLabel }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:14px; color:#f4a582">{{ toTopLabel }}</span></div>
+                <sc-if value="{{ showNickSaved }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:4px; font-size:15px; color:#d8cdbd"><span>{{ nickSavedLabel }}</span><button type="button" onClick="{{ editNick }}" style="padding:8px 16px; background:transparent; color:#f4a582; border:1px solid #4a4238; border-radius:100px; font-size:14px; cursor:pointer" style-hover="border-color:#f4a582">Изменить ник</button></div>
+                </sc-if>
                 <sc-if value="{{ showNick }}" hint-placeholder-val="{{ false }}">
                   <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px">
                     <input type="text" maxLength="16" placeholder="Никнейм для таблицы" value="{{ nick }}" onChange="{{ setNick }}" style="flex:1 1 180px; min-width:0; padding:12px 16px; background:#26221c; color:#fcf7f1; border:1px solid #4a4238; border-radius:100px; font:inherit; font-size:16px; outline:none" />
@@ -974,7 +977,9 @@ class Component extends DCLogic {
     try {
       const nick = localStorage.getItem('tm_nick') || null;
       if (score != null) await this.rpc('submit_score', { p_day: ctx.day, p_game: ctx.game, p_client: this.cid(), p_nick: nick, p_score: score });
-      const rows = await this.rpc('get_board', { p_day: ctx.day, p_game: ctx.game, p_client: this.cid() });
+      const rows = ctx.game === 'daily'
+        ? await this.rpc('get_board', { p_day: ctx.day, p_game: ctx.game, p_client: this.cid() })
+        : await this.rpc('get_ranking', { p_game: ctx.game, p_from: ctx.day.slice(0, 8) + '01', p_client: this.cid() });
       if (this._lb === ctx) this.setState({ lb: { status: 'ok', rows: rows || [] } });
     } catch (e) {
       if (this._lb === ctx) this.setState({ lb: { status: 'off', rows: [] } });
@@ -1068,10 +1073,10 @@ class Component extends DCLogic {
       localStorage.setItem(k, JSON.stringify(rec));
       extra.dailyRec = rec;
     }
-    this._lb = g === 'daily' ? { game: 'daily', day: this.dateKey() } : g === 'chord' && s.chordMode === 'challenge' ? { game: 'chord', day: this.weekKey() } : null;
+    const scored = s.score > 0 && !(g === 'chord' && s.chordMode === 'practice');
+    this._lb = g === 'daily' ? { game: 'daily', day: this.dateKey() } : scored ? { game: g, day: this.dateKey() } : null;
     this.setState({ phase: 'over', best, isBest, boss: null, playing: null, lb: null, ...extra });
     if (this._lb) this.syncBoard(s.score);
-    else if (s.score > 0 && !(g === 'chord' && s.chordMode === 'practice')) this.rpc('submit_score', { p_day: this.dateKey(), p_game: g, p_client: this.cid(), p_nick: localStorage.getItem('tm_nick') || null, p_score: s.score }).catch(() => {});
     const acc = s.total ? s.right / s.total : 0;
     this.say('over', [acc >= 0.85 ? 'Это было мощно.' : acc >= 0.6 ? 'Неплохо. Ещё заход?' : 'Разминка засчитана. Давай ещё.']);
   }
@@ -1214,7 +1219,7 @@ class Component extends DCLogic {
     const lb = s.lb;
     if (isDailyOver) {
       if (!lb || lb.status === 'loading') boardNote = 'Загружаю таблицу…';
-      else if (lb.status === 'off') boardNote = 'Таблица сейчас недоступна. Результат сохранён только у тебя.';
+      else if (lb.status === 'off') { boardNote = 'Таблица сейчас недоступна. Результат сохранён только у тебя.'; showNick = !s.saved; }
       else {
         const top = lb.rows.filter((x) => x.place <= 3);
         const me = lb.rows.find((x) => x.is_me);
@@ -1294,8 +1299,10 @@ class Component extends DCLogic {
       explain,
       overTag: s.isBest ? 'НОВЫЙ РЕКОРД' : 'ИТОГ · ' + this.META[g].title,
       overStats: [{ k: 'ПРАВИЛЬНО', v: s.right + ' / ' + s.total }, { k: 'МАКС. COMBO', v: String(s.maxCombo) }, { k: 'РЕКОРД', v: best ? fmt(best) : '—' }],
-      isDailyOver, board, boardNote, boardTitle: this._lb && this._lb.game === 'chord' ? 'ТОП НЕДЕЛИ · НА ВРЕМЯ' : 'ТОП ДНЯ', myBestLabel: fmt(myBest), toTopLabel, showNick, nick: s.nick,
+      isDailyOver, board, boardNote, boardTitle: this._lb && this._lb.game !== 'daily' ? 'ТОП МЕСЯЦА · ' + this.META[this._lb.game].title : 'ТОП ДНЯ', myBestLabel: fmt(myBest), toTopLabel, showNick, nick: s.nick,
       setNick: (e) => this.setState({ nick: e.target.value }), saveNick: this.saveNick,
+      showNickSaved: isDailyOver && s.saved && !!s.nick, nickSavedLabel: 'В таблице ты — «' + (s.nick || '') + '»',
+      editNick: () => this.setState({ saved: false }),
     };
   }
 }

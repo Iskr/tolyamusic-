@@ -36,7 +36,7 @@
     'Сильная доля.': 'Strong beat.', 'Начало четверти, счёт «раз», «два», «три», «четыре».': 'Start of the quarter, counted “one”, “two”, “three”, “four”.',
     'Слабая доля.': 'Weak beat.', 'Полусильная доля.': 'Semi-strong beat.', 'Середина четверти, счёт «и».': 'Middle of the quarter, counted “and”.',
     'Например, в первой четверти: 1.1 — сильная, 1.2 — слабая, 1.3 — полусильная, 1.4 — слабая. Дальше то же самое для 2.x, 3.x и 4.x. Счёт вслух: «раз-и, два-и, три-и, четыре-и».': 'For example, in the first quarter: 1.1 is strong, 1.2 weak, 1.3 semi-strong, 1.4 weak. The same goes for 2.x, 3.x and 4.x. Count out loud: “one-and, two-and, three-and, four-and”.',
-    'Готово': 'Done', 'Дальше →': 'Next →', 'Сохранить': 'Save', 'Ещё раз': 'Play again', 'Другая игра': 'Another game',
+    'Готово': 'Done', 'Изменить ник': 'Change nickname', 'Дальше →': 'Next →', 'Сохранить': 'Save', 'Ещё раз': 'Play again', 'Другая игра': 'Another game',
     '3 подряд → ×1.2': '3 in a row → ×1.2', '5 → ×1.5': '5 → ×1.5', '10 подряд → Босс': '10 in a row → Boss',
     'Хочешь так же быстро слышать гармонию': 'Want to hear harmony this fast', 'в своих треках': 'in your own tracks', 'Смотреть курсы': 'See courses',
     'Грищенко Анатолий Павлович': 'Anatoly Grishchenko', 'Кот-маскот в наушниках': 'Cat mascot in headphones', 'Никнейм для таблицы': 'Nickname for the leaderboard',
@@ -115,6 +115,8 @@
   const tr = (s) => { if (D[s] != null) return D[s]; for (const [re, f] of AB) { const m = s.match(re); if (m) return f(m); } return null; };
   R.push(
     ...AB,
+    [/^В таблице ты — «(.+)»$/, (m) => 'You’re on the board as “' + m[1] + '”'],
+    [/^ТОП МЕСЯЦА · (.+)$/, (m) => 'TOP THIS MONTH · ' + (D[m[1]] || m[1])],
     [/^Верно\. (.+)$/, (m) => { const x = tr(m[1]); return x ? 'Correct. ' + x : null; }],
     [/^Правильный ответ: ([АБ])\. (.+)$/, (m) => { const x = tr(m[2]); return x ? 'Correct answer: ' + L(m[1]) + '. ' + x : null; }],
     [/^Какая нота лишняя в (.+)\?$/, (m) => 'Which note doesn’t belong in ' + m[1] + '?'],
