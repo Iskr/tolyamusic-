@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="./music.js"></script>
+<script src="./bass.js"></script>
 <script src="./i18n-games.js"></script>
 <script src="./i18n.js"></script>
 <style>
@@ -23,6 +24,18 @@
   button { font-family: inherit; -webkit-tap-highlight-color: transparent; }
   button:focus { outline: none; }
   button:focus-visible { outline: 2px solid #f4a582; outline-offset: 2px; }
+  button, a, summary { touch-action: manipulation; }
+  button:disabled { cursor: default; }
+  .tm-pad { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; touch-action: none; transition: transform .07s ease-out, background .06s; }
+  .tm-pad:active { transform: scale(.94); }
+  .tm-stage-m, .tm-stage-m * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  .tm-key:active { filter: brightness(.92); }
+  .tm-shell, .tm-shell * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; box-sizing: border-box; }
+  .tm-shell input { -webkit-user-select: text; user-select: text; }
+  @keyframes tmRot { 0%, 22% { transform: rotate(0deg) } 50%, 78% { transform: rotate(-90deg) } 100% { transform: rotate(0deg) } }
+  .tm-rot { animation: tmRot 2.8s ease-in-out infinite; }
+  .tm-root { max-width: 100%; overflow-x: hidden; }
+  @supports (overflow-x: clip) { .tm-root { overflow-x: clip; } }
   @keyframes mIdle { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
   @keyframes mHop { 0% { transform: translateY(0) scale(1) } 30% { transform: translateY(-16px) scale(1.03) } 60% { transform: translateY(0) scale(.98) } 100% { transform: none } }
   @keyframes mShake { 0%,100% { transform: translateX(0) rotate(0) } 20% { transform: translateX(-7px) rotate(-2deg) } 40% { transform: translateX(6px) rotate(2deg) } 60% { transform: translateX(-3px) } 80% { transform: translateX(2px) } }
@@ -33,7 +46,7 @@
 </style>
 </helmet>
 
-<div style="max-width:100%; overflow-x:hidden">
+<div class="tm-root">
 
 <header style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:13px clamp(16px,4vw,56px); background:rgba(252,247,241,0.9); backdrop-filter:blur(10px); border-bottom:1px solid #ead9c6">
   <a href="./index.html" style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.14em; text-transform:uppercase">Толя<span style="color:#e0794f">•</span>Music</a>
@@ -140,9 +153,16 @@
         <span style="font-size:15px; line-height:1.5; color:#4a4339">Послушай два варианта и выбери тот, что подходит под условие.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#8a8172">восприятие · слух</span>
       </button>
+      <button type="button" onClick="{{ go.bass }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#fffdfa; border:1px solid #ead9c6; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="background:#fde6d8; border-color:#1e1b16">
+        <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><path d="M14 30 H192 M14 52 H192 M14 74 H192 M14 96 H192" stroke="#e0845e" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="22" y="44" width="48" height="16" rx="4" fill="#e0845e" fill-opacity="0.3" stroke="#e0845e" stroke-opacity="0.35" stroke-width="2"/><rect x="76" y="66" width="30" height="16" rx="4" fill="#e0845e" fill-opacity="0.3" stroke="#e0845e" stroke-opacity="0.35" stroke-width="2"/><rect x="112" y="88" width="40" height="16" rx="4" fill="#b9542c" fill-opacity="0.45" stroke="#b9542c" stroke-opacity="0.5" stroke-width="2"/><rect x="158" y="22" width="30" height="16" rx="4" fill="none" stroke="#b9542c" stroke-opacity="0.5" stroke-width="2" stroke-dasharray="4 4"/><text x="166" y="35" font-family="IBM Plex Mono, monospace" font-size="13" fill="#b9542c" fill-opacity=".6">?</text><path d="M22 122 q8 -12 16 0 t16 0 t16 0 t16 0" stroke="#e0845e" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#b9542c"><span>06</span><span>≈ 2 мин</span></span>
+        <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">СОБЕРИ БАС</span>
+        <span style="font-size:15px; line-height:1.5; color:#4a4339">Решай, когда звучит бас: вместе с бочкой, между ударами или в синкопу.</span>
+        <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#8a8172">бас · groove</span>
+      </button>
       <button type="button" onClick="{{ go.daily }}" style="text-align:left; position:relative; overflow:hidden; isolation:isolate; display:flex; flex-direction:column; gap:14px; padding:clamp(22px,2.6vw,30px); background:#f4a582; border:1px solid #f4a582; border-radius:8px; color:#1e1b16; cursor:pointer" style-hover="border-color:#1e1b16">
         <svg viewBox="0 0 200 140" aria-hidden="true" style="position:absolute; right:-10px; bottom:-16px; width:42%; max-width:180px; height:auto; z-index:-1; pointer-events:none; opacity:.75"><rect x="70" y="30" width="110" height="98" rx="8" stroke="#1e1b16" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M70 54 H180 M94 22 V38 M156 22 V38" stroke="#1e1b16" stroke-opacity="0.22" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="88" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="113" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="138" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="163" cy="70" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="88" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="113" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="138" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="163" cy="90" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="88" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="113" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="138" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><circle cx="163" cy="110" r="3" fill="#1e1b16" fill-opacity=".18"/><path d="M163 100 l4 9 l10 1 l-7 7 l2 10 l-9 -5 l-9 5 l2 -10 l-7 -7 l10 -1 z" fill="#1e1b16" fill-opacity=".14" stroke="#1e1b16" stroke-opacity="0.3" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1e1b16"><span>06</span><span>{{ todayLabel }}</span></span>
+        <span style="display:flex; justify-content:space-between; width:100%; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1e1b16"><span>07</span><span>{{ todayLabel }}</span></span>
         <span style="font-size:clamp(24px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em; line-height:1">ЗАДАНИЕ ДНЯ</span>
         <span style="font-size:15px; line-height:1.5; color:#1e1b16">Один набор на всех на сегодня: 10 нот, 3 ритма, 3 гармонии. ТОП-3 дня.</span>
         <span style="margin-top:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#1e1b16">всё сразу</span>
@@ -167,13 +187,13 @@
       </div>
     </div>
 
-    <div style="position:relative; display:flex; flex-wrap:wrap; gap:clamp(16px,2.4vw,28px); padding:clamp(14px,2.4vw,28px) clamp(14px,2.4vw,28px) 44px; background:#26221c; border:1px solid #3a342b; border-radius:8px">
+    <div class="{{ stageCls }}" style="{{ stageStyle }}">
       {{ fx }}
-      <div style="flex:1 1 230px; max-width:100%; display:flex; flex-wrap:wrap; gap:14px; align-content:flex-start">
-        <div style="flex:1 1 150px; max-width:230px; aspect-ratio:444/750; background:#fcf7f1; border-radius:6px; overflow:hidden"><x-import component-from-global-scope="tolya-cat" from="./mascot.js" mood="{{ mood }}" pulse="{{ mk }}" hint-size="100%,100%" style="display:block; width:100%; height:100%"></x-import></div>
+      <div style="{{ sideStyle }}">
+        <div style="{{ catStyle }}"><x-import component-from-global-scope="tolya-cat" from="./mascot.js" mood="{{ mood }}" pulse="{{ mk }}" hint-size="100%,100%" style="display:block; width:100%; height:100%"></x-import></div>
         <div style="flex:1 1 170px; display:flex; flex-direction:column; gap:12px">
           <div style="position:relative; padding:12px 16px; background:#fcf7f1; color:#1e1b16; border-radius:6px; font-size:17px; font-weight:600; line-height:1.3; min-height:48px">{{ line }}</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px">
+          <div style="{{ hudStyle }}">
             <div style="padding:12px; background:#1e1b16; border-radius:6px; grid-column:1 / -1">
               <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; color:#a99d8b">SCORE</div>
               <div style="font-size:clamp(28px,3.4vw,38px); font-weight:800; letter-spacing:-0.02em; line-height:1.1">{{ scoreLabel }}</div>
@@ -194,7 +214,7 @@
         </div>
       </div>
 
-      <div style="flex:999 1 420px; min-width:0; display:flex; flex-direction:column; gap:20px; position:relative; z-index:2">
+      <div id="tm-main" style="{{ mainStyle }}">
 
         <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex; flex-direction:column; gap:22px; align-items:flex-start; padding:clamp(4px,1vw,12px) 0">
@@ -210,22 +230,33 @@
                 <button type="button" onClick="{{ setPractice }}" style="{{ modePracticeStyle }}">Тренировка</button>
               </div>
             </sc-if>
-            <sc-if value="{{ isRhythmGame }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex; align-items:center; gap:4px; padding:4px; background:#1e1b16; border-radius:100px">
-                <button type="button" onClick="{{ bpmDown }}" style="width:40px; height:40px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer" style-hover="background:#3a342b">−</button>
-                <span style="min-width:96px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:15px; color:#fcf7f1">{{ bpm }} BPM</span>
-                <button type="button" onClick="{{ bpmUp }}" style="width:40px; height:40px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer" style-hover="background:#3a342b">+</button>
+            <sc-if value="{{ isBass }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%; max-width:640px; display:flex; flex-direction:column; gap:10px">
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:8px">
+                  <sc-for list="{{ bassLevels }}" as="l" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; opacity:.75; flex:none">{{ l.n }}</span><span style="flex:1; min-width:0; font-weight:700">{{ l.title }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; flex:none">{{ l.mark }}</span></button>
+                  </sc-for>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; line-height:1.5; color:#8a7f70">{{ bassRoadmap }}</div>
               </div>
             </sc-if>
-            <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap">
-              <button type="button" onClick="{{ start }}" style="padding:18px 46px; background:#f4a582; color:#1e1b16; border:none; border-radius:100px; font-size:18px; font-weight:800; letter-spacing:0.02em; cursor:pointer" style-hover="background:#fcf7f1">СТАРТ</button>
+            <sc-if value="{{ isRhythmGame }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; gap:4px; padding:4px; background:#1e1b16; border-radius:100px">
+                <button type="button" onClick="{{ bpmDown }}" style="width:44px; height:44px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer" style-hover="background:#3a342b">−</button>
+                <span style="min-width:96px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:15px; color:#fcf7f1">{{ bpm }} BPM</span>
+                <button type="button" onClick="{{ bpmUp }}" style="width:44px; height:44px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer" style-hover="background:#3a342b">+</button>
+              </div>
+            </sc-if>
+            <div style="{{ startRowStyle }}">
+              <button type="button" onClick="{{ start }}" style="{{ startBtnStyle }}" style-hover="background:#fcf7f1">СТАРТ</button>
               <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#a99d8b">{{ bestLabel }}</span>
             </div>
           </div>
         </sc-if>
 
         <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex; flex-direction:column; gap:22px">
+          <div style="{{ playStyle }}">
+            <sc-if value="{{ deskHud }}" hint-placeholder-val="{{ true }}">
             <div style="display:flex; align-items:center; gap:14px">
               <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:#a99d8b; white-space:nowrap">{{ progLabel }}</span>
               <div style="flex:1; height:6px; background:#3a342b; border-radius:3px; overflow:hidden"><div style="{{ progStyle }}"></div></div>
@@ -233,6 +264,7 @@
               <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#f4a582; white-space:nowrap">{{ levelLabel }}</span>
               <button type="button" onClick="{{ exit }}" style="padding:6px 12px; background:transparent; color:#a99d8b; border:1px solid #4a4238; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:11px; cursor:pointer" style-hover="color:#fcf7f1; border-color:#fcf7f1">{{ exitLabel }}</button>
             </div>
+            </sc-if>
 
             <sc-if value="{{ showBoss }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex; flex-direction:column; gap:18px">
@@ -272,14 +304,14 @@
             </sc-if>
 
             <sc-if value="{{ showPiano }}" hint-placeholder-val="{{ false }}">
-              <div style="position:relative; width:100%; max-width:760px; height:clamp(140px,22vw,200px); user-select:none">
+              <div style="{{ pianoStyle }}">
                 <div style="display:flex; gap:4px; height:100%">
                   <sc-for list="{{ whiteKeys }}" as="k" hint-placeholder-count="14">
-                    <button type="button" onClick="{{ k.press }}" style="{{ k.style }}">{{ k.a }}</button>
+                    <button type="button" class="tm-key" onClick="{{ k.press }}" style="{{ k.style }}">{{ k.a }}</button>
                   </sc-for>
                 </div>
                 <sc-for list="{{ blackKeys }}" as="k" hint-placeholder-count="10">
-                  <button type="button" onClick="{{ k.press }}" style="{{ k.style }}"><span>{{ k.a }}</span><span>{{ k.b }}</span></button>
+                  <button type="button" class="tm-key" onClick="{{ k.press }}" style="{{ k.style }}"><span>{{ k.a }}</span><span>{{ k.b }}</span></button>
                 </sc-for>
               </div>
             </sc-if>
@@ -309,7 +341,7 @@
                       <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:3px">
                         <sc-for list="{{ b.cells }}" as="c" hint-placeholder-count="4">
                           <div style="display:flex; flex-direction:column; gap:5px; min-width:0">
-                            <button type="button" onClick="{{ c.press }}" style="{{ c.style }}"></button>
+                            <button type="button" class="tm-pad" aria-label="{{ c.lbl }}" onPointerDown="{{ c.down }}" onClick="{{ c.click }}" style="{{ c.style }}"></button>
                             <span style="{{ c.lblStyle }}">{{ c.lbl }}</span>
                           </div>
                         </sc-for>
@@ -343,6 +375,50 @@
                     </div>
                   </div>
                 </sc-if>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ showBass }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-wrap:wrap; gap:18px; align-items:stretch">
+                <div style="flex:999 1 440px; min-width:0; display:flex; flex-direction:column; gap:12px">
+                  <div style="display:flex; flex-direction:column; gap:4px">
+                    <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#f4a582">{{ bgLevelLabel }}</span>
+                    <span style="font-size:clamp(18px,2vw,22px); font-weight:700; line-height:1.3">{{ bgTask }}</span>
+                  </div>
+                  <div style="{{ bgGridStyle }}">
+                    <span></span>
+                    <sc-for list="{{ bgHead }}" as="h" hint-placeholder-count="8"><span style="{{ h.style }}">{{ h.t }}</span></sc-for>
+                    <span style="{{ bgLblStyle }}">Kick</span>
+                    <sc-for list="{{ bgKick }}" as="c" hint-placeholder-count="8"><span style="{{ c.style }}"></span></sc-for>
+                    <span style="{{ bgLblStyle }}">Snare</span>
+                    <sc-for list="{{ bgSnare }}" as="c" hint-placeholder-count="8"><span style="{{ c.style }}"></span></sc-for>
+                    <sc-if value="{{ bgIsPads }}" hint-placeholder-val="{{ true }}">
+                      <span style="{{ bgLblStyle }}"><span>Bass</span><span style="font-size:10px; letter-spacing:0; text-transform:none; color:#f4a582">{{ bgNotes }}</span></span>
+                      <sc-for list="{{ bgPads }}" as="c" hint-placeholder-count="8"><button type="button" class="tm-pad" aria-label="{{ c.aria }}" onPointerDown="{{ c.down }}" onClick="{{ c.click }}" style="{{ c.style }}"><span style="{{ c.vis }}">{{ c.t }}</span></button></sc-for>
+                    </sc-if>
+                    <sc-if value="{{ bgIsChoose }}" hint-placeholder-val="{{ false }}">
+                      <sc-for list="{{ bgOpts }}" as="o" hint-placeholder-count="3">
+                        <button type="button" onClick="{{ o.pick }}" style="{{ o.style }}"><span style="{{ o.idStyle }}">{{ o.id }}</span><sc-for list="{{ o.cells }}" as="c" hint-placeholder-count="8"><span style="{{ c.style }}"></span></sc-for></button>
+                      </sc-for>
+                    </sc-if>
+                  </div>
+                </div>
+                <div style="flex:1 1 260px; min-width:0; display:flex; flex-direction:column; gap:10px">
+                  <div style="{{ bgFbStyle }}">
+                    <sc-if value="{{ bgEval }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap"><span style="{{ bgBadge }}">{{ bgEval.label }}</span><sc-if value="{{ bgStale }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#a99d8b">Изменено — проверь ещё раз</span></sc-if></div>
+                      <sc-for list="{{ bgLines }}" as="l" hint-placeholder-count="2"><div style="{{ l.style }}">{{ l.t }}</div></sc-for>
+                      <div style="display:flex; flex-wrap:wrap; gap:4px"><sc-for list="{{ bgChips }}" as="c" hint-placeholder-count="5"><span style="padding:3px 7px; border:1px solid #4a4238; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#d8cdbd; white-space:nowrap">{{ c.t }}</span></sc-for></div>
+                    </sc-if>
+                    <sc-if value="{{ bgHint }}" hint-placeholder-val="{{ true }}"><div style="{{ bgHintStyle }}">{{ bgHint }}</div></sc-if>
+                  </div>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; flex:none">
+                    <button type="button" onClick="{{ bgPlay }}" style="{{ bgPlayStyle }}">{{ bgPlayLabel }}</button>
+                    <button type="button" onClick="{{ bgReset }}" disabled="{{ bgNoReset }}" style="{{ bgResetStyle }}">↻ Сбросить</button>
+                    <button type="button" onClick="{{ bgCheck }}" disabled="{{ bgNoCheck }}" style="{{ bgCheckStyle }}">{{ bgCheckLabel }}</button>
+                    <button type="button" onClick="{{ bgNext }}" disabled="{{ bgNoNext }}" style="{{ bgNextStyle }}">{{ bgNextLabel }}</button>
+                  </div>
+                </div>
               </div>
             </sc-if>
 
@@ -381,6 +457,17 @@
               </sc-for>
             </div>
 
+            <sc-if value="{{ isBassOver }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%; max-width:660px; display:flex; flex-direction:column; gap:8px">
+                <sc-for list="{{ bassSum }}" as="l" hint-placeholder-count="3">
+                  <div style="{{ l.style }}">{{ l.t }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ bassHasNext }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ bassNextLevel }}" style="padding:16px 32px; background:#fcf7f1; color:#1e1b16; border:none; border-radius:100px; font-size:17px; font-weight:800; cursor:pointer">Следующий уровень →</button>
+            </sc-if>
+
             <sc-if value="{{ isDailyOver }}" hint-placeholder-val="{{ false }}">
               <div style="width:100%; max-width:520px; display:flex; flex-direction:column; gap:10px; padding:20px; background:#1e1b16; border-radius:8px">
                 <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#f4a582">{{ boardTitle }}</div>
@@ -411,6 +498,13 @@
       </div>
     </div>
 
+    <sc-if value="{{ mobOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; flex-direction:column; gap:10px">
+        <button type="button" onClick="{{ openShell }}" style="min-height:56px; padding:0 24px; background:#f4a582; color:#1e1b16; border:none; border-radius:100px; font-size:18px; font-weight:800; cursor:pointer">▶ Играть на весь экран</button>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; line-height:1.5; color:#a99d8b">На телефоне игра открывается на весь экран — держи его горизонтально.</span>
+      </div>
+    </sc-if>
+
     <div style="display:flex; gap:clamp(12px,2.4vw,28px); flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:#a99d8b">
       <span style="color:#fcf7f1">COMBO</span><span>3 подряд → ×1.2</span><span>5 → ×1.5</span><span>10 → ×2</span><span>15 → ×3</span><span style="color:#f4a582">10 подряд → Босс</span>
     </div>
@@ -435,6 +529,238 @@
   </div>
 </footer>
 
+<sc-if value="{{ shellOn }}" hint-placeholder-val="{{ false }}">
+<div class="tm-shell" style="{{ shellStyle }}">
+  {{ fx }}
+  <div style="display:flex; align-items:center; gap:8px; min-width:0; position:relative; z-index:3">
+    <button type="button" onClick="{{ shClose }}" aria-label="{{ shCloseLabel }}" style="flex:none; width:40px; height:40px; padding:0; border-radius:100px; border:1px solid #4a4238; background:transparent; color:#d8cdbd; font-size:16px; line-height:1; cursor:pointer">✕</button>
+    <span style="flex:0 1 auto; max-width:34%; font-size:15px; font-weight:800; letter-spacing:-0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ gameTitle }}</span>
+    <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px">
+      <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:#a99d8b; white-space:nowrap; overflow:hidden"><span>{{ progLabel }} {{ progValue }}</span><span style="color:#f4a582">{{ shMeta }}</span></div>
+        <div style="height:4px; background:#3a342b; border-radius:2px; overflow:hidden"><div style="{{ progStyle }}"></div></div>
+      </sc-if>
+    </div>
+    <span style="flex:none; min-width:44px; text-align:right; font-size:20px; font-weight:800; letter-spacing:-0.02em">{{ scoreLabel }}</span>
+    <sc-if value="{{ canFull }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ goFull }}" aria-label="Во весь экран" style="flex:none; width:40px; height:40px; padding:0; border-radius:100px; border:1px solid #4a4238; background:transparent; color:#d8cdbd; font-size:16px; line-height:1; cursor:pointer">⛶</button></sc-if>
+    <button type="button" onClick="{{ openRules }}" aria-label="Правила" style="flex:none; width:40px; height:40px; padding:0; border-radius:100px; border:1px solid #4a4238; background:transparent; color:#d8cdbd; font-size:16px; line-height:1; cursor:pointer; font-weight:700">?</button>
+  </div>
+
+  <div style="{{ shBodyStyle }}">
+    <div style="{{ shMainStyle }}">
+      <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:10px; min-height:0">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#f4a582">{{ gameMeta }}</div>
+          <div style="font-size:18px; font-weight:600; line-height:1.35; color:#e8ddcc; max-width:560px; text-wrap:pretty">{{ shShort }}</div>
+          <sc-if value="{{ isChord }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; gap:4px; padding:4px; background:#26221c; border-radius:100px; align-self:flex-start">
+              <button type="button" onClick="{{ setChallenge }}" style="{{ modeChallengeStyle }}">На время · 60 сек</button>
+              <button type="button" onClick="{{ setPractice }}" style="{{ modePracticeStyle }}">Тренировка</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isRhythmGame }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; align-items:center; gap:4px; padding:4px; background:#26221c; border-radius:100px; align-self:flex-start">
+              <button type="button" onClick="{{ bpmDown }}" style="width:44px; height:44px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer">−</button>
+              <span style="min-width:96px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:15px; color:#fcf7f1">{{ bpm }} BPM</span>
+              <button type="button" onClick="{{ bpmUp }}" style="width:44px; height:44px; border:none; border-radius:100px; background:transparent; color:#fcf7f1; font-size:20px; cursor:pointer">+</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isBass }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:6px">
+              <sc-for list="{{ bassLevels }}" as="l" hint-placeholder-count="5">
+                <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; opacity:.75; flex:none">{{ l.n }}</span><span style="flex:1; min-width:0; font-weight:700; font-size:14px; line-height:1.2">{{ l.title }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; flex:none">{{ l.mark }}</span></button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ showBoss }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 10px; flex:none"><span style="padding:3px 10px; background:#f4a582; color:#1e1b16; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em">БОСС · +2000</span><span style="font-size:16px; font-weight:600; line-height:1.35">{{ bossLine }}</span></div>
+        </sc-if>
+        <sc-if value="{{ showPick }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:4px; flex:none">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#f4a582">{{ task.kind }}</span>
+            <span style="font-size:20px; font-weight:800; line-height:1.15; letter-spacing:-0.01em">{{ task.question }}</span>
+            <sc-if value="{{ task.wide }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:18px">{{ task.label }}</span></sc-if>
+          </div>
+          <div style="{{ shOptsStyle }}">
+            <sc-for list="{{ opts }}" as="o" hint-placeholder-count="8">
+              <button type="button" onClick="{{ o.press }}" style="{{ o.style }}">{{ o.name }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showBuild }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; flex:none"><span style="font-size:24px; font-weight:800; line-height:1.1">{{ task.question }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#f4a582">{{ task.sub }}</span></div>
+        </sc-if>
+        <sc-if value="{{ showPiano }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ shPianoStyle }}">
+            <div style="display:flex; gap:4px; height:100%">
+              <sc-for list="{{ whiteKeys }}" as="k" hint-placeholder-count="7">
+                <button type="button" class="tm-key" onClick="{{ k.press }}" style="{{ k.style }}">{{ k.a }}</button>
+              </sc-for>
+            </div>
+            <sc-for list="{{ blackKeys }}" as="k" hint-placeholder-count="5">
+              <button type="button" class="tm-key" onClick="{{ k.press }}" style="{{ k.style }}"><span>{{ k.a }}</span><span>{{ k.b }}</span></button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ shDrums }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ drGridStyle }}">
+            <sc-for list="{{ drPads }}" as="c" hint-placeholder-count="16">
+              <button type="button" class="tm-pad" aria-label="{{ c.aria }}" onPointerDown="{{ c.down }}" onClick="{{ c.click }}" style="{{ c.style }}"><span style="{{ c.vis }}"><span style="{{ c.lblStyle }}">{{ c.lbl }}</span></span></button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showAB }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:18px; font-weight:800; line-height:1.2; flex:none">{{ abQ }}</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1 1 auto; min-height:0">
+            <sc-for list="{{ abTiles }}" as="t" hint-placeholder-count="2">
+              <div style="{{ t.shStyle }}">
+                <div style="font-size:30px; font-weight:800; line-height:1">{{ t.letter }}</div>
+                <button type="button" onClick="{{ t.play }}" style="{{ t.playStyle }}">{{ t.playLabel }}</button>
+                <button type="button" onClick="{{ t.choose }}" style="{{ t.chooseStyle }}">{{ t.chooseLabel }}</button>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showBass }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; gap:8px; align-items:baseline; min-width:0; flex:none"><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#f4a582; white-space:nowrap">{{ bgLevelShort }}</span><span style="font-size:14px; font-weight:600; color:#e8ddcc; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">{{ bgTask }}</span></div>
+          <div style="{{ bgGridStyle }}">
+            <span></span>
+            <sc-for list="{{ bgHead }}" as="h" hint-placeholder-count="8"><span style="{{ h.style }}">{{ h.t }}</span></sc-for>
+            <span style="{{ bgLblStyle }}">Kick</span>
+            <sc-for list="{{ bgKick }}" as="c" hint-placeholder-count="8"><span style="{{ c.style }}"></span></sc-for>
+            <span style="{{ bgLblStyle }}">Snare</span>
+            <sc-for list="{{ bgSnare }}" as="c" hint-placeholder-count="8"><span style="{{ c.style }}"></span></sc-for>
+            <sc-if value="{{ bgIsPads }}" hint-placeholder-val="{{ true }}">
+              <span style="{{ bgLblStyle }}"><span>Bass</span><span style="font-size:10px; letter-spacing:0; text-transform:none; color:#f4a582">{{ bgNotes }}</span></span>
+              <sc-for list="{{ bgPads }}" as="c" hint-placeholder-count="8"><button type="button" class="tm-pad" aria-label="{{ c.aria }}" onPointerDown="{{ c.down }}" onClick="{{ c.click }}" style="{{ c.style }}"><span style="{{ c.vis }}">{{ c.t }}</span></button></sc-for>
+            </sc-if>
+            <sc-if value="{{ bgIsChoose }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ bgOpts }}" as="o" hint-placeholder-count="3">
+                <button type="button" onClick="{{ o.pick }}" style="{{ o.style }}"><span style="{{ o.idStyle }}">{{ o.id }}</span><sc-for list="{{ o.cells }}" as="c" hint-placeholder-count="8"><span style="{{ c.style }}"></span></sc-for></button>
+              </sc-for>
+            </sc-if>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ isOver }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:#f4a582">{{ overTag }}</div>
+          <div style="display:flex; align-items:baseline; gap:8px 22px; flex-wrap:wrap">
+            <span style="font-size:46px; font-weight:800; line-height:0.95; letter-spacing:-0.03em">{{ scoreLabel }}</span>
+            <sc-for list="{{ overStats }}" as="st" hint-placeholder-count="3">
+              <div><div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#a99d8b">{{ st.k }}</div><div style="font-size:18px; font-weight:600">{{ st.v }}</div></div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ isBassOver }}" hint-placeholder-val="{{ false }}">
+            <div style="width:100%; max-width:660px; display:flex; flex-direction:column; gap:8px">
+              <sc-for list="{{ bassSum }}" as="l" hint-placeholder-count="3">
+                <div style="{{ l.style }}">{{ l.t }}</div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isDailyOver }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:6px; padding:12px; background:#26221c; border-radius:8px; max-width:560px">
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:#f4a582">{{ boardTitle }}</div>
+              <sc-if value="{{ boardNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px; color:#a99d8b">{{ boardNote }}</div></sc-if>
+              <sc-for list="{{ board }}" as="b" hint-placeholder-count="3">
+                <div style="{{ b.style }}"><span style="font-family:'IBM Plex Mono',monospace; width:28px">{{ b.place }}</span><span style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis">{{ b.name }}</span><span style="font-weight:800">{{ b.score }}</span></div>
+              </sc-for>
+              <div style="display:flex; justify-content:space-between; gap:12px; font-size:15px"><span>Ты: {{ myBestLabel }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#f4a582">{{ toTopLabel }}</span></div>
+              <sc-if value="{{ showNick }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; gap:8px">
+                  <input type="text" maxLength="16" placeholder="Никнейм для таблицы" value="{{ nick }}" onChange="{{ setNick }}" style="flex:1; min-width:0; padding:10px 14px; background:#1e1b16; color:#fcf7f1; border:1px solid #4a4238; border-radius:100px; font:inherit; font-size:16px; outline:none; user-select:text; -webkit-user-select:text" />
+                  <button type="button" onClick="{{ saveNick }}" style="padding:10px 18px; background:#f4a582; color:#1e1b16; border:none; border-radius:100px; font-size:15px; font-weight:700; cursor:pointer">Сохранить</button>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="{{ shRailStyle }}">
+      <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{ start }}" style="flex:1 1 auto; min-height:64px; max-height:150px; border-radius:16px; background:#f4a582; color:#1e1b16; border:none; font-size:22px; font-weight:800; letter-spacing:0.02em; cursor:pointer">СТАРТ</button>
+        <button type="button" onClick="{{ openRules }}" style="flex:none; min-height:46px; border-radius:100px; background:transparent; color:#fcf7f1; border:1px solid #4a4238; font-size:15px; font-weight:600; cursor:pointer">Правила</button>
+        <span style="flex:none; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#a99d8b">{{ bestLabel }}</span>
+      </sc-if>
+      <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ shDrums }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:6px; flex:none"><span style="font-size:18px; font-weight:800; line-height:1.1; min-width:0">{{ rhStatus }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:15px; color:#f4a582; font-variant-numeric:tabular-nums">{{ rhTime }}</span></div>
+          <div style="height:6px; background:#3a342b; border-radius:3px; overflow:hidden; flex:none"><div style="{{ rhTimerStyle }}"></div></div>
+          <div style="flex:1 1 auto; min-height:0; overflow:hidden; font-family:'IBM Plex Mono',monospace; font-size:11px; line-height:1.45; color:#a99d8b">{{ rhMobNote }}</div>
+          <button type="button" onClick="{{ rhReplay }}" disabled="{{ rhNoAct }}" style="{{ shReplayStyle }}">{{ shReplayLabel }}</button>
+          <button type="button" onClick="{{ rhCheck }}" disabled="{{ rhNoAct }}" style="{{ shDoneStyle }}">Готово</button>
+        </sc-if>
+        <sc-if value="{{ shExplainOn }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1 1 auto; min-height:0; overflow-y:auto; font-size:13px; line-height:1.45; color:#e8ddcc; padding:10px; border:1px solid #3a342b; border-radius:8px">{{ shExplain }}</div>
+        </sc-if>
+        <sc-if value="{{ showBuildActions }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ checkBuild }}" style="flex:none; min-height:48px; border-radius:100px; background:#f4a582; color:#1e1b16; border:none; font-size:16px; font-weight:800; cursor:pointer">Проверить</button>
+          <button type="button" onClick="{{ clearBuild }}" style="flex:none; min-height:44px; border-radius:100px; background:transparent; color:#fcf7f1; border:1px solid #4a4238; font-size:15px; cursor:pointer">Сбросить</button>
+        </sc-if>
+        <sc-if value="{{ showAbNext }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ abNext }}" style="flex:none; min-height:48px; border-radius:100px; background:#f4a582; color:#1e1b16; border:none; font-size:16px; font-weight:800; cursor:pointer">Дальше →</button>
+        </sc-if>
+        <sc-if value="{{ showBass }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ bgFbStyle }}">
+            <sc-if value="{{ bgEval }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap"><span style="{{ bgBadge }}">{{ bgEval.label }}</span><sc-if value="{{ bgStale }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#a99d8b">Изменено — проверь ещё раз</span></sc-if></div>
+              <sc-for list="{{ bgLines }}" as="l" hint-placeholder-count="2"><div style="{{ l.style }}">{{ l.t }}</div></sc-for>
+              <div style="display:flex; flex-wrap:wrap; gap:4px"><sc-for list="{{ bgChips }}" as="c" hint-placeholder-count="5"><span style="padding:3px 7px; border:1px solid #4a4238; border-radius:100px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#d8cdbd; white-space:nowrap">{{ c.t }}</span></sc-for></div>
+            </sc-if>
+            <sc-if value="{{ bgHint }}" hint-placeholder-val="{{ true }}"><div style="{{ bgHintStyle }}">{{ bgHint }}</div></sc-if>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; flex:none">
+            <button type="button" onClick="{{ bgPlay }}" style="{{ bgPlayStyle }}">{{ bgPlayLabel }}</button>
+            <button type="button" onClick="{{ bgReset }}" disabled="{{ bgNoReset }}" style="{{ bgResetStyle }}">↻ Сбросить</button>
+            <button type="button" onClick="{{ bgCheck }}" disabled="{{ bgNoCheck }}" style="{{ bgCheckStyle }}">{{ bgCheckLabel }}</button>
+            <button type="button" onClick="{{ bgNext }}" disabled="{{ bgNoNext }}" style="{{ bgNextStyle }}">{{ bgNextLabel }}</button>
+          </div>
+        </sc-if>
+      </sc-if>
+      <sc-if value="{{ isOver }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ start }}" style="flex:none; min-height:52px; border-radius:100px; background:#f4a582; color:#1e1b16; border:none; font-size:17px; font-weight:800; cursor:pointer">Ещё раз</button>
+        <sc-if value="{{ bassHasNext }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ bassNextLevel }}" style="flex:none; min-height:52px; border-radius:100px; background:#fcf7f1; color:#1e1b16; border:none; font-size:15px; font-weight:800; cursor:pointer">Следующий уровень →</button>
+        </sc-if>
+        <button type="button" onClick="{{ closeShell }}" style="flex:none; min-height:46px; border-radius:100px; background:transparent; color:#fcf7f1; border:1px solid #4a4238; font-size:15px; cursor:pointer">Все игры</button>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{ rulesOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; inset:0; z-index:10; display:flex; align-items:center; justify-content:center; padding:max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:rgba(20,18,15,0.92)">
+      <div style="width:min(680px,100%); max-height:100%; overflow-y:auto; display:flex; flex-direction:column; gap:10px; padding:16px 18px; background:#26221c; border:1px solid #3a342b; border-radius:12px">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap"><span style="font-size:20px; font-weight:800">{{ gameTitle }}</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#f4a582">{{ gameMeta }}</span></div>
+        <ol style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px">
+          <sc-for list="{{ rules }}" as="r" hint-placeholder-count="4">
+            <li style="display:flex; gap:10px; font-size:14px; line-height:1.45; color:#e8ddcc"><span style="flex:none; width:22px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#f4a582; padding-top:2px">{{ r.n }}</span><span>{{ r.t }}</span></li>
+          </sc-for>
+        </ol>
+        <button type="button" onClick="{{ closeRules }}" style="align-self:flex-end; min-width:160px; min-height:48px; padding:0 24px; border-radius:100px; background:#f4a582; color:#1e1b16; border:none; font-size:16px; font-weight:800; cursor:pointer">Понятно</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ rotateOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; inset:0; z-index:20; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:24px; text-align:center; background:#1e1b16">
+      <button type="button" onClick="{{ closeShell }}" aria-label="Закрыть игру" style="position:absolute; top:max(12px, env(safe-area-inset-top)); left:16px; width:44px; height:44px; padding:0; border-radius:100px; border:1px solid #4a4238; background:transparent; color:#d8cdbd; font-size:17px; cursor:pointer">✕</button>
+      <svg class="tm-rot" viewBox="0 0 120 120" width="104" height="104" aria-hidden="true"><rect x="38" y="16" width="44" height="88" rx="9" fill="none" stroke="#f4a582" stroke-width="4"></rect><circle cx="60" cy="94" r="3" fill="#f4a582"></circle><path d="M96 42 a40 40 0 0 1 0 36" fill="none" stroke="#6a5f50" stroke-width="3" stroke-linecap="round"></path><path d="M90 76 l6 4 l3 -7" fill="none" stroke="#6a5f50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <div style="font-size:24px; font-weight:800; line-height:1.15; max-width:320px">Поверни телефон горизонтально</div>
+      <div style="font-size:15px; line-height:1.45; color:#d8cdbd; max-width:320px">Так игровое поле и кнопки помещаются на одном экране.</div>
+      <sc-if value="{{ canFull }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ goFull }}" style="min-height:48px; padding:0 24px; border-radius:100px; background:#f4a582; color:#1e1b16; border:none; font-size:16px; font-weight:800; cursor:pointer">⛶ Во весь экран</button></sc-if>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; line-height:1.5; color:#8a7f70; max-width:320px">Если экран не поворачивается — выключи блокировку ориентации.</div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
@@ -445,14 +771,16 @@ class Component extends DCLogic {
     mood: 'idle', line: 'Готов? Выбери игру и жми старт.', mk: 0, bursts: [], rh: null,
     chordMode: 'challenge', ab: null, abPicked: null, playing: null, dq: null, di: 0,
     nick: '', saved: false, best: {}, isBest: false, dailyRec: null,
+    bassLevel: 0, bass: null, bassPlay: null, bassPos: -1, bassDone: {}, mob: false, land: false, vw: 0, vh: 0, shell: false, rulesOpen: false,
   };
 
   META = {
     fake: { title: 'ЛИШНЯЯ НОТА', meta: '12 заданий · ≈ 60 сек', rules: ['На экране гамма или аккорд и набор нот. Одна нота лишняя.', 'Найди её. Сложность растёт: гаммы → трезвучия → септаккорды → нонаккорды.', 'Ошиблись — есть вторая попытка за половину очков, combo сбрасывается. После неё прозвучит твой вариант и правильный.', '10 подряд — Босс.'] },
-    rhythm: { title: 'РИТМ-БОМБА', meta: '6 раундов · ≈ 90 сек', rules: ['Сначала отсчёт, потом ритм. Он прозвучит дважды.', 'Сетка — один такт из четырёх четвертей, каждая делится на четыре части. Клетки подписаны «четверть.часть»: от 1.1 до 4.4.', 'В каждой четверти: x.1 — сильная доля, x.2 — слабая, x.3 — полусильная, x.4 — слабая. Подробнее — в памятке под сеткой.', 'После ритма есть 12 секунд, чтобы отметить удары. Пока ритм играет повторно, таймер стоит. Темп меняется кнопками BPM.', '3 точных подряд — ритм-босс.'] },
+    rhythm: { title: 'РИТМ-БОМБА', meta: '6 раундов · ≈ 90 сек', rules: ['Сначала отсчёт, потом ритм. Он прозвучит дважды.', 'Сетка — один такт: четыре четверти по четыре шага. Счёт «1 e & a, 2 e & a…»: цифра — сильная доля, «&» — полусильная, «e» и «a» — слабые.', 'На компьютере шаги подписаны «четверть.часть»: 2.3 — третий шаг второй четверти. Подробнее — в памятке под сеткой.', 'После ритма есть 12 секунд, чтобы отметить удары. Пока ритм играет повторно, таймер стоит. Темп меняется кнопками BPM.', '3 точных подряд — ритм-босс.'] },
     kill: { title: 'НОТНЫЙ ТИР', meta: '60 сек · на скорость', rules: ['Наборы нот идут один за другим без пауз.', 'Бей ноту, которая не подходит к аккорду или гамме.', 'Быстрый ответ — больше очков. Ошибка: −100, сброс combo и вторая попытка.', '10 подряд — Босс, таймер ждёт.'] },
     chord: { title: 'АККОРДНЫЙ ЗАБЕГ', meta: 'На время 60 сек · Тренировка без времени', rules: ['«Собери Dm» — отметь нужные звуки на клавиатуре.', 'Иногда наоборот: по нотам назови аккорд.', 'Тренировка: исправляй сколько угодно. На время: 60 секунд, на ошибку даётся одно исправление, потом звучит твой аккорд и правильный.', 'Трезвучия → dim и aug → септаккорды → нонаккорды. Ошибки возвращают к простому.'] },
     ab: { title: 'А ИЛИ Б', meta: '6 вопросов · ≈ 90 сек', rules: ['Два коротких фрагмента, А и Б. Слушай сколько угодно.', 'Выбери тот, что подходит под условие.', 'После ответа — короткое объяснение.', 'Нужны наушники или нормальные колонки.'] },
+    bass: { title: 'СОБЕРИ БАС', meta: '5 уровней · 2 раунда', rules: ['Звучат барабаны и аккорды. Высота баса уже задана — ты решаешь только, КОГДА он играет.', 'Нажимай шаги в строке Bass. Луп не останавливается: изменения слышны со следующего шага.', '«Проверить» разбирает groove: связь с kick, плотность, паузы, синкопы. Ошибок нет — есть эффект решения.', 'В зачёт идёт первая проверка раунда. Потом можно экспериментировать сколько угодно.'] },
     daily: { title: 'ЗАДАНИЕ ДНЯ', meta: '16 заданий · одинаковые для всех сегодня', rules: ['10 заданий на ноты, 3 ритма, 3 гармонии.', 'Скорость ответа и combo умножают очки.', 'В зачёт идёт лучший результат за день.', 'Попал в ТОП-3 — оставь никнейм.'] },
   };
   LINES = {
@@ -482,12 +810,38 @@ class Component extends DCLogic {
     document.addEventListener('catready', this._onCat);
     this._to = [];
     const best = {};
-    ['fake', 'rhythm', 'kill', 'chord', 'ab', 'daily'].forEach((g) => { const v = +localStorage.getItem('tm_best_' + g); if (v) best[g] = v; });
+    ['fake', 'rhythm', 'kill', 'chord', 'ab', 'bass', 'daily'].forEach((g) => { const v = +localStorage.getItem('tm_best_' + g); if (v) best[g] = v; });
     let dailyRec = null;
     try { dailyRec = JSON.parse(localStorage.getItem('tm_daily_' + this.dateKey()) || 'null'); } catch (e) {}
-    this.setState({ best, dailyRec, bpm: +localStorage.getItem('tm_bpm') || 100, nick: localStorage.getItem('tm_nick') || '', saved: !!localStorage.getItem('tm_nick') });
+    let bassDone = {};
+    try { bassDone = JSON.parse(localStorage.getItem('tm_bass_done') || '{}') || {}; } catch (e) {}
+    const bassLevel = window.TM_BASS ? Math.max(0, TM_BASS.LEVELS.findIndex((L) => !bassDone[L.id])) : 0;
+    // Мобильная раскладка: решаем по реальному размеру экрана и типу указателя, а не только по ширине
+    this._onVp = () => {
+      const w = window.innerWidth, h = window.innerHeight;
+      // телефон = сенсорный экран с короткой стороной до 540px; узкое окно на компьютере остаётся десктопом
+      let touch = false;
+      try { touch = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0; } catch (e) {}
+      const mob = touch && Math.min(w, h) <= 540;
+      const land = mob && w > h;
+      const st = this.state;
+      if (st.mob !== mob || st.land !== land || st.vw !== w || st.vh !== h) this.setState({ mob, land, vw: w, vh: h });
+    };
+    this._onVp();
+    window.addEventListener('resize', this._onVp);
+    window.addEventListener('orientationchange', this._onVp);
+    this.setState({ best, dailyRec, bassDone, bassLevel, bpm: +localStorage.getItem('tm_bpm') || 100, nick: localStorage.getItem('tm_nick') || '', saved: !!localStorage.getItem('tm_nick') });
   }
-  componentWillUnmount() { document.removeEventListener('catready', this._onCat); document.removeEventListener('visibilitychange', this._onVis); window.removeEventListener('pagehide', this._onVis); this.hardStop(); if (window.__tmGame === this) window.__tmGame = null; }
+  componentDidUpdate() {
+    // Во время игры на телефоне страница под игровым экраном не прокручивается
+    const lock = !!this.state.mob && !!this.state.shell;
+    if (lock === !!this._locked) return;
+    this._locked = lock;
+    const de = document.documentElement, bd = document.body;
+    de.style.overflow = lock ? 'hidden' : ''; bd.style.overflow = lock ? 'hidden' : ''; bd.style.overscrollBehavior = lock ? 'none' : '';
+    if (!lock && this.state.phase === 'over') requestAnimationFrame(() => { const el = document.getElementById('tm-main'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onVp); window.removeEventListener('orientationchange', this._onVp); if (this._locked) { document.documentElement.style.overflow = ''; document.body.style.overflow = ''; document.body.style.overscrollBehavior = ''; } document.removeEventListener('catready', this._onCat); document.removeEventListener('visibilitychange', this._onVis); window.removeEventListener('pagehide', this._onVis); this.hardStop(); if (window.__tmGame === this) window.__tmGame = null; }
   hardStop(keepPhase) {
     this.stopAll();
     clearInterval(this._ri);
@@ -498,7 +852,7 @@ class Component extends DCLogic {
   }
 
   dateKey() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
-  stopAll() { (this._to || []).forEach(clearTimeout); this._to = []; (this._pt || []).forEach(clearTimeout); this._pt = []; if (this._bus) { try { this._bus.disconnect(); } catch (e) {} this._bus = null; } clearInterval(this._ti); clearInterval(this._ri); this._replaying = false; if (this.state && this.state.replaying) this.setState({ replaying: false }); }
+  stopAll() { this.bassStop(); (this._to || []).forEach(clearTimeout); this._to = []; (this._pt || []).forEach(clearTimeout); this._pt = []; if (this._bus) { try { this._bus.disconnect(); } catch (e) {} this._bus = null; } clearInterval(this._ti); clearInterval(this._ri); this._replaying = false; if (this.state && this.state.replaying) this.setState({ replaying: false }); }
   later(fn, ms) { this._to.push(setTimeout(fn, ms)); }
   mult(c) { return c >= 15 ? 3 : c >= 10 ? 2 : c >= 5 ? 1.5 : c >= 3 ? 1.2 : 1; }
   timed() { const s = this.state; return s.game === 'kill' || (s.game === 'chord' && s.chordMode === 'challenge'); }
@@ -572,11 +926,18 @@ class Component extends DCLogic {
     o1.connect(lp); o2.connect(g2); g2.connect(lp); lp.connect(g); g.connect(this._out);
     o1.start(t); o2.start(t); o1.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
   }
-  bassN(m, t, dur) {
+  bassN(m, t, dur, bright) {
     const a = this.ac(), o = a.createOscillator(); o.type = 'sawtooth'; o.frequency.value = 440 * Math.pow(2, (m - 69) / 12);
-    const lp = a.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 2; lp.frequency.setValueAtTime(700, t); lp.frequency.exponentialRampToValueAtTime(180, t + Math.min(dur, 0.4));
+    const lp = a.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 2; lp.frequency.setValueAtTime(bright ? 1500 : 700, t); lp.frequency.exponentialRampToValueAtTime(bright ? 420 : 180, t + Math.min(dur, 0.4));
     const g = a.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.32, t + 0.015); g.gain.setValueAtTime(0.32, t + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
     o.connect(lp); lp.connect(g); g.connect(this._out); o.start(t); o.stop(t + dur + 0.05);
+  }
+  snare(t) {
+    this.noise(t, 'bandpass', 1900, 0.7, 0.14, 0.28);
+    const a = this.ac(), o = a.createOscillator(), g = a.createGain();
+    o.frequency.setValueAtTime(210, t); o.frequency.exponentialRampToValueAtTime(140, t + 0.08);
+    g.gain.setValueAtTime(0.22, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+    o.connect(g); g.connect(this._out); o.start(t); o.stop(t + 0.14);
   }
   blip(ok) {
     const t = this.now();
@@ -592,10 +953,31 @@ class Component extends DCLogic {
   // ---------- flow ----------
   selectGame(id) {
     this.stopAll();
-    this.setState({ game: id, phase: 'intro', boss: null, task: null, rh: null, ab: null, fb: null, playing: null });
+    // на телефоне игра открывается в полноэкранной оболочке; правила показываются сами при первом запуске
+    const sh = !!this.state.mob;
+    let seen = true;
+    try { seen = !!localStorage.getItem('tm_rules_' + id); } catch (e) {}
+    this.setState({ game: id, phase: 'intro', boss: null, task: null, rh: null, ab: null, fb: null, playing: null, bass: null, shell: sh, rulesOpen: sh && !seen });
     this.say('idle', ['Готов? Жми старт.']);
-    this.scrollArcade();
+    if (!sh) this.scrollArcade();
   }
+  openShell = () => this.selectGame(this.state.game);
+  closeShell = () => {
+    this.stopAll();
+    this.setState({ shell: false, phase: 'intro', boss: null, rh: null, task: null, fb: null, playing: null, rulesOpen: false });
+    try { if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
+  };
+  openRules = () => this.setState({ rulesOpen: true });
+  closeRules = () => { try { localStorage.setItem('tm_rules_' + this.state.game, '1'); } catch (e) {} this.setState({ rulesOpen: false }); };
+  goFull = () => {
+    // только там, где браузер это умеет (Android Chrome); iOS Safari кнопку не показывает
+    const de = document.documentElement;
+    try {
+      const pr = de.requestFullscreen({ navigationUI: 'hide' });
+      if (pr && pr.then) pr.then(() => { try { const l = screen.orientation.lock('landscape'); if (l && l.catch) l.catch(() => {}); } catch (e) {} this._onVp(); }).catch(() => {});
+    } catch (e) {}
+  };
+  paused() { const s = this.state; return !!(s.shell && s.mob && (!s.land || s.rulesOpen)); }
   start = () => {
     if (!window.TM) return;
     this.stopAll(); this.ac();
@@ -605,11 +987,12 @@ class Component extends DCLogic {
     this._seen = new Set();
     if (g === 'daily') base.dq = this.buildDaily();
     if (g === 'ab') base.ab = this.buildAB();
+    if (g === 'bass') { if (!window.TM_BASS) return; base.bass = this.bassSetup(); }
     this.setState(base, () => {
-      this.say('idle', ['Поехали.']);
+      this.say('idle', [g === 'bass' ? 'Слушай аккорды и выбирай бас.' : 'Поехали.']);
       if (g === 'rhythm') this.rhRound(false);
       else if (g === 'daily') this.runDaily();
-      else if (g !== 'ab') this.nextTask();
+      else if (g !== 'ab' && g !== 'bass') this.nextTask();
       if (this.timed()) this.startClock();
     });
   };
@@ -624,7 +1007,7 @@ class Component extends DCLogic {
     clearInterval(this._ti);
     this._ti = setInterval(() => {
       const s = this.state;
-      if (s.phase !== 'play' || s.boss || (s.buildRetry && !s.fb)) return;
+      if (s.phase !== 'play' || s.boss || (s.buildRetry && !s.fb) || this.paused()) return;
       const t = Math.max(0, +(s.time - 0.1).toFixed(1));
       this.setState({ time: t });
       if (t <= 0) this.finish();
@@ -845,7 +1228,7 @@ class Component extends DCLogic {
     this._ri = setInterval(() => {
       const rh = this.state.rh;
       if (!rh || rh.sub !== 'input') return clearInterval(this._ri);
-      if (this._replaying) return;
+      if (this._replaying || this.paused()) return;
       const t = Math.max(0, +(rh.t - 0.1).toFixed(1));
       this.patchRh({ t });
       if (t <= 0) this.rhCheck();
@@ -857,7 +1240,10 @@ class Component extends DCLogic {
     const now = performance.now();
     if (this._lastTap && this._lastTap.i === i && now - this._lastTap.t < 180) return;
     this._lastTap = { i, t: now };
-    if (!rh.input[i]) this.perc(this.now());
+    if (!rh.input[i]) {
+      this.perc(this.now());
+      if (this.state.mob && navigator.vibrate) { try { navigator.vibrate(6); } catch (e) {} }
+    }
     const input = rh.input.slice(); input[i] = !input[i];
     const hint = rh.hint ? rh.hint.slice() : null;
     if (hint) hint[i] = '';
@@ -986,6 +1372,114 @@ class Component extends DCLogic {
     }
   }
 
+  // BASS — «Собери бас»: бас как ритм. Высота задана, игрок ставит моменты. Данные и оценка — bass.js (TM_BASS).
+  bassSetup() {
+    const lv = (this._lv = TM_BASS.build(Math.min(this.state.bassLevel || 0, TM_BASS.LEVELS.length - 1)));
+    return this.bassRound(lv, 0, []);
+  }
+  bassRound(lv, ri, results) { return { ri, pat: lv.rounds[ri].start.slice(), ev: null, stale: false, first: null, choice: null, results }; }
+  bassCur() { const B = this.state.bass; return B && this._lv ? this._lv.rounds[B.ri] : null; }
+  bassPat() {
+    const B = this.state.bass, R = this.bassCur();
+    if (!B || !R) return [];
+    if (R.type === 'choose') { const o = R.options.find((x) => x.id === B.choice); return o ? o.P : []; }
+    return B.pat;
+  }
+  bassStep(s, t, st) {
+    const R = this.bassCur();
+    if (!R) return;
+    const bar = (s >> 3) % R.chords.length, k = s & 7, pat = this.bassPat();
+    const prev = this._out;
+    this._out = this._bbus;
+    try {
+      if (R.K[k]) this.kick(t);
+      if (R.S[k]) this.snare(t);
+      this.hat(t, k % 2 ? 0.045 : 0.08);
+      if (k === 0) this.voice(R.chords[bar].pcs).forEach((m) => this.keys(m, t, st * 7.5, 0.045));
+      if (pat[k]) { let g = 1; while (g < 2 && !pat[(k + g) % 8]) g++; this.bassN(TM_BASS.midi(R.chords[bar].root), t, g * st * 0.85, true); }
+    } finally { this._out = prev; }
+  }
+  bassRun(mode) {
+    // мини-секвенсор: шаги планируются на 120 мс вперёд и читают рисунок из state — правка слышна со следующего шага
+    this.bassStop(true);
+    const R = this.bassCur();
+    if (!R) return;
+    const a = this.ac(), st = 60 / 96 / 2, total = R.chords.length * 8;
+    const bus = (this._bbus = a.createGain()); bus.connect(this._out);
+    let idx = 0, t = a.currentTime + 0.05;
+    this._bt = [];
+    const sched = () => {
+      if (this._bbus !== bus) return;
+      while (t < a.currentTime + 0.12) {
+        const sIdx = idx % total, tt = t;
+        this.bassStep(sIdx, t, st);
+        this._bt.push(setTimeout(() => { if (this._bbus === bus) this.setState({ bassPos: sIdx }); }, Math.max(0, (tt - a.currentTime) * 1000)));
+        idx++; t += st;
+      }
+      if (this._bt.length > 64) this._bt = this._bt.slice(-32);
+    };
+    this.setState({ bassPlay: mode || 'loop', bassPos: -1 });
+    this._bi = setInterval(sched, 25);
+    sched();
+  }
+  bassStop(quiet) {
+    clearInterval(this._bi); this._bi = null;
+    (this._bt || []).forEach(clearTimeout); this._bt = [];
+    const g = this._bbus;
+    this._bbus = null;
+    if (g && this._ac) { try { g.gain.setTargetAtTime(0, this._ac.currentTime, 0.015); } catch (e) {} setTimeout(() => { try { g.disconnect(); } catch (e) {} }, 250); }
+    if (!quiet && this.state && (this.state.bassPlay || this.state.bassPos !== -1)) this.setState({ bassPlay: null, bassPos: -1 });
+  }
+  bassTap(i) {
+    const s = this.state, B = s.bass, R = this.bassCur();
+    if (s.phase !== 'play' || !B || !R || R.type === 'choose') return;
+    const now = performance.now();
+    if (this._lastBT && this._lastBT.i === i && now - this._lastBT.t < 150) return;
+    this._lastBT = { i, t: now };
+    const pat = B.pat.slice(); pat[i] = !pat[i];
+    this.setState({ bass: { ...B, pat, stale: !!B.ev } });
+    if (pat[i] && !s.bassPlay) this.bassN(TM_BASS.midi(R.chords[0].root), this.now(), 0.25, true);
+    if (pat[i] && s.mob && navigator.vibrate) { try { navigator.vibrate(6); } catch (e) {} }
+  }
+  bassPick(id) {
+    const B = this.state.bass, R = this.bassCur();
+    if (!B || !R || R.type !== 'choose') return;
+    this.setState({ bass: { ...B, choice: id, stale: !!B.ev } });
+    if (!this.state.bassPlay) this.bassRun('loop');
+  }
+  bassPlayToggle = () => { if (this.state.bassPlay) return this.bassStop(); this.bassRun('loop'); };
+  bassCheck = () => {
+    const s = this.state, B = s.bass, R = this.bassCur();
+    if (!B || !R || (R.type === 'choose' && !B.choice)) return;
+    const ev = R.type === 'choose' ? TM_BASS.evalChoice(R, B.choice) : TM_BASS.evaluate(this._lv, R, B.pat);
+    const firstTime = !B.first;
+    this.setState({ bass: { ...B, ev, stale: false, first: firstTime ? ev : B.first }, ...(firstTime ? { score: s.score + ev.pts, right: s.right + (ev.v === 'great' ? 1 : 0), total: s.total + 1 } : {}) });
+    if (firstTime && ev.pts) this.burst('+' + ev.pts);
+    if (ev.v === 'great') this.say('correct'); else if (ev.v === 'ok') this.say('idle', ['Работает. Послушай и другие варианты.']); else this.say('wrong', ['Попробуй иначе — послушай разницу.']);
+    if (!s.bassPlay) this.bassRun('loop');
+  };
+  bassReset = () => {
+    const B = this.state.bass, R = this.bassCur();
+    if (!B || !R || R.type === 'choose') return;
+    this.setState({ bass: { ...B, pat: R.start.slice(), stale: !!B.ev } });
+  };
+  bassNext = () => {
+    const B = this.state.bass, lv = this._lv;
+    if (!B || !lv || !B.first) return;
+    const results = [...B.results]; results[B.ri] = B.first;
+    if (B.ri + 1 >= lv.rounds.length) return this.bassFinish(results);
+    this.bassStop();
+    this.setState({ bass: this.bassRound(lv, B.ri + 1, results) });
+    this.say('idle', ['Новый groove. Включи луп и слушай.']);
+  };
+  bassFinish(results) {
+    const lv = this._lv, sum = TM_BASS.summary(lv, results);
+    const done = { ...(this.state.bassDone || {}) };
+    done[lv.L.id] = Math.max(done[lv.L.id] || 0, sum.total);
+    try { localStorage.setItem('tm_bass_done', JSON.stringify(done)); } catch (e) {}
+    this.setState({ bass: { ...this.state.bass, results, sum }, bassDone: done }, () => this.finish());
+  }
+
   // A/B
   abTypes() {
     const C = (ns, t, d, v) => ns.forEach((n) => this.keys(n, t, d, v || 0.1));
@@ -1099,6 +1593,9 @@ class Component extends DCLogic {
     const showPick = play && !s.boss && !isRh && !!task && task.type === 'pick';
     const showBuild = play && !s.boss && g === 'chord' && !!task && task.type === 'build';
     const showAB = play && g === 'ab' && !!s.ab;
+    // mp — старая встроенная мобильная раскладка больше не используется: на телефоне игры живут в оболочке (sh)
+    const mob = !!s.mob, land = !!s.land, mp = false, sh = mob && !!s.shell;
+    const showBass = play && g === 'bass' && !!s.bass && !!this._lv;
     const bossActive = !!s.boss || (isRh && s.rh.boss);
 
     // mascot + fx
@@ -1126,6 +1623,7 @@ class Component extends DCLogic {
     else if (g === 'fake') { progValue = Math.min(s.total + 1, 12) + '/12'; progPct = (s.total / 12) * 100; }
     else if (g === 'rhythm') { progLabel = 'РАУНД'; progValue = s.round + 1 + '/6'; progPct = (s.round / 6) * 100; }
     else if (g === 'ab' && s.ab) { progLabel = 'ВОПРОС'; progValue = s.ab.i + 1 + '/6'; progPct = (s.ab.i / 6) * 100; }
+    else if (g === 'bass' && showBass) { const n = this._lv.rounds.length; progLabel = 'РАУНД'; progValue = s.bass.ri + 1 + '/' + n; progPct = ((s.bass.ri + (s.bass.first ? 1 : 0)) / n) * 100; }
     else if (g === 'daily' && s.dq) { progValue = s.di + 1 + '/' + s.dq.length; progPct = (s.di / s.dq.length) * 100; }
 
     // pick options
@@ -1147,24 +1645,26 @@ class Component extends DCLogic {
     const showPiano = !!s.boss || showBuild;
     const keyState = (k) => {
       if (s.boss) { const b = s.bossFb; if (s.bossWrong === k) return 'bad'; if (!b) return 'idle'; if (b.k === k) return b.ok ? 'good' : 'bad'; return k < 12 && k === s.boss.answerPc ? 'answer' : 'idle'; }
-      if (s.marks) { if (s.marks.wrong.includes(k)) return 'bad'; if (s.marks.missing.includes(k)) return 'answer'; }
-      if (s.sel.includes(k)) return fb && fb.ok ? 'good' : 'sel';
+      const inK = (arr) => (mob ? arr.some((x) => x % 12 === k % 12) : arr.includes(k));
+      if (s.marks) { if (inK(s.marks.wrong)) return 'bad'; if (inK(s.marks.missing)) return 'answer'; }
+      if (inK(s.sel)) return fb && fb.ok ? 'good' : 'sel';
       return 'idle';
     };
     const press = (k) => () => (s.boss ? this.bossPick(k) : this.toggleKey(k));
     const W = [[0, 'C'], [2, 'D'], [4, 'E'], [5, 'F'], [7, 'G'], [9, 'A'], [11, 'B']];
     const B = [[1, 'C♯', 'D♭', 0], [3, 'D♯', 'E♭', 1], [6, 'F♯', 'G♭', 3], [8, 'G♯', 'A♭', 4], [10, 'A♯', 'B♭', 5]];
-    const KW = '((100% - 52px) / 14)';
-    const whiteKeys = [0, 1].flatMap((o) => W.map(([pc, a]) => {
+    const octs = mob ? [0] : [0, 1];
+    const KW = mob ? '((100% - 24px) / 7)' : '((100% - 52px) / 14)';
+    const whiteKeys = octs.flatMap((o) => W.map(([pc, a]) => {
       const k = o * 12 + pc, st = keyState(k);
-      return { a: pc === 0 ? a + (o + 3) : a, press: press(k), style: { flex: '1 1 0', minWidth: 0, height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 10, borderRadius: '0 0 5px 5px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(10px,1.4vw,13px)', fontWeight: 500, overflow: 'hidden', outline: 'none',
+      return { a: pc === 0 ? a + (o + 3) : a, press: press(k), style: { flex: '1 1 0', minWidth: 0, height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 10, borderRadius: '0 0 5px 5px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: mob ? 15 : 'clamp(10px,1.4vw,13px)', fontWeight: 500, overflow: 'hidden', outline: 'none', touchAction: 'manipulation',
         border: 'none', background: st === 'sel' || st === 'good' ? '#f4a582' : st === 'bad' ? '#c84b31' : '#fcf7f1', color: st === 'bad' ? '#fcf7f1' : pc === 0 ? '#b9542c' : '#1e1b16',
         boxShadow: st === 'answer' ? 'inset 0 0 0 4px #e0794f' : 'inset 0 -6px 0 rgba(0,0,0,0.08)' } };
     }));
-    const blackKeys = [0, 1].flatMap((o) => B.map(([pc, a, b, w]) => {
+    const blackKeys = octs.flatMap((o) => B.map(([pc, a, b, w]) => {
       const k = o * 12 + pc, wi = o * 7 + w, st = keyState(k);
       return { a, b, press: press(k), style: { position: 'absolute', top: 0, height: '60%', width: 'calc(' + KW + ' * 0.64)', left: 'calc(' + (wi + 1) + ' * ' + KW + ' + ' + (wi * 4 + 2) + 'px - ' + KW + ' * 0.32)', zIndex: 2,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 1, paddingBottom: 6, padding: '0 0 6px', borderRadius: '0 0 4px 4px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(7px,1vw,9px)', lineHeight: 1.1, overflow: 'hidden', outline: 'none',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 1, paddingBottom: 6, padding: '0 0 6px', borderRadius: '0 0 4px 4px', cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: mob ? 11 : 'clamp(7px,1vw,9px)', lineHeight: 1.1, overflow: 'hidden', outline: 'none', touchAction: 'manipulation',
         border: '1px solid #4a4238', background: st === 'sel' || st === 'good' ? '#f4a582' : st === 'bad' ? '#c84b31' : '#141210', color: st === 'sel' || st === 'good' ? '#1e1b16' : '#d8cdbd',
         boxShadow: st === 'answer' ? 'inset 0 0 0 3px #f4a582' : 'none' } };
     }));
@@ -1196,7 +1696,25 @@ class Component extends DCLogic {
       else { const r = rh.res[i]; if (r === 'hit') { base.background = '#f4a582'; base.borderColor = '#f4a582'; } else if (r === 'miss') miss(); else if (r === 'extra') { base.background = '#c84b31'; base.borderColor = '#c84b31'; } else base.opacity = 0.5; if (rh.pos === i) { base.boxShadow = 'inset 0 0 0 2px #fcf7f1'; base.opacity = 1; } }
       return base;
     };
-    const rhBeats = isRh ? [0, 1, 2, 3].map((b) => ({ n: String(b + 1), cells: [0, 1, 2, 3].map((k) => { const i = b * 4 + k; return { press: () => this.rhTap(i), style: cellStyle(i), lbl: (b + 1) + '.' + (k + 1), lblStyle: { textAlign: 'center', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(9px,1.2vw,12px)', lineHeight: 1, whiteSpace: 'nowrap', color: k === 0 ? '#fcf7f1' : k === 2 ? '#f4a582' : '#8a7f70', fontWeight: k === 0 ? 700 : k === 2 ? 500 : 400 } }; }) })) : [];
+    // pointerdown — удар засчитывается в момент касания; click остаётся только для клавиатуры (detail === 0)
+    const tapDown = (i) => (e) => { if (e && e.button > 0) return; this.rhTap(i); };
+    const tapKey = (i) => (e) => { if (e && e.detail) return; this.rhTap(i); };
+    const rhBeats = isRh && !mp ? [0, 1, 2, 3].map((b) => ({ n: String(b + 1), cells: [0, 1, 2, 3].map((k) => { const i = b * 4 + k; return { down: tapDown(i), click: tapKey(i), style: cellStyle(i), lbl: (b + 1) + '.' + (k + 1), lblStyle: { textAlign: 'center', fontFamily: '"IBM Plex Mono", monospace', fontSize: 'clamp(9px,1.2vw,12px)', lineHeight: 1, whiteSpace: 'nowrap', color: k === 0 ? '#fcf7f1' : k === 2 ? '#f4a582' : '#8a7f70', fontWeight: k === 0 ? 700 : k === 2 ? 500 : 400 } }; }) })) : [];
+    // landscape-раскладка ритма: 2 ряда по 8 (по две четверти в ряду), вся ячейка — зона нажатия, визуал с отступом
+    const DRL = ['1', 'e', '&', 'a'];
+    const drPads = isRh && sh ? Array.from({ length: 16 }, (_, i) => {
+      const b = Math.floor(i / 4), k = i % 4, st = cellStyle(i), row = Math.floor(i / 8), col = i % 8;
+      const on = rh.input[i] || (rh.res && rh.res[i] === 'hit') || (rh.sub === 'listen' && rh.pos === i);
+      return {
+        lbl: k === 0 ? String(b + 1) : DRL[k], aria: b + 1 + '.' + (k + 1), down: tapDown(i), click: tapKey(i),
+        style: { gridRow: row + 1, gridColumn: col < 4 ? col + 1 : col + 2, display: 'block', width: '100%', height: '100%', minWidth: 0, minHeight: 0, margin: 0, padding: 4, border: 'none', background: 'transparent', cursor: st.cursor, outline: 'none' },
+        vis: { ...st, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', width: '100%', height: '100%', padding: '8px 9px', borderRadius: 12, borderWidth: st.borderWidth === 1 ? (k === 0 ? 2 : 1) : st.borderWidth, pointerEvents: 'none' },
+        lblStyle: { fontFamily: '"IBM Plex Mono", monospace', fontSize: k === 0 ? 17 : 14, lineHeight: 1, color: on ? '#1e1b16' : k === 0 ? '#fcf7f1' : k === 2 ? '#f4a582' : '#8a7f70', fontWeight: k === 0 ? 700 : 500 },
+      };
+    }) : [];
+    const drGridStyle = { display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0,1fr)) 10px repeat(4, minmax(0,1fr))', gridTemplateRows: 'repeat(2, minmax(0,1fr))', flex: '1 1 auto', minHeight: 0, touchAction: 'none' };
+    const rhNoAct = !(isRh && rh.sub === 'input');
+    const rhMobNote = isRh && sh ? (rh.sub === 'listen' ? 'Слушай: ритм прозвучит два раза.' : rh.sub === 'input' ? (rh.fix ? 'Пунктир — сюда нужен удар, красным — лишний. За исправление половина очков.' : 'Жми зоны, где был удар. Повторное нажатие убирает удар.') : rh.ok ? '' : 'Пунктир — пропущенный удар, красным — лишний.') : '';
     const rhStatus = isRh ? (rh.sub === 'listen' ? (rh.count ? 'Отсчёт ' + rh.count : 'Слушай') : rh.sub === 'input' ? (rh.fix ? 'Исправь ошибки' : 'Твой ход') : rh.playLbl ? '♪ ' + rh.playLbl : rh.ok ? 'Точно в ритм' : 'Не совпало') : '';
     const rhPct = isRh ? (rh.sub === 'input' ? (rh.t / rh.max) * 100 : rh.sub === 'listen' ? 100 : 0) : 0;
 
@@ -1210,8 +1728,64 @@ class Component extends DCLogic {
         style: { display: 'flex', flexDirection: 'column', gap: 12, padding: 'clamp(16px,2vw,24px)', borderRadius: 8, background: state === 'good' ? '#f4a582' : '#2f2a23', color: state === 'good' ? '#1e1b16' : '#fcf7f1', border: state === 'bad' ? '2px solid #c84b31' : '1px solid #4a4238' },
         playStyle: { padding: '13px 12px', borderRadius: 100, border: 'none', cursor: 'pointer', fontSize: 16, fontWeight: 600, background: playingMe ? '#fcf7f1' : state === 'good' ? '#1e1b16' : '#fcf7f1', color: playingMe ? '#1e1b16' : state === 'good' ? '#fcf7f1' : '#1e1b16', opacity: s.playing && !playingMe ? 0.5 : 1 },
         chooseStyle: { padding: '13px 12px', borderRadius: 100, cursor: picked ? 'default' : 'pointer', fontSize: 16, fontWeight: 600, background: 'transparent', border: '1px solid ' + (state === 'good' ? '#1e1b16' : '#6a5f50'), color: 'inherit' },
+        shStyle: { display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 8, padding: 10, minHeight: 0, borderRadius: 10, background: state === 'good' ? '#f4a582' : '#2f2a23', color: state === 'good' ? '#1e1b16' : '#fcf7f1', border: state === 'bad' ? '2px solid #c84b31' : '1px solid #4a4238' },
       };
     }) : [];
+
+    // bass (ритм)
+    const BB = window.TM_BASS, lv = this._lv, bs = s.bass, EN = window.TM_LANG === 'en', MONOF = '"IBM Plex Mono", monospace';
+    const R = showBass ? lv.rounds[bs.ri] : null, isChoose = !!R && R.type === 'choose';
+    const bPos = s.bassPlay && s.bassPos >= 0 ? s.bassPos % 8 : -1;
+    const labW = sh ? 44 : 64, colGap = sh ? 4 : 6;
+    let bgHead = [], bgKick = [], bgSnare = [], bgPads = [], bgOpts = [], bgGridStyle = {}, bgLines = [], bgChips = [], bgEval = null, bgBadge = {}, bgHint = '';
+    if (R) {
+      const cellRow = (arr, color) => arr.map((v, i) => ({ style: { minHeight: 12, borderRadius: 5, background: v ? color : '#2a2620', border: '1px solid ' + (bPos === i ? '#fcf7f1' : v ? color : '#3a342b') } }));
+      bgHead = BB.STEP_LBL.map((t, i) => ({ t, style: { textAlign: 'center', fontFamily: MONOF, fontSize: 12, lineHeight: 1.2, color: bPos === i ? '#fcf7f1' : i % 2 ? '#8a7f70' : '#f4a582', fontWeight: i % 2 ? 400 : 700 } }));
+      bgKick = cellRow(R.K, '#f4a582');
+      bgSnare = cellRow(R.S, '#d8cdbd');
+      const noteTxt = R.chords.map((c) => c.name).join('/');
+      bgPads = isChoose ? [] : bs.pat.map((v, i) => ({
+        t: v ? noteTxt : '', aria: 'Bass ' + BB.STEP_LBL[i] + (i % 2 ? '+' : ''),
+        down: (e) => { if (e && e.button > 0) return; this.bassTap(i); }, click: (e) => { if (e && e.detail) return; this.bassTap(i); },
+        style: { display: 'block', width: '100%', height: '100%', minWidth: 0, minHeight: 0, margin: 0, padding: 3, border: 'none', background: 'transparent', cursor: 'pointer', outline: 'none' },
+        vis: { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', borderRadius: 10, background: v ? '#f4a582' : '#2f2a23', color: v ? '#1e1b16' : '#6a5f50', border: bPos === i ? '2px solid #fcf7f1' : '1px solid ' + (v ? '#f4a582' : i % 2 ? '#3a342b' : '#4a4238'), fontFamily: MONOF, fontSize: sh ? 13 : 15, fontWeight: 700, pointerEvents: 'none', transition: 'background .06s' },
+      }));
+      bgOpts = isChoose ? R.options.map((o) => {
+        const on = bs.choice === o.id, best = bs.ev && o.pts >= 100;
+        return {
+          id: o.id, pick: () => this.bassPick(o.id),
+          style: { gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: labW - 4 + 'px repeat(8, minmax(0,1fr))', columnGap: colGap, alignItems: 'stretch', minHeight: 0, height: '100%', padding: '5px 0', margin: 0, borderRadius: 10, border: '2px solid ' + (on ? '#fcf7f1' : best ? '#f4a582' : 'transparent'), background: on ? '#3a342b' : 'transparent', cursor: 'pointer', color: '#fcf7f1', textAlign: 'left' },
+          idStyle: { alignSelf: 'center', paddingLeft: sh ? 6 : 10, fontSize: 20, fontWeight: 800 },
+          cells: o.P.map((v, i) => ({ style: { minHeight: 10, borderRadius: 6, background: v ? (on ? '#f4a582' : '#b8957c') : '#2a2620', border: '1px solid ' + (on && bPos === i ? '#fcf7f1' : v ? 'transparent' : '#3a342b') } })),
+        };
+      }) : [];
+      bgGridStyle = { display: 'grid', gridTemplateColumns: labW + 'px repeat(8, minmax(0,1fr))', gridTemplateRows: 'auto ' + (sh ? '16px 16px' : '22px 22px') + (isChoose ? ' repeat(3, minmax(0,1fr))' : ' minmax(0,1fr)'), columnGap: colGap, rowGap: sh ? 5 : 8, flex: '1 1 auto', minHeight: sh ? 0 : isChoose ? 280 : 230, alignItems: 'stretch' };
+      if (bs.ev) {
+        bgEval = bs.ev;
+        bgBadge = { padding: '4px 10px', borderRadius: 100, background: bs.ev.color[0], color: bs.ev.color[1], fontFamily: MONOF, fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase' };
+        bgLines = bs.ev.lines.map(([tone, t]) => ({ t, style: { fontSize: sh ? 12.5 : 15, lineHeight: 1.45, color: tone === 'warn' ? '#f1c3b0' : tone === 'good' ? '#fcf7f1' : '#d8cdbd', paddingLeft: 9, borderLeft: '2px solid ' + (tone === 'warn' ? '#c84b31' : tone === 'good' ? '#f4a582' : '#6a5f50') } }));
+        bgChips = bs.ev.chips.map((t) => ({ t }));
+      } else bgHint = isChoose ? (bs.choice ? 'Нажми «Выбрать», когда определишься.' : 'Выбери вариант A, B или C') : s.bassPlay ? 'Нажимай шаги в строке Bass — изменения слышны сразу.' : 'Сначала включи луп, потом ставь ноты — изменения слышны сразу.';
+    }
+    const isBassOver = s.phase === 'over' && g === 'bass' && !!(bs && bs.sum) && !!lv;
+    const railW = (s.vw || 800) >= 780 ? 220 : 190, tight = sh && railW < 200;
+    const bgBtn = (primary, on) => ({ minHeight: sh ? 46 : 52, minWidth: 0, padding: tight ? '0 3px' : '0 8px', borderRadius: 100, fontSize: tight ? 13 : sh ? 14 : 16, letterSpacing: tight ? '-0.01em' : 0, overflow: 'hidden', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', border: primary ? 'none' : '1px solid ' + (on ? '#fcf7f1' : '#4a4238'), background: primary ? '#f4a582' : on ? '#fcf7f1' : 'transparent', color: primary || on ? '#1e1b16' : '#fcf7f1' });
+    const bassLevels = BB ? BB.LEVELS.map((L, i) => {
+      const on = (s.bassLevel || 0) === i, done = (s.bassDone || {})[L.id];
+      return { n: String(i + 1).padStart(2, '0'), title: EN ? L.title.en : L.title.ru, mark: done ? '✓ ' + done : '', pick: () => this.setState({ bassLevel: i }),
+        style: { display: 'flex', alignItems: 'center', gap: 10, minHeight: 48, padding: '8px 14px', borderRadius: 10, cursor: 'pointer', textAlign: 'left', fontSize: 16, border: '1px solid ' + (on ? '#f4a582' : '#4a4238'), background: on ? '#f4a582' : 'transparent', color: on ? '#1e1b16' : '#fcf7f1' } };
+    }) : [];
+    const SHORT = {
+      fake: 'Найди ноту, которой нет в гамме или аккорде. 12 заданий.',
+      rhythm: 'Услышь ритм и отметь удары на сетке. 6 раундов.',
+      kill: 'Скоростная «Лишняя нота»: 60 секунд, чем быстрее ответ, тем больше очков.',
+      chord: 'Собирай аккорды на клавиатуре и узнавай их по нотам.',
+      ab: 'Послушай два фрагмента и выбери тот, что подходит под условие.',
+      bass: 'Высота баса задана — решай, когда он играет: с бочкой, между ударами или в синкопу.',
+      daily: 'Один набор на всех: ноты, ритмы и гармония. ТОП-3 дня.',
+    };
+    let canFull = false;
+    try { canFull = sh && !document.fullscreenElement && !!document.documentElement.requestFullscreen && !!(window.screen && screen.orientation && screen.orientation.lock); } catch (e) {}
 
     // daily board
     const isDailyOver = s.phase === 'over' && !!this._lb;
@@ -1231,7 +1805,7 @@ class Component extends DCLogic {
         showNick = !!me && !s.saved;
       }
     }
-    const rankChips = ['daily', 'fake', 'rhythm', 'kill', 'chord', 'ab'].map((id) => ({ title: { chord: 'АККОРДЫ', daily: 'ЗАДАНИЕ ДНЯ' }[id] || this.META[id].title, press: () => this.loadRanking(id), style: { flex: 'none', whiteSpace: 'nowrap', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 11, letterSpacing: '0.08em', border: '1px solid ' + ((s.rankGame || 'daily') === id ? '#1e1b16' : '#ead9c6'), background: (s.rankGame || 'daily') === id ? '#1e1b16' : 'transparent', color: (s.rankGame || 'daily') === id ? '#fcf7f1' : '#4a4339' } }));
+    const rankChips = ['daily', 'fake', 'rhythm', 'kill', 'chord', 'ab', 'bass'].map((id) => ({ title: { chord: 'АККОРДЫ', daily: 'ЗАДАНИЕ ДНЯ' }[id] || this.META[id].title, press: () => this.loadRanking(id), style: { flex: 'none', whiteSpace: 'nowrap', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 11, letterSpacing: '0.08em', border: '1px solid ' + ((s.rankGame || 'daily') === id ? '#1e1b16' : '#ead9c6'), background: (s.rankGame || 'daily') === id ? '#1e1b16' : 'transparent', color: (s.rankGame || 'daily') === id ? '#fcf7f1' : '#4a4339' } }));
     const rg = s.rankGame || 'daily';
     const rankRule = rg === 'daily' ? 'Складываются лучшие результаты за каждый день. Чем чаще играешь, тем выше поднимаешься.' : rg === 'chord' ? 'В зачёт идёт лучший результат одной игры в режиме «На время».' : 'В зачёт идёт лучший результат за одну игру.';
     const tabStyle = (on) => ({ padding: '10px 20px', borderRadius: 100, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 600, background: on ? '#1e1b16' : 'transparent', color: on ? '#fcf7f1' : '#4a4339' });
@@ -1254,7 +1828,7 @@ class Component extends DCLogic {
     const rankCards = [mkCard('ТОП-3 · ' + MONTHS[new Date().getMonth()], 'этот месяц', rk.month, false), mkCard('ТОП-3 · ВСЕГО', 'за всё время', rk.all, true)];
     const chipStyle = (on) => ({ flex: 'none', whiteSpace: 'nowrap', padding: '8px 14px', borderRadius: 100, cursor: 'pointer', fontFamily: '"IBM Plex Mono", monospace', fontSize: 11, letterSpacing: '0.08em', border: '1px solid ' + (on ? '#f4a582' : '#4a4238'), background: on ? '#f4a582' : 'transparent', color: on ? '#1e1b16' : '#d8cdbd' });
     const modeStyle = (on) => ({ padding: '10px 18px', borderRadius: 100, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 600, background: on ? '#fcf7f1' : 'transparent', color: on ? '#1e1b16' : '#d8cdbd' });
-    const ids = ['fake', 'rhythm', 'kill', 'chord', 'ab', 'daily'];
+    const ids = ['fake', 'rhythm', 'kill', 'chord', 'ab', 'bass', 'daily'];
     const go = {}; ids.forEach((id) => { go[id] = () => this.selectGame(id); });
     const best = s.best[g];
 
@@ -1263,7 +1837,56 @@ class Component extends DCLogic {
       showRank: s.tab === 'rank', showList: s.tab !== 'rank', rankCards,
       rankPaneStyle: { gridArea: '1 / 1', minWidth: 0, alignSelf: 'start', visibility: s.tab === 'rank' ? 'visible' : 'hidden', opacity: s.tab === 'rank' ? 1 : 0, transition: 'opacity .2s' },
       listPaneStyle: { gridArea: '1 / 1', minWidth: 0, visibility: s.tab === 'rank' ? 'hidden' : 'visible', opacity: s.tab === 'rank' ? 0 : 1, transition: 'opacity .2s' },
-      listTitle: 'Шесть аркад. Каждая что-то тренирует.',
+      listTitle: 'Семь игр. Каждая что-то тренирует.',
+      // страница: на телефоне арена внутри страницы скрыта — игра открывается в оболочке
+      stageCls: '',
+      stageStyle: mob ? { display: 'none' } : { position: 'relative', display: 'flex', flexWrap: 'wrap', gap: 'clamp(16px,2.4vw,28px)', padding: 'clamp(14px,2.4vw,28px) clamp(14px,2.4vw,28px) 44px', background: '#26221c', border: '1px solid #3a342b', borderRadius: 8 },
+      sideStyle: { flex: '1 1 230px', maxWidth: '100%', display: 'flex', flexWrap: 'wrap', gap: 14, alignContent: 'flex-start' },
+      catStyle: { flex: '1 1 150px', maxWidth: 230, aspectRatio: '444/750', background: '#fcf7f1', borderRadius: 6, overflow: 'hidden' },
+      hudStyle: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 },
+      mainStyle: { flex: '999 1 420px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 20, position: 'relative', zIndex: 2 },
+      playStyle: { display: 'flex', flexDirection: 'column', gap: 22 },
+      startRowStyle: { display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' },
+      startBtnStyle: { minHeight: 56, padding: '18px 46px', background: '#f4a582', color: '#1e1b16', border: 'none', borderRadius: 100, fontSize: 18, fontWeight: 800, letterSpacing: '0.02em', cursor: 'pointer' },
+      deskHud: true,
+      pianoStyle: { position: 'relative', width: '100%', maxWidth: 760, height: 'clamp(140px,22vw,200px)', userSelect: 'none' },
+      mobOpen: mob, openShell: this.openShell,
+      // мобильная landscape-оболочка (общая для всех игр)
+      shellOn: sh, rotateOn: sh && !land, rulesOpen: sh && !!s.rulesOpen, canFull,
+      closeShell: this.closeShell, openRules: this.openRules, closeRules: this.closeRules, goFull: this.goFull,
+      shClose: play ? this.exit : this.closeShell, shCloseLabel: play ? 'Выйти из раунда' : 'Закрыть игру',
+      shellStyle: { position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, zIndex: 1000, display: 'grid', gridTemplateRows: '40px minmax(0,1fr)', gap: 8, padding: 'max(6px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left))', background: '#1e1b16', color: '#fcf7f1', overflow: 'hidden', overscrollBehavior: 'none', touchAction: 'manipulation' },
+      shBodyStyle: { display: 'grid', gridTemplateColumns: 'minmax(0,1fr) ' + railW + 'px', gap: 10, minHeight: 0, minWidth: 0 },
+      shMainStyle: { minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', gap: 8, overflowY: s.phase === 'play' ? 'hidden' : 'auto', position: 'relative', zIndex: 2 },
+      shRailStyle: { minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', gap: 8, position: 'relative', zIndex: 2 },
+      shMeta: g === 'daily' || g === 'ab' || g === 'bass' ? '' : (s.combo ? 'COMBO ' + s.combo + ' · ×' + this.mult(s.combo) + ' · ' : '') + 'LVL ' + s.level,
+      shShort: SHORT[g] || '',
+      bossLine: s.boss ? s.boss.steps.join(' ') : '',
+      shOptsStyle: { display: 'grid', gridTemplateColumns: 'repeat(' + (opts.length <= 4 ? opts.length || 1 : Math.ceil(opts.length / 2)) + ', minmax(0,1fr))', gridAutoRows: 'minmax(48px, 1fr)', gap: 8, flex: '1 1 auto', minHeight: 0, maxHeight: 180 },
+      shPianoStyle: { position: 'relative', width: '100%', flex: '1 1 auto', minHeight: 90, userSelect: 'none' },
+      shDrums: isRh && sh, drPads, drGridStyle, rhNoAct, rhMobNote,
+      shReplayLabel: s.replaying ? '♪ Играет…' : '↻ Послушать',
+      shReplayStyle: { flex: 'none', minHeight: 46, padding: '0 10px', borderRadius: 100, fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap', cursor: rhNoAct ? 'default' : 'pointer', background: s.replaying ? '#fcf7f1' : 'transparent', color: s.replaying ? '#1e1b16' : '#fcf7f1', border: '1px solid ' + (s.replaying ? '#fcf7f1' : '#4a4238'), opacity: rhNoAct ? 0.35 : 1 },
+      shDoneStyle: { flex: 'none', minHeight: 56, padding: '0 10px', borderRadius: 100, border: 'none', fontSize: 18, fontWeight: 800, cursor: rhNoAct ? 'default' : 'pointer', background: '#f4a582', color: '#1e1b16', opacity: rhNoAct ? 0.35 : 1 },
+      shExplainOn: play && !isRh && !showBass && !!(explain || (showBuild && buildHint) || s.boss || s.line),
+      shExplain: explain || (showBuild ? buildHint : '') || (s.boss ? 'Какая нота получится?' : '') || s.line,
+      // bass
+      isBass: g === 'bass', bassLevels, bassRoadmap: BB ? (EN ? BB.ROADMAP.en : BB.ROADMAP.ru) : '',
+      showBass, bgGridStyle, bgHead, bgKick, bgSnare, bgPads, bgOpts, bgIsPads: !!R && !isChoose, bgIsChoose: isChoose,
+      bgNotes: R ? R.chords.map((c) => c.name).join(' → ') : '',
+      bgLblStyle: { alignSelf: 'center', display: 'flex', flexDirection: 'column', gap: 2, fontFamily: MONOF, fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#a99d8b', lineHeight: 1.1 },
+      bgLevelLabel: showBass ? 'Уровень ' + (lv.i + 1) + ' · ' + lv.title : '', bgLevelShort: showBass ? 'LVL ' + (lv.i + 1) : '', bgTask: showBass ? lv.intro : '',
+      bgEval, bgStale: !!(bs && bs.stale), bgLines, bgChips, bgBadge, bgHint,
+      bgHintStyle: { fontSize: sh ? 12.5 : 15, lineHeight: 1.45, color: '#a99d8b' },
+      bgFbStyle: { display: 'flex', flexDirection: 'column', gap: 8, flex: sh ? '1 1 auto' : 'none', minHeight: sh ? 0 : 120, overflowY: sh ? 'auto' : 'visible', padding: sh ? 10 : 14, border: '1px solid #3a342b', borderRadius: 8, background: '#26221c' },
+      bgPlay: this.bassPlayToggle, bgPlayLabel: s.bassPlay ? '■ Стоп' : '▶ Слушать', bgPlayStyle: bgBtn(false, !!s.bassPlay),
+      bgReset: this.bassReset, bgNoReset: isChoose, bgResetStyle: { ...bgBtn(false, false), opacity: isChoose ? 0.35 : 1, cursor: isChoose ? 'default' : 'pointer' },
+      bgCheck: this.bassCheck, bgCheckLabel: isChoose ? '✓ Выбрать' : '✓ Проверить', bgNoCheck: isChoose && !(bs && bs.choice),
+      bgCheckStyle: { ...bgBtn(!(bs && bs.first), false), opacity: isChoose && !(bs && bs.choice) ? 0.35 : 1 },
+      bgNext: this.bassNext, bgNoNext: !(bs && bs.first), bgNextLabel: R && bs.ri + 1 >= lv.rounds.length ? 'Итог →' : 'Дальше →',
+      bgNextStyle: { ...bgBtn(!!(bs && bs.first), false), opacity: bs && bs.first ? 1 : 0.35, cursor: bs && bs.first ? 'pointer' : 'default' },
+      isBassOver, bassSum: isBassOver ? bs.sum.lines.map((t, i) => ({ t, style: i === 0 ? { fontSize: sh ? 18 : 'clamp(22px,3vw,30px)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.01em' } : { padding: sh ? '8px 10px' : '12px 14px', border: '1px solid #3a342b', borderRadius: 8, fontSize: sh ? 13 : 16, lineHeight: 1.5, color: '#e8ddcc' } })) : [],
+      bassHasNext: isBassOver && BB && lv.i + 1 < BB.LEVELS.length, bassNextLevel: () => this.setState({ bassLevel: lv.i + 1 }, this.start),
       tabGames: () => this.setState({ tab: 'games' }), tabRank: this.loadRanking,
       rankChips, rankRule, rankGameTitle: this.META[rg].title, rankPlay: () => this.selectGame(rg),
       tabGamesStyle: tabStyle(s.tab !== 'rank'), tabRankStyle: tabStyle(s.tab === 'rank'),
@@ -1282,23 +1905,23 @@ class Component extends DCLogic {
       meterStyle: { height: '100%', width: meterPct + '%', background: '#f4a582', borderRadius: 3, transition: 'width .2s' },
       meterLabel: next ? 'до ×' + this.mult(next) + ': ещё ' + (next - s.combo) : 'максимум ×3',
       progLabel, progValue, progStyle: { height: '100%', width: Math.max(0, Math.min(100, progPct)) + '%', background: '#fcf7f1', borderRadius: 3, transition: 'width .1s linear' },
-      levelLabel: g === 'daily' || g === 'ab' ? '' : 'LVL ' + s.level,
+      levelLabel: g === 'daily' || g === 'ab' || g === 'bass' ? '' : 'LVL ' + s.level,
       showBoss: play && !!s.boss, bossSteps: s.boss ? s.boss.steps.map((t) => ({ t })) : [],
       showPick, task: task || {}, opts,
       showBuild, buildHint, showPiano, whiteKeys, blackKeys,
       showBuildActions: showBuild && (practice || s.buildRetry) && !fb,
       checkBuild: () => this.checkBuild(), clearBuild: () => this.setState({ sel: [] }),
-      showRhythm: isRh, rhBoss: isRh && rh.boss, rhStatus, rhTime: isRh && rh.sub === 'input' ? rh.t.toFixed(1) + ' с' : '',
+      showRhythm: isRh && !sh, rhBoss: isRh && rh.boss, rhStatus, rhTime: isRh && rh.sub === 'input' ? rh.t.toFixed(1) + ' с' : '',
       rhTimerStyle: { height: '100%', width: rhPct + '%', background: rhPct < 30 && rh && rh.sub === 'input' ? '#e8806a' : '#f4a582', borderRadius: 4, transition: 'width .1s linear' },
       rhFixNote: isRh && rh.fix && rh.sub === 'input' ? 'Пунктир — сюда нужен удар, красным — лишний удар. За исправление половина очков.' : '',
       rhBeats, rhCanAct: isRh && rh.sub === 'input', rhCheck: this.rhCheck, rhReplay: this.rhReplay,
-      rhReplayLabel: s.replaying ? '♪ Играет… таймер на паузе' : 'Послушать ещё раз',
+      rhReplayLabel: mp ? (s.replaying ? '♪ Играет…' : '↻ Послушать') : s.replaying ? '♪ Играет… таймер на паузе' : 'Послушать ещё раз',
       rhReplayStyle: { padding: '13px 24px', background: s.replaying ? '#fcf7f1' : 'transparent', color: s.replaying ? '#1e1b16' : '#fcf7f1', border: '1px solid ' + (s.replaying ? '#fcf7f1' : '#4a4238'), borderRadius: 100, fontSize: 16, cursor: s.replaying ? 'default' : 'pointer' },
       bpm: s.bpm || 100, bpmUp: () => this.setBpm(5), bpmDown: () => this.setBpm(-5), isRhythmGame: g === 'rhythm' || g === 'daily',
       showAB, abQ: showAB ? s.ab.list[s.ab.i].q : '', abTiles, showAbNext: showAB && !!s.abPicked, abNext: this.abNext,
       explain,
       overTag: s.isBest ? 'НОВЫЙ РЕКОРД' : 'ИТОГ · ' + this.META[g].title,
-      overStats: [{ k: 'ПРАВИЛЬНО', v: s.right + ' / ' + s.total }, { k: 'МАКС. COMBO', v: String(s.maxCombo) }, { k: 'РЕКОРД', v: best ? fmt(best) : '—' }],
+      overStats: isBassOver ? [{ k: 'ОТЛИЧНЫХ GROOVE', v: bs.sum.great + ' / ' + lv.rounds.length }, { k: 'ОЧКИ УРОВНЯ', v: bs.sum.total + ' / ' + bs.sum.max }, { k: 'РЕКОРД', v: best ? fmt(best) : '—' }] : [{ k: 'ПРАВИЛЬНО', v: s.right + ' / ' + s.total }, { k: 'МАКС. COMBO', v: String(s.maxCombo) }, { k: 'РЕКОРД', v: best ? fmt(best) : '—' }],
       isDailyOver, board, boardNote, boardTitle: this._lb && this._lb.game !== 'daily' ? 'ТОП МЕСЯЦА · ' + this.META[this._lb.game].title : 'ТОП ДНЯ', myBestLabel: fmt(myBest), toTopLabel, showNick, nick: s.nick,
       setNick: (e) => this.setState({ nick: e.target.value }), saveNick: this.saveNick,
       showNickSaved: isDailyOver && s.saved && !!s.nick, nickSavedLabel: 'В таблице ты — «' + (s.nick || '') + '»',
